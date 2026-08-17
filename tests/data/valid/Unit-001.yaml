@@ -1,0 +1,4 @@
+# Degree Celsius aligned with QUDT
+term_id: http://qudt.org/vocab/unit/DEG_C
+label: degree Celsius
+ucum_code: Cel

@@ -1,0 +1,4 @@
+# Invalid: missing required fields value, unit, matrix, geolocation, and time
+measurement_type:
+  term_id: http://vocab.nerc.ac.uk/standard_name/air_temperature/
+  label: air_temperature

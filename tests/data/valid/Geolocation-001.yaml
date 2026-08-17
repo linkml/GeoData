@@ -1,0 +1,5 @@
+# A point location in WGS84 decimal degrees
+latitude: 36.4072
+longitude: -105.5767
+altitude: 2090.0
+coordinate_system: WGS84

@@ -1,0 +1,7 @@
+# CF Conventions air temperature property
+term_id: http://vocab.nerc.ac.uk/standard_name/air_temperature/
+label: air_temperature
+source_vocabulary: CF Conventions
+definition: >-
+  Air temperature is the bulk temperature of the air, not the surface
+  (skin) temperature.

@@ -1,0 +1,22 @@
+# Soil pH measurement at a field site in New Mexico
+measurement_type:
+  term_id: http://purl.obolibrary.org/obo/ENVO_09200011
+  label: soil_pH
+  source_vocabulary: ENVO
+  definition: The pH of soil measured in a 1:2.5 water suspension.
+value: "7.2"
+unit:
+  term_id: http://qudt.org/vocab/unit/UNITLESS
+  label: pH
+  ucum_code: "[pH]"
+matrix: soil
+geolocation:
+  latitude: 36.4072
+  longitude: -105.5767
+  altitude: 2090.0
+time: "2023-06-15T14:30:00Z"
+depth: 0.15
+observer: "A. Thessen"
+laboratory: "NEON Soil Biogeochemistry Lab"
+quality_flag: good
+project: "NEON"

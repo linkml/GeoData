@@ -1,0 +1,18 @@
+# Sediment core from a dryland lake in South Africa
+specimen_id: https://igsn.org/ICDP5054EEW1001
+specimen_type: sediment_core
+label: "ICDP DSDDP Core 5054-1"
+material: NaturalSolidMaterial
+collection_location:
+  latitude: -31.5
+  longitude: 25.3
+  altitude: 1020.0
+collection_time: "2014-09-15T10:30:00Z"
+collected_by: "R. Muscheler"
+repository: ICDP Core Repository
+curation_location: "GFZ Potsdam, Core Storage Hall B"
+description: >-
+  Drill core from a dryland lake deposit, Kathu Pan, South Africa.
+  Used for palaeoclimate reconstruction.
+mass: 4500.0
+license: https://creativecommons.org/licenses/by/4.0/
