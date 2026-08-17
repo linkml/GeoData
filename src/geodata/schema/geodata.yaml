@@ -1,5 +1,5 @@
 ---
-id: https://w3id.org/example-org/geodata
+id: https://w3id.org/linkml/geodata
 name: geodata
 title: Earth Science Data Schema
 description: >-
@@ -10,11 +10,11 @@ description: >-
 version: 0.1.0
 license: BSD-3-Clause
 see_also:
-  - https://example-org.github.io/geodata
+  - https://linkml.github.io/geodata
 
 prefixes:
   linkml:   https://w3id.org/linkml/
-  geodata:  https://w3id.org/example-org/geodata/
+  geodata:  https://w3id.org/linkml/geodata/
   schema:   https://schema.org/
   sosa:     http://www.w3.org/ns/sosa/
   ssn:      http://www.w3.org/ns/ssn/

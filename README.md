@@ -6,7 +6,7 @@ Earth Science Data Schema for describing the data holdings of diverse earth scie
 
 ## Documentation Website
 
-[https://example-org.github.io/geodata](https://example-org.github.io/geodata)
+[https://linkml.github.io/geodata](https://linkml.github.io/geodata)
 
 ## Repository Structure
 

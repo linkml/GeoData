@@ -7,7 +7,7 @@
 # Note:
 # - just works fine with quoted variables of dot-env files like this one
 LINKML_SCHEMA_NAME="geodata"
-LINKML_SCHEMA_AUTHOR="GeoData Contributors <geodata@example.org>"
+LINKML_SCHEMA_AUTHOR="Anne Thessen <annethessen@gmail.com>"
 LINKML_SCHEMA_DESCRIPTION="Earth Science Data Schema for describing the data holdings of diverse earth science repositories"
 LINKML_SCHEMA_SOURCE_DIR="src/geodata/schema"
 

@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "geodata"
 description = "Earth Science Data Schema for describing the data holdings of diverse earth science repositories"
 authors = [
-  {name = "GeoData Contributors", email = "geodata@example.org"},
+  {name = "Anne Thessen", email = "annethessen@gmail.com"},
 ]
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
