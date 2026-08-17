@@ -2,7 +2,7 @@
 
 ## Objective
 
-Design and implement a linked data schema for describing the data holdings of diverse earth science repositories. The schema centers on a core `Measurement` class and a `TimeSeries` aggregate, and maps cleanly to established community standards.
+Design and implement a linked data schema for describing the data holdings of diverse earth science repositories. The schema centers on a core `Measurement` class, a `Specimen` class for physical objects that are measured, a `TimeSeries` aggregate, and an `AggregateObservation` class for statistically derived values, and maps cleanly to established community standards.
 
 ---
 
@@ -24,7 +24,7 @@ The fundamental unit of the schema. Every measurement MUST carry:
 Optional but recommended fields:
 
 - `instrument` — sensor or analytical method used
-- `sample_id` — reference to a physical or digital sample
+- `specimen` — reference to a `Specimen` object (physical or digital object that was measured)
 - `uncertainty` / `precision` — measurement error
 - `depth` / `elevation` — vertical position
 - `observer` / `laboratory` — provenance
@@ -45,13 +45,61 @@ Key fields:
 - `matrix` — shared matrix for all members
 - `platform` — weather station, buoy, satellite, etc.
 
-### 1.3 Supporting Classes
+### 1.3 `AggregateObservation`
+
+A single derived value produced by applying a statistical function to a set of `Measurement` or `TimeSeries` inputs. Represents summaries such as a monthly mean temperature, a maximum annual flood depth, or a site-level median pH.
+
+| Field | Description | Example |
+|---|---|---|
+| `aggregation_method` | Statistical function applied (controlled vocabulary) | `mean`, `max`, `min`, `median`, `std_dev`, `sum`, `count` |
+| `value` | The resulting aggregate value | `14.3` |
+| `unit` | Unit of the result (UCUM / QUDT) | `degC` |
+| `measurement_type` | The property being summarized (same vocabulary as `Measurement`) | `air_temperature` |
+| `input_measurements` | The `Measurement` or `TimeSeries` objects that were aggregated | list of references |
+| `sample_count` | Number of input values included in the aggregation | `365` |
+| `temporal_extent` | Time window over which aggregation was performed | ISO 8601 interval |
+| `spatial_extent` | Spatial footprint if aggregating across locations | WKT geometry |
+| `matrix` | Medium or material summarized | `air`, `soil` |
+
+Optional fields:
+- `geolocation` — representative or centroid location
+- `specimen` — reference to a `Specimen` if aggregating measurements from one physical object
+- `quality_flag` — QA/QC status of the aggregate
+- `missing_value_treatment` — how gaps or nulls were handled before aggregation
+
+**Relationship to other classes:** `AggregateObservation` is produced *from* `Measurement` or `TimeSeries` objects; it is not itself a raw observation. Provenance is tracked via `input_measurements`. It maps to `sosa:Observation` with a `sosa:Procedure` describing the aggregation method.
+
+### 1.4 `Specimen`
+
+A discrete physical or digital object collected from the environment and subsequently measured or analyzed. `Specimen` is a first-class entity distinct from `Measurement` — it persists across time and may be the subject of many measurements.
+
+| Field | Description | Example |
+|---|---|---|
+| `specimen_id` | Globally unique identifier (preferably an IGSN) | `IGSN:AU1234567` |
+| `specimen_type` | Kind of specimen (rock, sediment core, water, biological tissue, …) | `rock`, `sediment_core`, `ice_core` |
+| `label` | Human-readable name or field number | `"Core 3A, Section 2"` |
+| `material` | Bulk material composition (links to iSamples `Material` vocabulary) | `RockOrSediment`, `NaturalSolidMaterial` |
+| `collection_location` | `Geolocation` of where the specimen was collected | WGS84 lat/lon |
+| `collection_time` | Date/time or interval of collection | ISO 8601 |
+| `collected_by` | Person or organization | `"R. Smith"` |
+| `parent_specimen` | Reference to a parent specimen (e.g., subsample or aliquot) | another `Specimen` |
+| `repository` | Holding institution or archive | `"Smithsonian NMNH"` |
+| `curation_location` | Current physical location of the specimen | `"IODP Core Repository, Bremen"` |
+
+Optional fields:
+- `description` — free-text description
+- `preparation_method` — how the specimen was prepared for analysis
+- `quantity` / `mass` — amount of material
+- `access_rights` / `license`
+
+**Relationship to `Measurement`:** a `Measurement` MAY reference a `Specimen` via its `specimen` slot. When present, the specimen's `material` and `collection_location` provide context that supplements or overrides the measurement-level `matrix` and `geolocation`.
+
+### 1.5 Supporting Classes
 
 - `Geolocation` — point (lat/lon/alt), bounding box, polygon, or named place
 - `Matrix` — controlled list of earth/environmental media
 - `MeasurementType` — term from a vocabulary such as ENVO, SWEET, or CF conventions
 - `Unit` — UCUM / QUDT unit
-- `Sample` — physical or digital sample (links to iSamples)
 - `Dataset` / `Collection` — groups of time series or measurements
 
 ---
@@ -146,7 +194,28 @@ The schema will use W3C SOSA/SSN as the foundational observation model, since it
 | `geolocation` | `sosa:hasFeatureOfInterest` → `geo:hasGeometry` |
 | `time` | `sosa:resultTime` / `sosa:phenomenonTime` |
 | `instrument` | `sosa:madeBySensor` |
-| `sample_id` | `sosa:hasFeatureOfInterest` → Sample |
+| `specimen` | `sosa:hasFeatureOfInterest` → `sosa:Sample` |
+
+`Specimen` corresponds to `sosa:Sample` / `igsn:PhysicalSample`:
+
+| GeoData field | SOSA/SSN / iSamples term |
+|---|---|
+| `specimen_id` | `schema:identifier` / IGSN |
+| `specimen_type` | `sosa:isSampleOf` (the sampled feature type) |
+| `material` | `isam:material` (iSamples Material vocabulary) |
+| `collection_location` | `sosa:usedProcedure` → sampling location |
+| `collection_time` | `sosa:resultTime` on the sampling act |
+| `parent_specimen` | `sosa:isSampleOf` (hierarchical) |
+
+`AggregateObservation` maps to a `sosa:Observation` whose procedure describes the statistical derivation:
+
+| GeoData field | SOSA/PROV term |
+|---|---|
+| `aggregation_method` | `sosa:usedProcedure` |
+| `value` | `sosa:hasSimpleResult` / `sosa:hasResult` |
+| `input_measurements` | `prov:wasDerivedFrom` |
+| `temporal_extent` | `sosa:phenomenonTime` |
+| `sample_count` | `ssn-ext:memberCount` (OMS extension) |
 
 `TimeSeries` maps to a `sosa:ObservationCollection` (OGC API — Moving Features / OMS).
 
@@ -155,8 +224,8 @@ The schema will use W3C SOSA/SSN as the foundational observation model, since it
 ## 6. Phased Implementation Plan
 
 ### Phase 1 — Core Schema Definition
-- [ ] Define LinkML schema (`geodata.yaml`) with `Measurement` and `TimeSeries` classes.
-- [ ] Define enumerations for `matrix` (soil, water, air, sediment, rock, ice, biota, ...).
+- [ ] Define LinkML schema (`geodata.yaml`) with `Measurement`, `AggregateObservation`, `Specimen`, and `TimeSeries` classes.
+- [ ] Define enumerations for `matrix`, `specimen_type`, and `aggregation_method` (mean, max, min, median, std_dev, sum, count).
 - [ ] Define slot ranges using QUDT for units and SOSA for observation properties.
 - [ ] Generate JSON Schema, JSON-LD context, and OWL from LinkML.
 
@@ -193,13 +262,16 @@ GeoData/
     geolink_mapping.sssom.tsv
     soterml_mapping.sssom.tsv
     ecolink_mapping.sssom.tsv
+    specimen_mapping.sssom.tsv  # Specimen → sosa:Sample, iSamples PhysicalSample, IGSN
   vocabularies/
     measurement_types.yaml  # curated parameter registry
     matrix_terms.yaml       # controlled list of matrices
+    specimen_types.yaml     # controlled list of specimen kinds
   examples/
     soil_ph_measurement.jsonld
     air_temperature_timeseries.jsonld
     water_turbidity_measurement.jsonld
+    monthly_mean_temperature.jsonld        # AggregateObservation example
   docs/
     index.md
     design_decisions.md
@@ -217,6 +289,8 @@ GeoData/
 4. **Geolocation model** — support moving platforms (ships, aircraft, satellites) from the start, or defer?
 5. **Multi-matrix measurements** — e.g., pore water in soil; how to handle compound matrices?
 6. **Versioning strategy** — semver on the schema YAML, or date-based versions like NMDC uses?
+7. **Specimen vs. Sample distinction** — should `Specimen` subsume the former `Sample` concept entirely, or is a lightweight `Sample` (anonymous aliquot with no persistent ID) also needed as a separate class?
+8. **Specimen identifier minting** — require an IGSN, accept any URI, or allow local identifiers with optional IGSN linkage?
 
 ---
 

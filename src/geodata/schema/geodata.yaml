@@ -1,0 +1,668 @@
+---
+id: https://w3id.org/example-org/geodata
+name: geodata
+title: Earth Science Data Schema
+description: >-
+  A linked data schema for describing the data holdings of diverse earth
+  science repositories. Centres on Measurement, AggregateObservation,
+  Specimen, and TimeSeries, with alignment to SOSA/SSN, iSamples, NMDC,
+  Science on Schema.org, and GeoLink.
+version: 0.1.0
+license: BSD-3-Clause
+see_also:
+  - https://example-org.github.io/geodata
+
+prefixes:
+  linkml:   https://w3id.org/linkml/
+  geodata:  https://w3id.org/example-org/geodata/
+  schema:   https://schema.org/
+  sosa:     http://www.w3.org/ns/sosa/
+  ssn:      http://www.w3.org/ns/ssn/
+  qudt:     http://qudt.org/schema/qudt/
+  unit:     http://qudt.org/vocab/unit/
+  envo:     http://purl.obolibrary.org/obo/ENVO_
+  sweet:    http://sweetontology.net/
+  geo:      http://www.opengis.net/ont/geosparql#
+  owl_time: http://www.w3.org/2006/time#
+  gl:       http://schema.geolink.org/1.0/base/main#
+  nmdc:     https://w3id.org/nmdc/
+  isam:     https://w3id.org/isample/
+  prov:     http://www.w3.org/ns/prov#
+  xsd:      http://www.w3.org/2001/XMLSchema#
+
+default_prefix: geodata
+default_range: string
+
+imports:
+  - linkml:types
+
+# ---------------------------------------------------------------------------
+# Custom types
+# ---------------------------------------------------------------------------
+
+types:
+
+  DecimalDegree:
+    uri: xsd:double
+    base: float
+    description: A coordinate value expressed in decimal degrees.
+
+  UCUMExpression:
+    uri: xsd:string
+    base: str
+    description: A unit expression in UCUM notation (e.g. "m/s", "Cel", "g/cm3").
+
+  WKTLiteral:
+    uri: geo:wktLiteral
+    base: str
+    description: A geometry encoded as a Well-Known Text (WKT) literal.
+
+# ---------------------------------------------------------------------------
+# Enumerations
+# ---------------------------------------------------------------------------
+
+enums:
+
+  MatrixEnum:
+    description: >-
+      The medium or material in which a measurement was made or from which
+      a specimen was collected. Terms are aligned to ENVO.
+    permissible_values:
+      soil:
+        description: Terrestrial soil
+        meaning: envo:00001998
+      water:
+        description: Generic / unspecified water
+        meaning: envo:00002006
+      freshwater:
+        description: Fresh surface water (rivers, lakes, streams)
+        meaning: envo:00002004
+      seawater:
+        description: Marine or ocean water
+        meaning: envo:00002149
+      groundwater:
+        description: Subsurface groundwater
+        meaning: envo:01001004
+      pore_water:
+        description: Water occupying pore spaces of soil or sediment
+        meaning: envo:01001057
+      air:
+        description: Atmospheric air
+        meaning: envo:00002005
+      atmosphere:
+        description: The atmosphere as a whole-system feature of interest
+        meaning: envo:01000810
+      sediment:
+        description: Unconsolidated sediment
+        meaning: envo:00002007
+      rock:
+        description: Consolidated rock
+        meaning: envo:00001995
+      ice:
+        description: Glacial or sea ice
+        meaning: envo:00002209
+      snow:
+        description: Snow pack
+        meaning: envo:01000406
+      permafrost:
+        description: Perennially frozen ground
+        meaning: envo:00000134
+      biota:
+        description: Living organisms or biological tissue
+        meaning: envo:00000016
+
+  AggregationMethodEnum:
+    description: Statistical function used to derive an AggregateObservation.
+    permissible_values:
+      mean:
+        description: Arithmetic mean of input values
+      max:
+        description: Maximum of input values
+      min:
+        description: Minimum of input values
+      median:
+        description: Median of input values
+      std_dev:
+        description: Standard deviation of input values
+      sum:
+        description: Sum of input values
+      count:
+        description: Count of non-missing input values
+      range:
+        description: Difference between maximum and minimum
+      percentile_25:
+        description: 25th percentile
+      percentile_75:
+        description: 75th percentile
+      percentile_95:
+        description: 95th percentile
+
+  SpecimenTypeEnum:
+    description: The kind of discrete physical specimen collected from the environment.
+    permissible_values:
+      rock:
+        description: Consolidated rock sample
+      sediment:
+        description: Loose unconsolidated sediment
+      sediment_core:
+        description: A drilled or pushed sediment core
+      ice_core:
+        description: A drilled ice core
+      soil:
+        description: Soil sample
+      water:
+        description: Collected water sample (bottle, bag, etc.)
+      biological_tissue:
+        description: Biological tissue or whole organism
+      mineral:
+        description: Individual mineral specimen
+      fluid:
+        description: Non-water fluid sample (e.g. hydrothermal fluid, oil)
+      gas:
+        description: Gas sample
+      peat:
+        description: Peat or organic-rich deposit
+      coral:
+        description: Coral skeleton
+      tree_ring:
+        description: Tree ring / dendrochronology sample
+      speleothem:
+        description: Cave deposit (stalactite, stalagmite, flowstone, etc.)
+      dust:
+        description: Atmospheric dust or aerosol trap sample
+      other:
+        description: Specimen type not covered by the other terms
+
+  QualityFlagEnum:
+    description: QA/QC status of a measurement or aggregate observation.
+    permissible_values:
+      good:
+        description: Value passed all quality checks
+      suspect:
+        description: Value may be unreliable; use with caution
+      bad:
+        description: Value failed quality checks and should not be used
+      missing:
+        description: Value is absent or could not be obtained
+      estimated:
+        description: Value was estimated or gap-filled
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+
+classes:
+
+  # --- Supporting classes ---------------------------------------------------
+
+  Geolocation:
+    description: >-
+      A spatial location expressed as a point, geometry, or named feature.
+      At least one of (latitude + longitude), wkt_geometry, or place_uri
+      MUST be provided.
+    class_uri: geo:Feature
+    attributes:
+      latitude:
+        range: DecimalDegree
+        description: WGS84 decimal latitude (−90 to +90).
+        minimum_value: -90
+        maximum_value: 90
+      longitude:
+        range: DecimalDegree
+        description: WGS84 decimal longitude (−180 to +180).
+        minimum_value: -180
+        maximum_value: 180
+      altitude:
+        range: float
+        description: Altitude above the WGS84 ellipsoid, in metres.
+      wkt_geometry:
+        range: WKTLiteral
+        description: >-
+          Geometry (point, line, polygon, bounding box, etc.) encoded as
+          a WKT literal. Use for transects, polygonal areas, or when a
+          point is insufficient.
+        slot_uri: geo:asWKT
+      place_uri:
+        range: uri
+        description: >-
+          URI of a named place (e.g. a GeoNames, Wikidata, or GeoLink
+          feature) that identifies the location.
+      coordinate_system:
+        range: string
+        description: >-
+          Coordinate reference system identifier. Defaults to WGS84
+          (EPSG:4326) when absent.
+        ifabsent: string(WGS84)
+
+  TemporalExtent:
+    description: A closed time interval defined by a start and end instant.
+    class_uri: owl_time:ProperInterval
+    attributes:
+      start_time:
+        range: datetime
+        required: true
+        description: Start of the interval (ISO 8601 datetime).
+        slot_uri: owl_time:hasBeginning
+      end_time:
+        range: datetime
+        required: true
+        description: End of the interval (ISO 8601 datetime).
+        slot_uri: owl_time:hasEnd
+
+  MeasurementType:
+    description: >-
+      A measured or observed property drawn from a controlled vocabulary
+      such as CF Conventions, SWEET, or ENVO. Maps to
+      sosa:ObservableProperty.
+    class_uri: sosa:ObservableProperty
+    attributes:
+      term_id:
+        range: uri
+        identifier: true
+        required: true
+        description: >-
+          URI of the property term in a source vocabulary (e.g. a CF
+          standard name URI or a SWEET property URI).
+      label:
+        range: string
+        required: true
+        description: Human-readable name for the property (e.g. "air_temperature").
+        slot_uri: schema:name
+      source_vocabulary:
+        range: string
+        description: >-
+          The vocabulary from which the term is drawn (e.g. "CF
+          Conventions", "SWEET", "ENVO").
+      definition:
+        range: string
+        description: Textual definition of the property.
+        slot_uri: schema:description
+
+  Unit:
+    description: >-
+      A unit of measure aligned with QUDT and expressible in UCUM notation.
+      Maps to qudt:Unit.
+    class_uri: qudt:Unit
+    attributes:
+      term_id:
+        range: uri
+        identifier: true
+        required: true
+        description: >-
+          QUDT unit URI (e.g. http://qudt.org/vocab/unit/DEG_C).
+      label:
+        range: string
+        required: true
+        description: Human-readable unit label (e.g. "degree Celsius").
+        slot_uri: schema:name
+      ucum_code:
+        range: UCUMExpression
+        description: UCUM expression for the unit (e.g. "Cel", "m/s", "g/cm3").
+
+  # --- Core classes ---------------------------------------------------------
+
+  Specimen:
+    description: >-
+      A discrete physical or digital object collected from the environment
+      and subsequently measured or analysed. First-class entity: it persists
+      across time and may be the subject of many Measurements.
+      Maps to sosa:Sample and iSamples PhysicalSample.
+    class_uri: sosa:Sample
+    attributes:
+      specimen_id:
+        range: uri
+        identifier: true
+        required: true
+        description: >-
+          Globally unique identifier for the specimen. Preferably an IGSN
+          (e.g. https://igsn.org/AU1234567) or another persistent URI.
+        slot_uri: schema:identifier
+      specimen_type:
+        range: SpecimenTypeEnum
+        required: true
+        description: The kind of physical specimen.
+      label:
+        range: string
+        description: Human-readable name or field number (e.g. "Core 3A, Section 2").
+        slot_uri: schema:name
+      material:
+        range: string
+        description: >-
+          Bulk material of the specimen using iSamples Material vocabulary
+          terms (e.g. "RockOrSediment", "NaturalSolidMaterial", "Fluid",
+          "BiogenicNonOrganicMaterial").
+        slot_uri: isam:material
+      collection_location:
+        range: Geolocation
+        description: Location where the specimen was collected.
+        inlined: true
+      collection_time:
+        range: datetime
+        description: Date and time of collection (ISO 8601).
+        slot_uri: sosa:resultTime
+      collected_by:
+        range: string
+        description: Person or organisation responsible for collection.
+        slot_uri: schema:contributor
+      parent_specimen:
+        range: Specimen
+        description: >-
+          Parent specimen from which this one was derived (e.g. a
+          subsample, aliquot, or thin section).
+        slot_uri: sosa:isSampleOf
+      repository:
+        range: string
+        description: Institution or archive currently holding the specimen.
+      curation_location:
+        range: string
+        description: >-
+          Current physical storage location within the repository
+          (e.g. "IODP Bremen Core Repository, Cabinet 7, Tray 3").
+      description:
+        range: string
+        description: Free-text description of the specimen.
+        slot_uri: schema:description
+      preparation_method:
+        range: string
+        description: How the specimen was prepared for analysis.
+      mass:
+        range: float
+        description: Mass of the specimen in grams.
+      access_rights:
+        range: string
+        description: Statement of access conditions for specimen data.
+        slot_uri: schema:conditionsOfAccess
+      license:
+        range: uri
+        description: URI of the license governing use of specimen metadata.
+        slot_uri: schema:license
+
+  Measurement:
+    description: >-
+      A single observed value of a property at a location and time.
+      The fundamental atomic unit of the schema.
+      Maps to sosa:Observation.
+    class_uri: sosa:Observation
+    attributes:
+      measurement_type:
+        range: MeasurementType
+        required: true
+        description: The property that was measured.
+        slot_uri: sosa:observedProperty
+        inlined: true
+      value:
+        range: string
+        required: true
+        description: >-
+          The measured result. Stored as a string to accommodate both
+          numeric and categorical values. Numeric values MUST be parseable
+          as a float.
+        slot_uri: sosa:hasSimpleResult
+      unit:
+        range: Unit
+        required: true
+        description: Unit of the measured value.
+        slot_uri: qudt:hasUnit
+        inlined: true
+      matrix:
+        range: MatrixEnum
+        required: true
+        description: >-
+          The medium or material that was measured (the feature of
+          interest at the medium level).
+      geolocation:
+        range: Geolocation
+        required: true
+        description: Spatial location at which the measurement was made.
+        inlined: true
+      time:
+        range: datetime
+        required: true
+        description: >-
+          Date and time at which the measurement was made (ISO 8601).
+          Use temporal_extent instead when the observation spans an interval.
+        slot_uri: sosa:resultTime
+      temporal_extent:
+        range: TemporalExtent
+        description: >-
+          Time interval of the measurement, used in place of `time` when
+          the observation spans a period rather than an instant.
+        slot_uri: sosa:phenomenonTime
+        inlined: true
+      instrument:
+        range: string
+        description: Sensor, instrument, or analytical method used.
+        slot_uri: sosa:madeBySensor
+      specimen:
+        range: Specimen
+        description: >-
+          Physical specimen that was measured, if the measurement was made
+          on a collected object rather than in situ.
+      uncertainty:
+        range: float
+        description: >-
+          Measurement uncertainty expressed in the same unit as value
+          (e.g. one standard deviation or half-width of a 95 % CI).
+      depth:
+        range: float
+        description: Depth below surface in metres (positive downward).
+      elevation:
+        range: float
+        description: Elevation above reference datum in metres.
+      observer:
+        range: string
+        description: Person or organisation who made the measurement.
+        slot_uri: prov:wasAssociatedWith
+      laboratory:
+        range: string
+        description: Laboratory or facility where analysis was performed.
+      quality_flag:
+        range: QualityFlagEnum
+        description: QA/QC status of this measurement.
+      project:
+        range: string
+        description: Project or programme under which the measurement was made.
+      dataset:
+        range: string
+        description: Dataset or collection to which this measurement belongs.
+      license:
+        range: uri
+        description: URI of the license governing use of this measurement.
+        slot_uri: schema:license
+      access_rights:
+        range: string
+        description: Statement of access conditions.
+        slot_uri: schema:conditionsOfAccess
+
+  AggregateObservation:
+    description: >-
+      A single derived value produced by applying a statistical function to
+      a set of Measurement or TimeSeries inputs (e.g. monthly mean
+      temperature, annual maximum flood depth, site-level median pH).
+      Maps to sosa:Observation with a sosa:Procedure describing the
+      aggregation; provenance tracked via prov:wasDerivedFrom.
+    class_uri: sosa:Observation
+    attributes:
+      aggregation_method:
+        range: AggregationMethodEnum
+        required: true
+        description: The statistical function applied to the input measurements.
+        slot_uri: sosa:usedProcedure
+      value:
+        range: float
+        required: true
+        description: The resulting aggregate value.
+        slot_uri: sosa:hasSimpleResult
+      unit:
+        range: Unit
+        required: true
+        description: Unit of the aggregate value.
+        slot_uri: qudt:hasUnit
+        inlined: true
+      measurement_type:
+        range: MeasurementType
+        required: true
+        description: The property being summarised.
+        slot_uri: sosa:observedProperty
+        inlined: true
+      input_measurements:
+        range: Measurement
+        multivalued: true
+        description: Measurement objects that were aggregated to produce this value.
+        slot_uri: prov:wasDerivedFrom
+      input_time_series:
+        range: TimeSeries
+        multivalued: true
+        description: TimeSeries objects used as input to this aggregation.
+        slot_uri: prov:wasDerivedFrom
+      sample_count:
+        range: integer
+        description: Number of non-missing input values included in the aggregation.
+      temporal_extent:
+        range: TemporalExtent
+        description: Time window over which the aggregation was performed.
+        slot_uri: sosa:phenomenonTime
+        inlined: true
+      spatial_extent:
+        range: WKTLiteral
+        description: >-
+          Spatial footprint over which aggregation was performed, encoded
+          as WKT. Use when aggregating across multiple locations.
+      matrix:
+        range: MatrixEnum
+        description: Medium or material summarised.
+      geolocation:
+        range: Geolocation
+        description: >-
+          Representative or centroid location for the aggregate
+          (e.g. station location, grid cell centre).
+        inlined: true
+      specimen:
+        range: Specimen
+        description: >-
+          Specimen from which the aggregated measurements were taken,
+          if the aggregation is over repeated analyses of one object.
+      quality_flag:
+        range: QualityFlagEnum
+        description: QA/QC status of this aggregate observation.
+      missing_value_treatment:
+        range: string
+        description: >-
+          How missing or null input values were handled prior to
+          aggregation (e.g. "excluded", "interpolated", "zero-filled").
+
+  TimeSeries:
+    description: >-
+      An ordered collection of Measurement objects sharing a common
+      measurement type, matrix, and geolocation, varying over time.
+      Maps to sosa:ObservationCollection.
+    class_uri: sosa:ObservationCollection
+    attributes:
+      measurements:
+        range: Measurement
+        multivalued: true
+        required: true
+        description: Ordered list of Measurement objects comprising this series.
+        inlined_as_list: true
+      temporal_extent:
+        range: TemporalExtent
+        description: Overall start and end datetime of the series.
+        inlined: true
+      temporal_resolution:
+        range: string
+        description: >-
+          Nominal sampling interval as an ISO 8601 duration
+          (e.g. "PT1H" = hourly, "P1D" = daily, "P1M" = monthly).
+      measurement_type:
+        range: MeasurementType
+        description: Shared measurement type for all members of this series.
+        slot_uri: sosa:observedProperty
+        inlined: true
+      geolocation:
+        range: Geolocation
+        description: Fixed or representative location of the station or platform.
+        inlined: true
+      matrix:
+        range: MatrixEnum
+        description: Shared matrix for all members of this series.
+      platform:
+        range: string
+        description: >-
+          Observing platform or station type (e.g. "weather station",
+          "moored buoy", "flux tower", "research vessel", "satellite").
+      label:
+        range: string
+        description: Human-readable name for this time series.
+        slot_uri: schema:name
+      license:
+        range: uri
+        description: URI of the license governing use of this time series.
+        slot_uri: schema:license
+
+  Dataset:
+    description: >-
+      A named, curated collection of Measurements, TimeSeries, and/or
+      AggregateObservations. Maps to schema:Dataset and gl:Dataset.
+    class_uri: schema:Dataset
+    tree_root: true
+    attributes:
+      dataset_id:
+        range: uri
+        identifier: true
+        required: true
+        description: Globally unique identifier for the dataset (URI or DOI).
+        slot_uri: schema:identifier
+      title:
+        range: string
+        required: true
+        description: Human-readable title of the dataset.
+        slot_uri: schema:name
+      description:
+        range: string
+        description: Abstract or summary of the dataset contents.
+        slot_uri: schema:description
+      measurements:
+        range: Measurement
+        multivalued: true
+        description: Individual Measurement objects included in this dataset.
+      time_series:
+        range: TimeSeries
+        multivalued: true
+        description: TimeSeries objects included in this dataset.
+      aggregate_observations:
+        range: AggregateObservation
+        multivalued: true
+        description: AggregateObservation objects included in this dataset.
+      temporal_extent:
+        range: TemporalExtent
+        description: Overall temporal coverage of the dataset.
+        slot_uri: schema:temporalCoverage
+        inlined: true
+      spatial_extent:
+        range: WKTLiteral
+        description: Overall spatial coverage of the dataset (WKT bounding box or polygon).
+        slot_uri: schema:spatialCoverage
+      creator:
+        range: string
+        description: Person or organisation that created the dataset.
+        slot_uri: schema:creator
+      publisher:
+        range: string
+        description: Organisation that published or distributes the dataset.
+        slot_uri: schema:publisher
+      license:
+        range: uri
+        description: URI of the license governing use of this dataset.
+        slot_uri: schema:license
+      keywords:
+        range: string
+        multivalued: true
+        description: Keywords or subject terms describing the dataset content.
+        slot_uri: schema:keywords
+      version:
+        range: string
+        description: Version identifier (e.g. "1.0.0" or "2024-01").
+        slot_uri: schema:version
+      doi:
+        range: uri
+        description: Digital Object Identifier for this dataset release.
