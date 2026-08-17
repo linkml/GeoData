@@ -188,6 +188,56 @@ enums:
         description: Value was estimated or gap-filled
 
 # ---------------------------------------------------------------------------
+# Shared top-level slots
+# Promoted from per-class attributes to eliminate OWL ambiguity warnings.
+# Each slot that appears in more than one class is defined once here and
+# referenced via `slots:` in each class; per-class overrides (e.g. required,
+# inlined_as_list) are set with `slot_usage:`.
+# ---------------------------------------------------------------------------
+
+slots:
+
+  term_id:
+    range: uri
+    identifier: true
+    required: true
+    slot_uri: schema:identifier
+    description: >-
+      URI of the term in a source vocabulary (e.g. a QUDT unit URI or a
+      CF standard name URI).
+
+  matrix:
+    range: MatrixEnum
+    slot_uri: geodata:matrix
+    description: >-
+      The medium or material in which a measurement was made or from which
+      a specimen was collected (feature of interest at the medium level).
+
+  geolocation:
+    range: Geolocation
+    inlined: true
+    slot_uri: geodata:geolocation
+    description: Spatial location associated with this entity.
+
+  specimen:
+    range: Specimen
+    slot_uri: geodata:specimen
+    description: >-
+      Physical specimen associated with the observation, if the measurement
+      was made on a collected object rather than in situ.
+
+  quality_flag:
+    range: QualityFlagEnum
+    slot_uri: geodata:quality_flag
+    description: QA/QC status of the value.
+
+  measurements:
+    range: Measurement
+    multivalued: true
+    slot_uri: geodata:measurements
+    description: Measurement objects belonging to this collection.
+
+# ---------------------------------------------------------------------------
 # Classes
 # ---------------------------------------------------------------------------
 
@@ -255,14 +305,9 @@ classes:
       such as CF Conventions, SWEET, or ENVO. Maps to
       sosa:ObservableProperty.
     class_uri: sosa:ObservableProperty
+    slots:
+      - term_id
     attributes:
-      term_id:
-        range: uri
-        identifier: true
-        required: true
-        description: >-
-          URI of the property term in a source vocabulary (e.g. a CF
-          standard name URI or a SWEET property URI).
       label:
         range: string
         required: true
@@ -283,13 +328,9 @@ classes:
       A unit of measure aligned with QUDT and expressible in UCUM notation.
       Maps to qudt:Unit.
     class_uri: qudt:Unit
+    slots:
+      - term_id
     attributes:
-      term_id:
-        range: uri
-        identifier: true
-        required: true
-        description: >-
-          QUDT unit URI (e.g. http://qudt.org/vocab/unit/DEG_C).
       label:
         range: string
         required: true
@@ -383,6 +424,16 @@ classes:
       The fundamental atomic unit of the schema.
       Maps to sosa:Observation.
     class_uri: sosa:Observation
+    slots:
+      - matrix
+      - geolocation
+      - specimen
+      - quality_flag
+    slot_usage:
+      matrix:
+        required: true
+      geolocation:
+        required: true
     attributes:
       measurement_type:
         range: MeasurementType
@@ -404,17 +455,6 @@ classes:
         description: Unit of the measured value.
         slot_uri: qudt:hasUnit
         inlined: true
-      matrix:
-        range: MatrixEnum
-        required: true
-        description: >-
-          The medium or material that was measured (the feature of
-          interest at the medium level).
-      geolocation:
-        range: Geolocation
-        required: true
-        description: Spatial location at which the measurement was made.
-        inlined: true
       time:
         range: datetime
         required: true
@@ -433,11 +473,6 @@ classes:
         range: string
         description: Sensor, instrument, or analytical method used.
         slot_uri: sosa:madeBySensor
-      specimen:
-        range: Specimen
-        description: >-
-          Physical specimen that was measured, if the measurement was made
-          on a collected object rather than in situ.
       uncertainty:
         range: float
         description: >-
@@ -456,9 +491,6 @@ classes:
       laboratory:
         range: string
         description: Laboratory or facility where analysis was performed.
-      quality_flag:
-        range: QualityFlagEnum
-        description: QA/QC status of this measurement.
       project:
         range: string
         description: Project or programme under which the measurement was made.
@@ -482,6 +514,11 @@ classes:
       Maps to sosa:Observation with a sosa:Procedure describing the
       aggregation; provenance tracked via prov:wasDerivedFrom.
     class_uri: sosa:Observation
+    slots:
+      - matrix
+      - geolocation
+      - specimen
+      - quality_flag
     attributes:
       aggregation_method:
         range: AggregationMethodEnum
@@ -528,23 +565,6 @@ classes:
         description: >-
           Spatial footprint over which aggregation was performed, encoded
           as WKT. Use when aggregating across multiple locations.
-      matrix:
-        range: MatrixEnum
-        description: Medium or material summarised.
-      geolocation:
-        range: Geolocation
-        description: >-
-          Representative or centroid location for the aggregate
-          (e.g. station location, grid cell centre).
-        inlined: true
-      specimen:
-        range: Specimen
-        description: >-
-          Specimen from which the aggregated measurements were taken,
-          if the aggregation is over repeated analyses of one object.
-      quality_flag:
-        range: QualityFlagEnum
-        description: QA/QC status of this aggregate observation.
       missing_value_treatment:
         range: string
         description: >-
@@ -557,13 +577,15 @@ classes:
       measurement type, matrix, and geolocation, varying over time.
       Maps to sosa:ObservationCollection.
     class_uri: sosa:ObservationCollection
-    attributes:
+    slots:
+      - matrix
+      - geolocation
+      - measurements
+    slot_usage:
       measurements:
-        range: Measurement
-        multivalued: true
         required: true
-        description: Ordered list of Measurement objects comprising this series.
         inlined_as_list: true
+    attributes:
       temporal_extent:
         range: TemporalExtent
         description: Overall start and end datetime of the series.
@@ -578,13 +600,6 @@ classes:
         description: Shared measurement type for all members of this series.
         slot_uri: sosa:observedProperty
         inlined: true
-      geolocation:
-        range: Geolocation
-        description: Fixed or representative location of the station or platform.
-        inlined: true
-      matrix:
-        range: MatrixEnum
-        description: Shared matrix for all members of this series.
       platform:
         range: string
         description: >-
@@ -605,6 +620,8 @@ classes:
       AggregateObservations. Maps to schema:Dataset and gl:Dataset.
     class_uri: schema:Dataset
     tree_root: true
+    slots:
+      - measurements
     attributes:
       dataset_id:
         range: uri
@@ -621,10 +638,6 @@ classes:
         range: string
         description: Abstract or summary of the dataset contents.
         slot_uri: schema:description
-      measurements:
-        range: Measurement
-        multivalued: true
-        description: Individual Measurement objects included in this dataset.
       time_series:
         range: TimeSeries
         multivalued: true
