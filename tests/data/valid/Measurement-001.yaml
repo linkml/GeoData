@@ -14,7 +14,7 @@ geolocation:
   latitude: 36.4072
   longitude: -105.5767
   altitude: 2090.0
-time: "2023-06-15T14:30:00Z"
+result_time: "2023-06-15T14:30:00Z"
 depth: 0.15
 observer: "A. Thessen"
 laboratory: "NEON Soil Biogeochemistry Lab"

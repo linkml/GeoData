@@ -31,7 +31,7 @@ measurements:
     geolocation:
       latitude: 36.4072
       longitude: -105.5767
-    time: "2023-06-15T14:30:00Z"
+    result_time: "2023-06-15T14:30:00Z"
     depth: 0.15
     quality_flag: good
   - measurement_type:
@@ -47,5 +47,5 @@ measurements:
     geolocation:
       latitude: 36.4180
       longitude: -105.5620
-    time: "2023-06-15T09:00:00Z"
+    result_time: "2023-06-15T09:00:00Z"
     quality_flag: good

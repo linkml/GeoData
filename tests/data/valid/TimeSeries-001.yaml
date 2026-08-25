@@ -29,7 +29,7 @@ measurements:
       latitude: 36.4072
       longitude: -105.5767
       altitude: 2090.0
-    time: "2023-06-15T00:00:00Z"
+    result_time: "2023-06-15T00:00:00Z"
     quality_flag: good
   - measurement_type:
       term_id: http://vocab.nerc.ac.uk/standard_name/air_temperature/
@@ -45,7 +45,7 @@ measurements:
       latitude: 36.4072
       longitude: -105.5767
       altitude: 2090.0
-    time: "2023-06-15T01:00:00Z"
+    result_time: "2023-06-15T01:00:00Z"
     quality_flag: good
   - measurement_type:
       term_id: http://vocab.nerc.ac.uk/standard_name/air_temperature/
@@ -61,5 +61,5 @@ measurements:
       latitude: 36.4072
       longitude: -105.5767
       altitude: 2090.0
-    time: "2023-06-15T02:00:00Z"
+    result_time: "2023-06-15T02:00:00Z"
     quality_flag: good
