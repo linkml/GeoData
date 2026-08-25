@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://linkml.github.io/geodata/elements/time/">
+        <link rel="canonical" href="https://linkml.github.io/geodata/elements/result_time/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: time - geodata</title>
+        <title>Slot: result_time - geodata</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-time" class="md-skip">
+        <a href="#slot-result_time" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: time
+              Slot: result_time
             
           </span>
         </div>
@@ -485,7 +485,7 @@
   
 
 
-<h1 id="slot-time">Slot: time</h1>
+<h1 id="slot-result_time">Slot: result_time</h1>
 <p><em>Date and time at which the measurement was made (ISO 8601). Use temporal_extent instead when the observation spans an interval.</em></p>
 <div>
 <p>URI: <a href="http://www.w3.org/ns/sosa/resultTime">sosa:resultTime</a></p>
@@ -503,7 +503,7 @@
 <tr>
 <td><a href="../Measurement/">Measurement</a></td>
 <td>A single observed value of a property at a location and time</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -541,26 +541,8 @@
 </thead>
 <tbody>
 <tr>
-<td>Required</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>### Slot Characteristics</td>
 <td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Owner</td>
-<td><a href="../Measurement/">Measurement</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -584,23 +566,21 @@
 </tr>
 <tr>
 <td>native</td>
-<td>geodata:time</td>
+<td>geodata:result_time</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time</span>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result_time</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Date and time at which the measurement was made (ISO 8601). Use temporal_extent</span>
 <span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">instead when the observation spans an interval.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/geodata</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sosa:resultTime</span>
-<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measurement</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measurement</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datetime</span>
-<span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
 </div>

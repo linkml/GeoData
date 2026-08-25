@@ -621,163 +621,283 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  geolocation__latitude:
-    name: geolocation__latitude
+  label:
+    name: label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable name or label for this entity.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    slot_uri: schema:name
+    owner: TimeSeries
+    domain_of:
+    - MeasurementType
+    - Unit
+    - Specimen
+    - TimeSeries
+    range: string
+  description:
+    name: description
+    definition_uri: https://w3id.org/linkml/geodata/description
+    description: Free-text description of this entity.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:description
+    slot_uri: schema:description
+    owner: Dataset
+    domain_of:
+    - Specimen
+    - Dataset
+    range: string
+  temporal_extent:
+    name: temporal_extent
+    definition_uri: https://w3id.org/linkml/geodata/temporal_extent
+    description: Time interval associated with this entity.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:phenomenonTime
+    slot_uri: sosa:phenomenonTime
+    owner: Dataset
+    domain_of:
+    - Measurement
+    - AggregateObservation
+    - TimeSeries
+    - Dataset
+    range: TemporalExtent
+    inlined: true
+    inlined_as_list: true
+  spatial_extent:
+    name: spatial_extent
+    definition_uri: https://w3id.org/linkml/geodata/spatial_extent
+    description: Spatial footprint encoded as WKT (bounding box, polygon, etc.).
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:spatialExtent
+    slot_uri: geodata:spatialExtent
+    owner: Dataset
+    domain_of:
+    - AggregateObservation
+    - Dataset
+    range: WKTLiteral
+  measurement_type:
+    name: measurement_type
+    definition_uri: https://w3id.org/linkml/geodata/measurement_type
+    description: The property that was measured or observed.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:observedProperty
+    slot_uri: sosa:observedProperty
+    owner: TimeSeries
+    domain_of:
+    - Measurement
+    - AggregateObservation
+    - TimeSeries
+    range: MeasurementType
+    inlined: true
+    inlined_as_list: false
+  value:
+    name: value
+    definition_uri: https://w3id.org/linkml/geodata/value
+    description: The measured result. Stored as a string to accommodate both numeric
+      and categorical values. Numeric values MUST be parseable as a float.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:hasSimpleResult
+    slot_uri: sosa:hasSimpleResult
+    owner: AggregateObservation
+    domain_of:
+    - Measurement
+    - AggregateObservation
+    range: string
+  unit:
+    name: unit
+    definition_uri: https://w3id.org/linkml/geodata/unit
+    description: Unit of the measured value.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - qudt:hasUnit
+    slot_uri: qudt:hasUnit
+    owner: AggregateObservation
+    domain_of:
+    - Measurement
+    - AggregateObservation
+    range: Unit
+    inlined: true
+    inlined_as_list: false
+  license:
+    name: license
+    definition_uri: https://w3id.org/linkml/geodata/license
+    description: URI of the license governing use of this entity.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:license
+    slot_uri: schema:license
+    owner: Dataset
+    domain_of:
+    - Specimen
+    - Measurement
+    - TimeSeries
+    - Dataset
+    range: uri
+  access_rights:
+    name: access_rights
+    definition_uri: https://w3id.org/linkml/geodata/access_rights
+    description: Statement of access conditions.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:conditionsOfAccess
+    slot_uri: schema:conditionsOfAccess
+    owner: Measurement
+    domain_of:
+    - Specimen
+    - Measurement
+    range: string
+  latitude:
+    name: latitude
+    definition_uri: https://w3id.org/linkml/geodata/latitude
     description: "WGS84 decimal latitude (\u221290 to +90)."
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:latitude
     slot_uri: geodata:latitude
-    alias: latitude
     owner: Geolocation
     domain_of:
     - Geolocation
     range: DecimalDegree
     minimum_value: -90
     maximum_value: 90
-  geolocation__longitude:
-    name: geolocation__longitude
+  longitude:
+    name: longitude
+    definition_uri: https://w3id.org/linkml/geodata/longitude
     description: "WGS84 decimal longitude (\u2212180 to +180)."
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:longitude
     slot_uri: geodata:longitude
-    alias: longitude
     owner: Geolocation
     domain_of:
     - Geolocation
     range: DecimalDegree
     minimum_value: -180
     maximum_value: 180
-  geolocation__altitude:
-    name: geolocation__altitude
+  altitude:
+    name: altitude
+    definition_uri: https://w3id.org/linkml/geodata/altitude
     description: Altitude above the WGS84 ellipsoid, in metres.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:altitude
     slot_uri: geodata:altitude
-    alias: altitude
     owner: Geolocation
     domain_of:
     - Geolocation
     range: float
-  geolocation__wkt_geometry:
-    name: geolocation__wkt_geometry
+  wkt_geometry:
+    name: wkt_geometry
+    definition_uri: https://w3id.org/linkml/geodata/wkt_geometry
     description: Geometry (point, line, polygon, bounding box, etc.) encoded as a
       WKT literal. Use for transects, polygonal areas, or when a point is insufficient.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - geo:asWKT
     slot_uri: geo:asWKT
-    alias: wkt_geometry
     owner: Geolocation
     domain_of:
     - Geolocation
     range: WKTLiteral
-  geolocation__place_uri:
-    name: geolocation__place_uri
+  place_uri:
+    name: place_uri
+    definition_uri: https://w3id.org/linkml/geodata/place_uri
     description: URI of a named place (e.g. a GeoNames, Wikidata, or GeoLink feature)
       that identifies the location.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:place_uri
     slot_uri: geodata:place_uri
-    alias: place_uri
     owner: Geolocation
     domain_of:
     - Geolocation
     range: uri
-  geolocation__coordinate_system:
-    name: geolocation__coordinate_system
+  coordinate_system:
+    name: coordinate_system
+    definition_uri: https://w3id.org/linkml/geodata/coordinate_system
     description: Coordinate reference system identifier. Defaults to WGS84 (EPSG:4326)
       when absent.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:coordinate_system
     slot_uri: geodata:coordinate_system
     ifabsent: string(WGS84)
-    alias: coordinate_system
     owner: Geolocation
     domain_of:
     - Geolocation
     range: string
-  temporalExtent__start_time:
-    name: temporalExtent__start_time
+  start_time:
+    name: start_time
+    definition_uri: https://w3id.org/linkml/geodata/start_time
     description: Start of the interval (ISO 8601 datetime).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - owl_time:hasBeginning
     slot_uri: owl_time:hasBeginning
-    alias: start_time
     owner: TemporalExtent
     domain_of:
     - TemporalExtent
     range: datetime
     required: true
-  temporalExtent__end_time:
-    name: temporalExtent__end_time
+  end_time:
+    name: end_time
+    definition_uri: https://w3id.org/linkml/geodata/end_time
     description: End of the interval (ISO 8601 datetime).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - owl_time:hasEnd
     slot_uri: owl_time:hasEnd
-    alias: end_time
     owner: TemporalExtent
     domain_of:
     - TemporalExtent
     range: datetime
     required: true
-  measurementType__label:
-    name: measurementType__label
-    description: Human-readable name for the property (e.g. "air_temperature").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:name
-    slot_uri: schema:name
-    alias: label
-    owner: MeasurementType
-    domain_of:
-    - MeasurementType
-    range: string
-    required: true
-  measurementType__source_vocabulary:
-    name: measurementType__source_vocabulary
+  source_vocabulary:
+    name: source_vocabulary
+    definition_uri: https://w3id.org/linkml/geodata/source_vocabulary
     description: The vocabulary from which the term is drawn (e.g. "CF Conventions",
       "SWEET", "ENVO").
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:source_vocabulary
     slot_uri: geodata:source_vocabulary
-    alias: source_vocabulary
     owner: MeasurementType
     domain_of:
     - MeasurementType
     range: string
-  measurementType__definition:
-    name: measurementType__definition
+  definition:
+    name: definition
+    definition_uri: https://w3id.org/linkml/geodata/definition
     description: Textual definition of the property.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:description
     slot_uri: schema:description
-    alias: definition
     owner: MeasurementType
     domain_of:
     - MeasurementType
     range: string
-  unit__label:
-    name: unit__label
-    description: Human-readable unit label (e.g. "degree Celsius").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:name
-    slot_uri: schema:name
-    alias: label
-    owner: Unit
-    domain_of:
-    - Unit
-    range: string
-    required: true
-  unit__ucum_code:
-    name: unit__ucum_code
+  ucum_code:
+    name: ucum_code
+    definition_uri: https://w3id.org/linkml/geodata/ucum_code
     description: UCUM expression for the unit (e.g. "Cel", "m/s", "g/cm3").
     from_schema: https://w3id.org/linkml/geodata
-    slot_uri: geodata:ucum_code
-    alias: ucum_code
+    mappings:
+    - qudt:ucumCode
+    slot_uri: qudt:ucumCode
     owner: Unit
     domain_of:
     - Unit
     range: UCUMExpression
-  specimen__specimen_id:
-    name: specimen__specimen_id
+  specimen_id:
+    name: specimen_id
+    definition_uri: https://w3id.org/linkml/geodata/specimen_id
     description: Globally unique identifier for the specimen. Preferably an IGSN (e.g.
       https://igsn.org/AU1234567) or another persistent URI.
     from_schema: https://w3id.org/linkml/geodata
@@ -785,420 +905,268 @@ slots:
     - schema:identifier
     slot_uri: schema:identifier
     identifier: true
-    alias: specimen_id
     owner: Specimen
     domain_of:
     - Specimen
     range: uri
     required: true
-  specimen__specimen_type:
-    name: specimen__specimen_type
+  specimen_type:
+    name: specimen_type
+    definition_uri: https://w3id.org/linkml/geodata/specimen_type
     description: The kind of physical specimen.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:specimen_type
     slot_uri: geodata:specimen_type
-    alias: specimen_type
     owner: Specimen
     domain_of:
     - Specimen
     range: SpecimenTypeEnum
     required: true
-  specimen__label:
-    name: specimen__label
-    description: Human-readable name or field number (e.g. "Core 3A, Section 2").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:name
-    slot_uri: schema:name
-    alias: label
-    owner: Specimen
-    domain_of:
-    - Specimen
-    range: string
-  specimen__material:
-    name: specimen__material
+  material:
+    name: material
+    definition_uri: https://w3id.org/linkml/geodata/material
     description: Bulk material of the specimen using iSamples Material vocabulary
       terms (e.g. "RockOrSediment", "NaturalSolidMaterial", "Fluid", "BiogenicNonOrganicMaterial").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - isam:material
     slot_uri: isam:material
-    alias: material
     owner: Specimen
     domain_of:
     - Specimen
     range: string
-  specimen__collection_location:
-    name: specimen__collection_location
+  collection_location:
+    name: collection_location
+    definition_uri: https://w3id.org/linkml/geodata/collection_location
     description: Location where the specimen was collected.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:collection_location
     slot_uri: geodata:collection_location
-    alias: collection_location
     owner: Specimen
     domain_of:
     - Specimen
     range: Geolocation
     inlined: true
     inlined_as_list: true
-  specimen__collection_time:
-    name: specimen__collection_time
+  collection_time:
+    name: collection_time
+    definition_uri: https://w3id.org/linkml/geodata/collection_time
     description: Date and time of collection (ISO 8601).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:resultTime
     slot_uri: sosa:resultTime
-    alias: collection_time
     owner: Specimen
     domain_of:
     - Specimen
     range: datetime
-  specimen__collected_by:
-    name: specimen__collected_by
+  collected_by:
+    name: collected_by
+    definition_uri: https://w3id.org/linkml/geodata/collected_by
     description: Person or organisation responsible for collection.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:contributor
     slot_uri: schema:contributor
-    alias: collected_by
     owner: Specimen
     domain_of:
     - Specimen
     range: string
-  specimen__parent_specimen:
-    name: specimen__parent_specimen
+  parent_specimen:
+    name: parent_specimen
+    definition_uri: https://w3id.org/linkml/geodata/parent_specimen
     description: Parent specimen from which this one was derived (e.g. a subsample,
       aliquot, or thin section).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:isSampleOf
     slot_uri: sosa:isSampleOf
-    alias: parent_specimen
     owner: Specimen
     domain_of:
     - Specimen
     range: Specimen
-  specimen__repository:
-    name: specimen__repository
+  repository:
+    name: repository
+    definition_uri: https://w3id.org/linkml/geodata/repository
     description: Institution or archive currently holding the specimen.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:repository
     slot_uri: geodata:repository
-    alias: repository
     owner: Specimen
     domain_of:
     - Specimen
     range: string
-  specimen__curation_location:
-    name: specimen__curation_location
+  curation_location:
+    name: curation_location
+    definition_uri: https://w3id.org/linkml/geodata/curation_location
     description: Current physical storage location within the repository (e.g. "IODP
       Bremen Core Repository, Cabinet 7, Tray 3").
     from_schema: https://w3id.org/linkml/geodata
-    slot_uri: geodata:curation_location
-    alias: curation_location
-    owner: Specimen
-    domain_of:
-    - Specimen
-    range: string
-  specimen__description:
-    name: specimen__description
-    description: Free-text description of the specimen.
-    from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - schema:description
-    slot_uri: schema:description
-    alias: description
+    - geodata:curation_location
+    slot_uri: geodata:curation_location
     owner: Specimen
     domain_of:
     - Specimen
     range: string
-  specimen__preparation_method:
-    name: specimen__preparation_method
+  preparation_method:
+    name: preparation_method
+    definition_uri: https://w3id.org/linkml/geodata/preparation_method
     description: How the specimen was prepared for analysis.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:preparation_method
     slot_uri: geodata:preparation_method
-    alias: preparation_method
     owner: Specimen
     domain_of:
     - Specimen
     range: string
-  specimen__mass:
-    name: specimen__mass
+  mass:
+    name: mass
+    definition_uri: https://w3id.org/linkml/geodata/mass
     description: Mass of the specimen in grams.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:mass
     slot_uri: geodata:mass
-    alias: mass
     owner: Specimen
     domain_of:
     - Specimen
     range: float
-  specimen__access_rights:
-    name: specimen__access_rights
-    description: Statement of access conditions for specimen data.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:conditionsOfAccess
-    slot_uri: schema:conditionsOfAccess
-    alias: access_rights
-    owner: Specimen
-    domain_of:
-    - Specimen
-    range: string
-  specimen__license:
-    name: specimen__license
-    description: URI of the license governing use of specimen metadata.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:license
-    slot_uri: schema:license
-    alias: license
-    owner: Specimen
-    domain_of:
-    - Specimen
-    range: uri
-  measurement__measurement_type:
-    name: measurement__measurement_type
-    description: The property that was measured.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:observedProperty
-    slot_uri: sosa:observedProperty
-    alias: measurement_type
-    owner: Measurement
-    domain_of:
-    - Measurement
-    range: MeasurementType
-    required: true
-    inlined: true
-    inlined_as_list: false
-  measurement__value:
-    name: measurement__value
-    description: The measured result. Stored as a string to accommodate both numeric
-      and categorical values. Numeric values MUST be parseable as a float.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:hasSimpleResult
-    slot_uri: sosa:hasSimpleResult
-    alias: value
-    owner: Measurement
-    domain_of:
-    - Measurement
-    range: string
-    required: true
-  measurement__unit:
-    name: measurement__unit
-    description: Unit of the measured value.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - qudt:hasUnit
-    slot_uri: qudt:hasUnit
-    alias: unit
-    owner: Measurement
-    domain_of:
-    - Measurement
-    range: Unit
-    required: true
-    inlined: true
-    inlined_as_list: false
-  measurement__time:
-    name: measurement__time
+  result_time:
+    name: result_time
+    definition_uri: https://w3id.org/linkml/geodata/result_time
     description: Date and time at which the measurement was made (ISO 8601). Use temporal_extent
       instead when the observation spans an interval.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:resultTime
     slot_uri: sosa:resultTime
-    alias: time
     owner: Measurement
     domain_of:
     - Measurement
     range: datetime
-    required: true
-  measurement__temporal_extent:
-    name: measurement__temporal_extent
-    description: Time interval of the measurement, used in place of `time` when the
-      observation spans a period rather than an instant.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:phenomenonTime
-    slot_uri: sosa:phenomenonTime
-    alias: temporal_extent
-    owner: Measurement
-    domain_of:
-    - Measurement
-    range: TemporalExtent
-    inlined: true
-    inlined_as_list: true
-  measurement__instrument:
-    name: measurement__instrument
+  instrument:
+    name: instrument
+    definition_uri: https://w3id.org/linkml/geodata/instrument
     description: Sensor, instrument, or analytical method used.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:madeBySensor
     slot_uri: sosa:madeBySensor
-    alias: instrument
     owner: Measurement
     domain_of:
     - Measurement
     range: string
-  measurement__uncertainty:
-    name: measurement__uncertainty
+  uncertainty:
+    name: uncertainty
+    definition_uri: https://w3id.org/linkml/geodata/uncertainty
     description: Measurement uncertainty expressed in the same unit as value (e.g.
       one standard deviation or half-width of a 95 % CI).
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:uncertainty
     slot_uri: geodata:uncertainty
-    alias: uncertainty
     owner: Measurement
     domain_of:
     - Measurement
     range: float
-  measurement__depth:
-    name: measurement__depth
+  depth:
+    name: depth
+    definition_uri: https://w3id.org/linkml/geodata/depth
     description: Depth below surface in metres (positive downward).
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:depth
     slot_uri: geodata:depth
-    alias: depth
     owner: Measurement
     domain_of:
     - Measurement
     range: float
-  measurement__elevation:
-    name: measurement__elevation
+  elevation:
+    name: elevation
+    definition_uri: https://w3id.org/linkml/geodata/elevation
     description: Elevation above reference datum in metres.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:elevation
     slot_uri: geodata:elevation
-    alias: elevation
     owner: Measurement
     domain_of:
     - Measurement
     range: float
-  measurement__observer:
-    name: measurement__observer
+  observer:
+    name: observer
+    definition_uri: https://w3id.org/linkml/geodata/observer
     description: Person or organisation who made the measurement.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - prov:wasAssociatedWith
     slot_uri: prov:wasAssociatedWith
-    alias: observer
     owner: Measurement
     domain_of:
     - Measurement
     range: string
-  measurement__laboratory:
-    name: measurement__laboratory
+  laboratory:
+    name: laboratory
+    definition_uri: https://w3id.org/linkml/geodata/laboratory
     description: Laboratory or facility where analysis was performed.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:laboratory
     slot_uri: geodata:laboratory
-    alias: laboratory
     owner: Measurement
     domain_of:
     - Measurement
     range: string
-  measurement__project:
-    name: measurement__project
+  project:
+    name: project
+    definition_uri: https://w3id.org/linkml/geodata/project
     description: Project or programme under which the measurement was made.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:project
     slot_uri: geodata:project
-    alias: project
     owner: Measurement
     domain_of:
     - Measurement
     range: string
-  measurement__dataset:
-    name: measurement__dataset
+  dataset:
+    name: dataset
+    definition_uri: https://w3id.org/linkml/geodata/dataset
     description: Dataset or collection to which this measurement belongs.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:dataset
     slot_uri: geodata:dataset
-    alias: dataset
     owner: Measurement
     domain_of:
     - Measurement
     range: string
-  measurement__license:
-    name: measurement__license
-    description: URI of the license governing use of this measurement.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:license
-    slot_uri: schema:license
-    alias: license
-    owner: Measurement
-    domain_of:
-    - Measurement
-    range: uri
-  measurement__access_rights:
-    name: measurement__access_rights
-    description: Statement of access conditions.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:conditionsOfAccess
-    slot_uri: schema:conditionsOfAccess
-    alias: access_rights
-    owner: Measurement
-    domain_of:
-    - Measurement
-    range: string
-  aggregateObservation__aggregation_method:
-    name: aggregateObservation__aggregation_method
+  aggregation_method:
+    name: aggregation_method
+    definition_uri: https://w3id.org/linkml/geodata/aggregation_method
     description: The statistical function applied to the input measurements.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:usedProcedure
     slot_uri: sosa:usedProcedure
-    alias: aggregation_method
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
     range: AggregationMethodEnum
     required: true
-  aggregateObservation__value:
-    name: aggregateObservation__value
-    description: The resulting aggregate value.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:hasSimpleResult
-    slot_uri: sosa:hasSimpleResult
-    alias: value
-    owner: AggregateObservation
-    domain_of:
-    - AggregateObservation
-    range: float
-    required: true
-  aggregateObservation__unit:
-    name: aggregateObservation__unit
-    description: Unit of the aggregate value.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - qudt:hasUnit
-    slot_uri: qudt:hasUnit
-    alias: unit
-    owner: AggregateObservation
-    domain_of:
-    - AggregateObservation
-    range: Unit
-    required: true
-    inlined: true
-    inlined_as_list: false
-  aggregateObservation__measurement_type:
-    name: aggregateObservation__measurement_type
-    description: The property being summarised.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:observedProperty
-    slot_uri: sosa:observedProperty
-    alias: measurement_type
-    owner: AggregateObservation
-    domain_of:
-    - AggregateObservation
-    range: MeasurementType
-    required: true
-    inlined: true
-    inlined_as_list: false
-  aggregateObservation__input_measurements:
-    name: aggregateObservation__input_measurements
+  input_measurements:
+    name: input_measurements
+    definition_uri: https://w3id.org/linkml/geodata/input_measurements
     description: Measurement objects that were aggregated to produce this value.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - prov:wasDerivedFrom
     slot_uri: prov:wasDerivedFrom
-    alias: input_measurements
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
@@ -1206,14 +1174,14 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  aggregateObservation__input_time_series:
-    name: aggregateObservation__input_time_series
+  input_time_series:
+    name: input_time_series
+    definition_uri: https://w3id.org/linkml/geodata/input_time_series
     description: TimeSeries objects used as input to this aggregation.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - prov:wasDerivedFrom
     slot_uri: prov:wasDerivedFrom
-    alias: input_time_series
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
@@ -1221,169 +1189,92 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  aggregateObservation__sample_count:
-    name: aggregateObservation__sample_count
+  sample_count:
+    name: sample_count
+    definition_uri: https://w3id.org/linkml/geodata/sample_count
     description: Number of non-missing input values included in the aggregation.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:sample_count
     slot_uri: geodata:sample_count
-    alias: sample_count
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
     range: integer
-  aggregateObservation__temporal_extent:
-    name: aggregateObservation__temporal_extent
-    description: Time window over which the aggregation was performed.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:phenomenonTime
-    slot_uri: sosa:phenomenonTime
-    alias: temporal_extent
-    owner: AggregateObservation
-    domain_of:
-    - AggregateObservation
-    range: TemporalExtent
-    inlined: true
-    inlined_as_list: true
-  aggregateObservation__spatial_extent:
-    name: aggregateObservation__spatial_extent
-    description: Spatial footprint over which aggregation was performed, encoded as
-      WKT. Use when aggregating across multiple locations.
-    from_schema: https://w3id.org/linkml/geodata
-    slot_uri: geodata:spatial_extent
-    alias: spatial_extent
-    owner: AggregateObservation
-    domain_of:
-    - AggregateObservation
-    range: WKTLiteral
-  aggregateObservation__missing_value_treatment:
-    name: aggregateObservation__missing_value_treatment
+  missing_value_treatment:
+    name: missing_value_treatment
+    definition_uri: https://w3id.org/linkml/geodata/missing_value_treatment
     description: How missing or null input values were handled prior to aggregation
       (e.g. "excluded", "interpolated", "zero-filled").
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:missing_value_treatment
     slot_uri: geodata:missing_value_treatment
-    alias: missing_value_treatment
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
     range: string
-  timeSeries__temporal_extent:
-    name: timeSeries__temporal_extent
-    description: Overall start and end datetime of the series.
-    from_schema: https://w3id.org/linkml/geodata
-    slot_uri: geodata:temporal_extent
-    alias: temporal_extent
-    owner: TimeSeries
-    domain_of:
-    - TimeSeries
-    range: TemporalExtent
-    inlined: true
-    inlined_as_list: true
-  timeSeries__temporal_resolution:
-    name: timeSeries__temporal_resolution
+  temporal_resolution:
+    name: temporal_resolution
+    definition_uri: https://w3id.org/linkml/geodata/temporal_resolution
     description: Nominal sampling interval as an ISO 8601 duration (e.g. "PT1H" =
       hourly, "P1D" = daily, "P1M" = monthly).
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:temporal_resolution
     slot_uri: geodata:temporal_resolution
-    alias: temporal_resolution
     owner: TimeSeries
     domain_of:
     - TimeSeries
     range: string
-  timeSeries__measurement_type:
-    name: timeSeries__measurement_type
-    description: Shared measurement type for all members of this series.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:observedProperty
-    slot_uri: sosa:observedProperty
-    alias: measurement_type
-    owner: TimeSeries
-    domain_of:
-    - TimeSeries
-    range: MeasurementType
-    inlined: true
-    inlined_as_list: false
-  timeSeries__platform:
-    name: timeSeries__platform
+  platform:
+    name: platform
+    definition_uri: https://w3id.org/linkml/geodata/platform
     description: Observing platform or station type (e.g. "weather station", "moored
       buoy", "flux tower", "research vessel", "satellite").
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:platform
     slot_uri: geodata:platform
-    alias: platform
     owner: TimeSeries
     domain_of:
     - TimeSeries
     range: string
-  timeSeries__label:
-    name: timeSeries__label
-    description: Human-readable name for this time series.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:name
-    slot_uri: schema:name
-    alias: label
-    owner: TimeSeries
-    domain_of:
-    - TimeSeries
-    range: string
-  timeSeries__license:
-    name: timeSeries__license
-    description: URI of the license governing use of this time series.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:license
-    slot_uri: schema:license
-    alias: license
-    owner: TimeSeries
-    domain_of:
-    - TimeSeries
-    range: uri
-  dataset__dataset_id:
-    name: dataset__dataset_id
+  dataset_id:
+    name: dataset_id
+    definition_uri: https://w3id.org/linkml/geodata/dataset_id
     description: Globally unique identifier for the dataset (URI or DOI).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:identifier
     slot_uri: schema:identifier
     identifier: true
-    alias: dataset_id
     owner: Dataset
     domain_of:
     - Dataset
     range: uri
     required: true
-  dataset__title:
-    name: dataset__title
+  title:
+    name: title
+    definition_uri: https://w3id.org/linkml/geodata/title
     description: Human-readable title of the dataset.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:name
     slot_uri: schema:name
-    alias: title
     owner: Dataset
     domain_of:
     - Dataset
     range: string
     required: true
-  dataset__description:
-    name: dataset__description
-    description: Abstract or summary of the dataset contents.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:description
-    slot_uri: schema:description
-    alias: description
-    owner: Dataset
-    domain_of:
-    - Dataset
-    range: string
-  dataset__time_series:
-    name: dataset__time_series
+  time_series:
+    name: time_series
+    definition_uri: https://w3id.org/linkml/geodata/time_series
     description: TimeSeries objects included in this dataset.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:time_series
     slot_uri: geodata:time_series
-    alias: time_series
     owner: Dataset
     domain_of:
     - Dataset
@@ -1391,12 +1282,14 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  dataset__aggregate_observations:
-    name: dataset__aggregate_observations
+  aggregate_observations:
+    name: aggregate_observations
+    definition_uri: https://w3id.org/linkml/geodata/aggregate_observations
     description: AggregateObservation objects included in this dataset.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:aggregate_observations
     slot_uri: geodata:aggregate_observations
-    alias: aggregate_observations
     owner: Dataset
     domain_of:
     - Dataset
@@ -1404,103 +1297,120 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  dataset__temporal_extent:
-    name: dataset__temporal_extent
-    description: Overall temporal coverage of the dataset.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:temporalCoverage
-    slot_uri: schema:temporalCoverage
-    alias: temporal_extent
-    owner: Dataset
-    domain_of:
-    - Dataset
-    range: TemporalExtent
-    inlined: true
-    inlined_as_list: true
-  dataset__spatial_extent:
-    name: dataset__spatial_extent
-    description: Overall spatial coverage of the dataset (WKT bounding box or polygon).
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:spatialCoverage
-    slot_uri: schema:spatialCoverage
-    alias: spatial_extent
-    owner: Dataset
-    domain_of:
-    - Dataset
-    range: WKTLiteral
-  dataset__creator:
-    name: dataset__creator
+  creator:
+    name: creator
+    definition_uri: https://w3id.org/linkml/geodata/creator
     description: Person or organisation that created the dataset.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:creator
     slot_uri: schema:creator
-    alias: creator
     owner: Dataset
     domain_of:
     - Dataset
     range: string
-  dataset__publisher:
-    name: dataset__publisher
+  publisher:
+    name: publisher
+    definition_uri: https://w3id.org/linkml/geodata/publisher
     description: Organisation that published or distributes the dataset.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:publisher
     slot_uri: schema:publisher
-    alias: publisher
     owner: Dataset
     domain_of:
     - Dataset
     range: string
-  dataset__license:
-    name: dataset__license
-    description: URI of the license governing use of this dataset.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:license
-    slot_uri: schema:license
-    alias: license
-    owner: Dataset
-    domain_of:
-    - Dataset
-    range: uri
-  dataset__keywords:
-    name: dataset__keywords
+  keywords:
+    name: keywords
+    definition_uri: https://w3id.org/linkml/geodata/keywords
     description: Keywords or subject terms describing the dataset content.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:keywords
     slot_uri: schema:keywords
-    alias: keywords
     owner: Dataset
     domain_of:
     - Dataset
     range: string
     multivalued: true
-  dataset__version:
-    name: dataset__version
+  version:
+    name: version
+    definition_uri: https://w3id.org/linkml/geodata/version
     description: Version identifier (e.g. "1.0.0" or "2024-01").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:version
     slot_uri: schema:version
-    alias: version
     owner: Dataset
     domain_of:
     - Dataset
     range: string
-  dataset__doi:
-    name: dataset__doi
+  doi:
+    name: doi
+    definition_uri: https://w3id.org/linkml/geodata/doi
     description: Digital Object Identifier for this dataset release.
     from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:doi
     slot_uri: geodata:doi
-    alias: doi
     owner: Dataset
     domain_of:
     - Dataset
     range: uri
+  MeasurementType_label:
+    name: MeasurementType_label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable name for the property (e.g. "air_temperature").
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    is_a: label
+    domain: MeasurementType
+    slot_uri: schema:name
+    alias: label
+    owner: MeasurementType
+    domain_of:
+    - MeasurementType
+    is_usage_slot: true
+    usage_slot_name: label
+    range: string
+    required: true
+  Unit_label:
+    name: Unit_label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable unit label (e.g. "degree Celsius").
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    is_a: label
+    domain: Unit
+    slot_uri: schema:name
+    alias: label
+    owner: Unit
+    domain_of:
+    - Unit
+    is_usage_slot: true
+    usage_slot_name: label
+    range: string
+    required: true
+  Specimen_label:
+    name: Specimen_label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable name or field number (e.g. "Core 3A, Section 2").
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    is_a: label
+    domain: Specimen
+    slot_uri: schema:name
+    alias: label
+    owner: Specimen
+    domain_of:
+    - Specimen
+    is_usage_slot: true
+    usage_slot_name: label
+    range: string
   Measurement_matrix:
     name: Measurement_matrix
     definition_uri: https://w3id.org/linkml/geodata/matrix
@@ -1540,6 +1450,142 @@ slots:
     required: true
     inlined: true
     inlined_as_list: true
+  Measurement_measurement_type:
+    name: Measurement_measurement_type
+    definition_uri: https://w3id.org/linkml/geodata/measurement_type
+    description: The property that was measured or observed.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:observedProperty
+    is_a: measurement_type
+    domain: Measurement
+    slot_uri: sosa:observedProperty
+    alias: measurement_type
+    owner: Measurement
+    domain_of:
+    - Measurement
+    is_usage_slot: true
+    usage_slot_name: measurement_type
+    range: MeasurementType
+    required: true
+    inlined: true
+    inlined_as_list: false
+  Measurement_value:
+    name: Measurement_value
+    definition_uri: https://w3id.org/linkml/geodata/value
+    description: The measured result. Stored as a string to accommodate both numeric
+      and categorical values. Numeric values MUST be parseable as a float.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:hasSimpleResult
+    is_a: value
+    domain: Measurement
+    slot_uri: sosa:hasSimpleResult
+    alias: value
+    owner: Measurement
+    domain_of:
+    - Measurement
+    is_usage_slot: true
+    usage_slot_name: value
+    range: string
+    required: true
+  Measurement_unit:
+    name: Measurement_unit
+    definition_uri: https://w3id.org/linkml/geodata/unit
+    description: Unit of the measured value.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - qudt:hasUnit
+    is_a: unit
+    domain: Measurement
+    slot_uri: qudt:hasUnit
+    alias: unit
+    owner: Measurement
+    domain_of:
+    - Measurement
+    is_usage_slot: true
+    usage_slot_name: unit
+    range: Unit
+    required: true
+    inlined: true
+    inlined_as_list: false
+  Measurement_result_time:
+    name: Measurement_result_time
+    definition_uri: https://w3id.org/linkml/geodata/result_time
+    description: Date and time at which the measurement was made (ISO 8601). Use temporal_extent
+      instead when the observation spans an interval.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:resultTime
+    is_a: result_time
+    domain: Measurement
+    slot_uri: sosa:resultTime
+    alias: result_time
+    owner: Measurement
+    domain_of:
+    - Measurement
+    is_usage_slot: true
+    usage_slot_name: result_time
+    range: datetime
+    required: true
+  AggregateObservation_value:
+    name: AggregateObservation_value
+    definition_uri: https://w3id.org/linkml/geodata/value
+    description: The resulting aggregate value.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:hasSimpleResult
+    is_a: value
+    domain: AggregateObservation
+    slot_uri: sosa:hasSimpleResult
+    alias: value
+    owner: AggregateObservation
+    domain_of:
+    - AggregateObservation
+    is_usage_slot: true
+    usage_slot_name: value
+    range: float
+    required: true
+  AggregateObservation_unit:
+    name: AggregateObservation_unit
+    definition_uri: https://w3id.org/linkml/geodata/unit
+    description: Unit of the measured value.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - qudt:hasUnit
+    is_a: unit
+    domain: AggregateObservation
+    slot_uri: qudt:hasUnit
+    alias: unit
+    owner: AggregateObservation
+    domain_of:
+    - AggregateObservation
+    is_usage_slot: true
+    usage_slot_name: unit
+    range: Unit
+    required: true
+    inlined: true
+    inlined_as_list: false
+  AggregateObservation_measurement_type:
+    name: AggregateObservation_measurement_type
+    definition_uri: https://w3id.org/linkml/geodata/measurement_type
+    description: The property being summarised.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:observedProperty
+    is_a: measurement_type
+    domain: AggregateObservation
+    slot_uri: sosa:observedProperty
+    alias: measurement_type
+    owner: AggregateObservation
+    domain_of:
+    - AggregateObservation
+    is_usage_slot: true
+    usage_slot_name: measurement_type
+    range: MeasurementType
+    required: true
+    inlined: true
+    inlined_as_list: false
   TimeSeries_measurements:
     name: TimeSeries_measurements
     definition_uri: https://w3id.org/linkml/geodata/measurements
@@ -1561,6 +1607,59 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
+  TimeSeries_label:
+    name: TimeSeries_label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable name for this time series.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    is_a: label
+    domain: TimeSeries
+    slot_uri: schema:name
+    alias: label
+    owner: TimeSeries
+    domain_of:
+    - TimeSeries
+    is_usage_slot: true
+    usage_slot_name: label
+    range: string
+  Dataset_temporal_extent:
+    name: Dataset_temporal_extent
+    definition_uri: https://w3id.org/linkml/geodata/temporal_extent
+    description: Overall temporal coverage of the dataset.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:temporalCoverage
+    is_a: temporal_extent
+    domain: Dataset
+    slot_uri: schema:temporalCoverage
+    alias: temporal_extent
+    owner: Dataset
+    domain_of:
+    - Dataset
+    is_usage_slot: true
+    usage_slot_name: temporal_extent
+    range: TemporalExtent
+    inlined: true
+    inlined_as_list: true
+  Dataset_spatial_extent:
+    name: Dataset_spatial_extent
+    definition_uri: https://w3id.org/linkml/geodata/spatial_extent
+    description: Overall spatial coverage of the dataset (WKT bounding box or polygon).
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:spatialCoverage
+    is_a: spatial_extent
+    domain: Dataset
+    slot_uri: schema:spatialCoverage
+    alias: spatial_extent
+    owner: Dataset
+    domain_of:
+    - Dataset
+    is_usage_slot: true
+    usage_slot_name: spatial_extent
+    range: WKTLiteral
 classes:
   Geolocation:
     name: Geolocation
@@ -1571,46 +1670,12 @@ classes:
     mappings:
     - geo:Feature
     slots:
-    - geolocation__latitude
-    - geolocation__longitude
-    - geolocation__altitude
-    - geolocation__wkt_geometry
-    - geolocation__place_uri
-    - geolocation__coordinate_system
-    attributes:
-      latitude:
-        name: latitude
-        description: "WGS84 decimal latitude (\u221290 to +90)."
-        range: DecimalDegree
-        minimum_value: -90
-        maximum_value: 90
-      longitude:
-        name: longitude
-        description: "WGS84 decimal longitude (\u2212180 to +180)."
-        range: DecimalDegree
-        minimum_value: -180
-        maximum_value: 180
-      altitude:
-        name: altitude
-        description: Altitude above the WGS84 ellipsoid, in metres.
-        range: float
-      wkt_geometry:
-        name: wkt_geometry
-        description: Geometry (point, line, polygon, bounding box, etc.) encoded as
-          a WKT literal. Use for transects, polygonal areas, or when a point is insufficient.
-        slot_uri: geo:asWKT
-        range: WKTLiteral
-      place_uri:
-        name: place_uri
-        description: URI of a named place (e.g. a GeoNames, Wikidata, or GeoLink feature)
-          that identifies the location.
-        range: uri
-      coordinate_system:
-        name: coordinate_system
-        description: Coordinate reference system identifier. Defaults to WGS84 (EPSG:4326)
-          when absent.
-        ifabsent: string(WGS84)
-        range: string
+    - latitude
+    - longitude
+    - altitude
+    - wkt_geometry
+    - place_uri
+    - coordinate_system
     class_uri: geo:Feature
   TemporalExtent:
     name: TemporalExtent
@@ -1620,21 +1685,8 @@ classes:
     mappings:
     - owl_time:ProperInterval
     slots:
-    - temporalExtent__start_time
-    - temporalExtent__end_time
-    attributes:
-      start_time:
-        name: start_time
-        description: Start of the interval (ISO 8601 datetime).
-        slot_uri: owl_time:hasBeginning
-        range: datetime
-        required: true
-      end_time:
-        name: end_time
-        description: End of the interval (ISO 8601 datetime).
-        slot_uri: owl_time:hasEnd
-        range: datetime
-        required: true
+    - start_time
+    - end_time
     class_uri: owl_time:ProperInterval
   MeasurementType:
     name: MeasurementType
@@ -1646,26 +1698,14 @@ classes:
     - sosa:ObservableProperty
     slots:
     - term_id
-    - measurementType__label
-    - measurementType__source_vocabulary
-    - measurementType__definition
-    attributes:
+    - MeasurementType_label
+    - source_vocabulary
+    - definition
+    slot_usage:
       label:
         name: label
         description: Human-readable name for the property (e.g. "air_temperature").
-        slot_uri: schema:name
-        range: string
         required: true
-      source_vocabulary:
-        name: source_vocabulary
-        description: The vocabulary from which the term is drawn (e.g. "CF Conventions",
-          "SWEET", "ENVO").
-        range: string
-      definition:
-        name: definition
-        description: Textual definition of the property.
-        slot_uri: schema:description
-        range: string
     class_uri: sosa:ObservableProperty
   Unit:
     name: Unit
@@ -1677,19 +1717,13 @@ classes:
     - qudt:Unit
     slots:
     - term_id
-    - unit__label
-    - unit__ucum_code
-    attributes:
+    - Unit_label
+    - ucum_code
+    slot_usage:
       label:
         name: label
         description: Human-readable unit label (e.g. "degree Celsius").
-        slot_uri: schema:name
-        range: string
         required: true
-      ucum_code:
-        name: ucum_code
-        description: UCUM expression for the unit (e.g. "Cel", "m/s", "g/cm3").
-        range: UCUMExpression
     class_uri: qudt:Unit
   Specimen:
     name: Specimen
@@ -1702,99 +1736,25 @@ classes:
     mappings:
     - sosa:Sample
     slots:
-    - specimen__specimen_id
-    - specimen__specimen_type
-    - specimen__label
-    - specimen__material
-    - specimen__collection_location
-    - specimen__collection_time
-    - specimen__collected_by
-    - specimen__parent_specimen
-    - specimen__repository
-    - specimen__curation_location
-    - specimen__description
-    - specimen__preparation_method
-    - specimen__mass
-    - specimen__access_rights
-    - specimen__license
-    attributes:
-      specimen_id:
-        name: specimen_id
-        description: Globally unique identifier for the specimen. Preferably an IGSN
-          (e.g. https://igsn.org/AU1234567) or another persistent URI.
-        slot_uri: schema:identifier
-        identifier: true
-        range: uri
-        required: true
-      specimen_type:
-        name: specimen_type
-        description: The kind of physical specimen.
-        range: SpecimenTypeEnum
-        required: true
+    - specimen_id
+    - specimen_type
+    - Specimen_label
+    - material
+    - collection_location
+    - collection_time
+    - collected_by
+    - parent_specimen
+    - repository
+    - curation_location
+    - description
+    - preparation_method
+    - mass
+    - access_rights
+    - license
+    slot_usage:
       label:
         name: label
         description: Human-readable name or field number (e.g. "Core 3A, Section 2").
-        slot_uri: schema:name
-        range: string
-      material:
-        name: material
-        description: Bulk material of the specimen using iSamples Material vocabulary
-          terms (e.g. "RockOrSediment", "NaturalSolidMaterial", "Fluid", "BiogenicNonOrganicMaterial").
-        slot_uri: isam:material
-        range: string
-      collection_location:
-        name: collection_location
-        description: Location where the specimen was collected.
-        range: Geolocation
-        inlined: true
-      collection_time:
-        name: collection_time
-        description: Date and time of collection (ISO 8601).
-        slot_uri: sosa:resultTime
-        range: datetime
-      collected_by:
-        name: collected_by
-        description: Person or organisation responsible for collection.
-        slot_uri: schema:contributor
-        range: string
-      parent_specimen:
-        name: parent_specimen
-        description: Parent specimen from which this one was derived (e.g. a subsample,
-          aliquot, or thin section).
-        slot_uri: sosa:isSampleOf
-        range: Specimen
-      repository:
-        name: repository
-        description: Institution or archive currently holding the specimen.
-        range: string
-      curation_location:
-        name: curation_location
-        description: Current physical storage location within the repository (e.g.
-          "IODP Bremen Core Repository, Cabinet 7, Tray 3").
-        range: string
-      description:
-        name: description
-        description: Free-text description of the specimen.
-        slot_uri: schema:description
-        range: string
-      preparation_method:
-        name: preparation_method
-        description: How the specimen was prepared for analysis.
-        range: string
-      mass:
-        name: mass
-        description: Mass of the specimen in grams.
-        range: float
-      access_rights:
-        name: access_rights
-        description: Statement of access conditions for specimen data.
-        slot_uri: schema:conditionsOfAccess
-        range: string
-      license:
-        name: license
-        description: URI of the license governing use of specimen metadata.
-        slot_uri: schema:license
-        range: uri
     class_uri: sosa:Sample
   Measurement:
     name: Measurement
@@ -1809,21 +1769,21 @@ classes:
     - Measurement_geolocation
     - specimen
     - quality_flag
-    - measurement__measurement_type
-    - measurement__value
-    - measurement__unit
-    - measurement__time
-    - measurement__temporal_extent
-    - measurement__instrument
-    - measurement__uncertainty
-    - measurement__depth
-    - measurement__elevation
-    - measurement__observer
-    - measurement__laboratory
-    - measurement__project
-    - measurement__dataset
-    - measurement__license
-    - measurement__access_rights
+    - Measurement_measurement_type
+    - Measurement_value
+    - Measurement_unit
+    - Measurement_result_time
+    - temporal_extent
+    - instrument
+    - uncertainty
+    - depth
+    - elevation
+    - observer
+    - laboratory
+    - project
+    - dataset
+    - license
+    - access_rights
     slot_usage:
       matrix:
         name: matrix
@@ -1831,87 +1791,18 @@ classes:
       geolocation:
         name: geolocation
         required: true
-    attributes:
       measurement_type:
         name: measurement_type
-        description: The property that was measured.
-        slot_uri: sosa:observedProperty
-        range: MeasurementType
         required: true
-        inlined: true
       value:
         name: value
-        description: The measured result. Stored as a string to accommodate both numeric
-          and categorical values. Numeric values MUST be parseable as a float.
-        slot_uri: sosa:hasSimpleResult
-        range: string
         required: true
       unit:
         name: unit
-        description: Unit of the measured value.
-        slot_uri: qudt:hasUnit
-        range: Unit
         required: true
-        inlined: true
-      time:
-        name: time
-        description: Date and time at which the measurement was made (ISO 8601). Use
-          temporal_extent instead when the observation spans an interval.
-        slot_uri: sosa:resultTime
-        range: datetime
+      result_time:
+        name: result_time
         required: true
-      temporal_extent:
-        name: temporal_extent
-        description: Time interval of the measurement, used in place of `time` when
-          the observation spans a period rather than an instant.
-        slot_uri: sosa:phenomenonTime
-        range: TemporalExtent
-        inlined: true
-      instrument:
-        name: instrument
-        description: Sensor, instrument, or analytical method used.
-        slot_uri: sosa:madeBySensor
-        range: string
-      uncertainty:
-        name: uncertainty
-        description: Measurement uncertainty expressed in the same unit as value (e.g.
-          one standard deviation or half-width of a 95 % CI).
-        range: float
-      depth:
-        name: depth
-        description: Depth below surface in metres (positive downward).
-        range: float
-      elevation:
-        name: elevation
-        description: Elevation above reference datum in metres.
-        range: float
-      observer:
-        name: observer
-        description: Person or organisation who made the measurement.
-        slot_uri: prov:wasAssociatedWith
-        range: string
-      laboratory:
-        name: laboratory
-        description: Laboratory or facility where analysis was performed.
-        range: string
-      project:
-        name: project
-        description: Project or programme under which the measurement was made.
-        range: string
-      dataset:
-        name: dataset
-        description: Dataset or collection to which this measurement belongs.
-        range: string
-      license:
-        name: license
-        description: URI of the license governing use of this measurement.
-        slot_uri: schema:license
-        range: uri
-      access_rights:
-        name: access_rights
-        description: Statement of access conditions.
-        slot_uri: schema:conditionsOfAccess
-        range: string
     class_uri: sosa:Observation
   AggregateObservation:
     name: AggregateObservation
@@ -1928,75 +1819,29 @@ classes:
     - geolocation
     - specimen
     - quality_flag
-    - aggregateObservation__aggregation_method
-    - aggregateObservation__value
-    - aggregateObservation__unit
-    - aggregateObservation__measurement_type
-    - aggregateObservation__input_measurements
-    - aggregateObservation__input_time_series
-    - aggregateObservation__sample_count
-    - aggregateObservation__temporal_extent
-    - aggregateObservation__spatial_extent
-    - aggregateObservation__missing_value_treatment
-    attributes:
-      aggregation_method:
-        name: aggregation_method
-        description: The statistical function applied to the input measurements.
-        slot_uri: sosa:usedProcedure
-        range: AggregationMethodEnum
-        required: true
+    - aggregation_method
+    - AggregateObservation_value
+    - AggregateObservation_unit
+    - AggregateObservation_measurement_type
+    - input_measurements
+    - input_time_series
+    - sample_count
+    - temporal_extent
+    - spatial_extent
+    - missing_value_treatment
+    slot_usage:
       value:
         name: value
         description: The resulting aggregate value.
-        slot_uri: sosa:hasSimpleResult
         range: float
         required: true
       unit:
         name: unit
-        description: Unit of the aggregate value.
-        slot_uri: qudt:hasUnit
-        range: Unit
         required: true
-        inlined: true
       measurement_type:
         name: measurement_type
         description: The property being summarised.
-        slot_uri: sosa:observedProperty
-        range: MeasurementType
         required: true
-        inlined: true
-      input_measurements:
-        name: input_measurements
-        description: Measurement objects that were aggregated to produce this value.
-        slot_uri: prov:wasDerivedFrom
-        range: Measurement
-        multivalued: true
-      input_time_series:
-        name: input_time_series
-        description: TimeSeries objects used as input to this aggregation.
-        slot_uri: prov:wasDerivedFrom
-        range: TimeSeries
-        multivalued: true
-      sample_count:
-        name: sample_count
-        description: Number of non-missing input values included in the aggregation.
-        range: integer
-      temporal_extent:
-        name: temporal_extent
-        description: Time window over which the aggregation was performed.
-        slot_uri: sosa:phenomenonTime
-        range: TemporalExtent
-        inlined: true
-      spatial_extent:
-        name: spatial_extent
-        description: Spatial footprint over which aggregation was performed, encoded
-          as WKT. Use when aggregating across multiple locations.
-        range: WKTLiteral
-      missing_value_treatment:
-        name: missing_value_treatment
-        description: How missing or null input values were handled prior to aggregation
-          (e.g. "excluded", "interpolated", "zero-filled").
-        range: string
     class_uri: sosa:Observation
   TimeSeries:
     name: TimeSeries
@@ -2010,49 +1855,20 @@ classes:
     - matrix
     - geolocation
     - TimeSeries_measurements
-    - timeSeries__temporal_extent
-    - timeSeries__temporal_resolution
-    - timeSeries__measurement_type
-    - timeSeries__platform
-    - timeSeries__label
-    - timeSeries__license
+    - temporal_extent
+    - temporal_resolution
+    - measurement_type
+    - platform
+    - TimeSeries_label
+    - license
     slot_usage:
       measurements:
         name: measurements
         required: true
         inlined_as_list: true
-    attributes:
-      temporal_extent:
-        name: temporal_extent
-        description: Overall start and end datetime of the series.
-        range: TemporalExtent
-        inlined: true
-      temporal_resolution:
-        name: temporal_resolution
-        description: Nominal sampling interval as an ISO 8601 duration (e.g. "PT1H"
-          = hourly, "P1D" = daily, "P1M" = monthly).
-        range: string
-      measurement_type:
-        name: measurement_type
-        description: Shared measurement type for all members of this series.
-        slot_uri: sosa:observedProperty
-        range: MeasurementType
-        inlined: true
-      platform:
-        name: platform
-        description: Observing platform or station type (e.g. "weather station", "moored
-          buoy", "flux tower", "research vessel", "satellite").
-        range: string
       label:
         name: label
         description: Human-readable name for this time series.
-        slot_uri: schema:name
-        range: string
-      license:
-        name: license
-        description: URI of the license governing use of this time series.
-        slot_uri: schema:license
-        range: uri
     class_uri: sosa:ObservationCollection
   Dataset:
     name: Dataset
@@ -2063,96 +1879,35 @@ classes:
     mappings:
     - schema:Dataset
     slots:
+    - dataset_id
+    - title
+    - description
     - measurements
-    - dataset__dataset_id
-    - dataset__title
-    - dataset__description
-    - dataset__time_series
-    - dataset__aggregate_observations
-    - dataset__temporal_extent
-    - dataset__spatial_extent
-    - dataset__creator
-    - dataset__publisher
-    - dataset__license
-    - dataset__keywords
-    - dataset__version
-    - dataset__doi
-    attributes:
-      dataset_id:
-        name: dataset_id
-        description: Globally unique identifier for the dataset (URI or DOI).
-        slot_uri: schema:identifier
-        identifier: true
-        range: uri
-        required: true
-      title:
-        name: title
-        description: Human-readable title of the dataset.
-        slot_uri: schema:name
-        range: string
-        required: true
-      description:
-        name: description
-        description: Abstract or summary of the dataset contents.
-        slot_uri: schema:description
-        range: string
-      time_series:
-        name: time_series
-        description: TimeSeries objects included in this dataset.
-        range: TimeSeries
-        multivalued: true
-      aggregate_observations:
-        name: aggregate_observations
-        description: AggregateObservation objects included in this dataset.
-        range: AggregateObservation
-        multivalued: true
+    - time_series
+    - aggregate_observations
+    - Dataset_temporal_extent
+    - Dataset_spatial_extent
+    - creator
+    - publisher
+    - license
+    - keywords
+    - version
+    - doi
+    slot_usage:
       temporal_extent:
         name: temporal_extent
         description: Overall temporal coverage of the dataset.
         slot_uri: schema:temporalCoverage
-        range: TemporalExtent
-        inlined: true
       spatial_extent:
         name: spatial_extent
         description: Overall spatial coverage of the dataset (WKT bounding box or
           polygon).
         slot_uri: schema:spatialCoverage
-        range: WKTLiteral
-      creator:
-        name: creator
-        description: Person or organisation that created the dataset.
-        slot_uri: schema:creator
-        range: string
-      publisher:
-        name: publisher
-        description: Organisation that published or distributes the dataset.
-        slot_uri: schema:publisher
-        range: string
-      license:
-        name: license
-        description: URI of the license governing use of this dataset.
-        slot_uri: schema:license
-        range: uri
-      keywords:
-        name: keywords
-        description: Keywords or subject terms describing the dataset content.
-        slot_uri: schema:keywords
-        range: string
-        multivalued: true
-      version:
-        name: version
-        description: Version identifier (e.g. "1.0.0" or "2024-01").
-        slot_uri: schema:version
-        range: string
-      doi:
-        name: doi
-        description: Digital Object Identifier for this dataset release.
-        range: uri
     class_uri: schema:Dataset
     tree_root: true
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-08-17T20:25:08'
-source_file_size: 22718
-generation_date: '2026-08-17T20:25:16'
+source_file_date: '2026-08-25T15:56:14'
+source_file_size: 22987
+generation_date: '2026-08-25T15:56:25'
 

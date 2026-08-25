@@ -2,406 +2,406 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://linkml.github.io/geodata/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/about/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/AggregateObservation/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/AggregationMethodEnum/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Boolean/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Curie/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Dataset/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Date/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/DateOrDatetime/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Datetime/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Decimal/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/DecimalDegree/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Double/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Float/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Geolocation/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Integer/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Jsonpath/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Jsonpointer/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/MatrixEnum/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Measurement/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/MeasurementType/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Ncname/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Nodeidentifier/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Objectidentifier/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/QualityFlagEnum/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Sparqlpath/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Specimen/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/SpecimenTypeEnum/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/String/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/TemporalExtent/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Time/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/TimeSeries/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/UCUMExpression/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Unit/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Uri/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Uriorcurie/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/WKTLiteral/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/access_rights/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/aggregate_observations/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/aggregation_method/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/altitude/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/collected_by/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/collection_location/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/collection_time/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/coordinate_system/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/creator/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/curation_location/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/dataset/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/dataset_id/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/definition/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/depth/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/description/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/doi/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/elevation/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/end_time/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/geodata/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/geolocation/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/input_measurements/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/input_time_series/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/instrument/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/keywords/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/label/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/laboratory/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/latitude/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/license/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/longitude/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/mass/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/material/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/matrix/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/measurement_type/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/measurements/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/missing_value_treatment/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/observer/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/parent_specimen/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/place_uri/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/platform/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/preparation_method/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/project/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/publisher/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/quality_flag/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/repository/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/result_time/</loc>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/sample_count/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/source_vocabulary/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/spatial_extent/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/specimen/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/specimen_id/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/specimen_type/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/start_time/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/temporal_extent/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/temporal_resolution/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/term_id/</loc>
-         <lastmod>2026-08-17</lastmod>
-    </url>
-    <url>
-         <loc>https://linkml.github.io/geodata/elements/time/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/time_series/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/title/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/ucum_code/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/uncertainty/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/unit/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/value/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/version/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/wkt_geometry/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
 </urlset>

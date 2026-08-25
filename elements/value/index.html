@@ -423,6 +423,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Identifier and Mapping Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -469,8 +486,9 @@
 
 
 <h1 id="slot-value">Slot: value</h1>
+<p><em>The measured result. Stored as a string to accommodate both numeric and categorical values. Numeric values MUST be parseable as a float.</em></p>
 <div>
-<p>URI: <a href="https://w3id.org/linkml/geodata/value">geodata:value</a></p>
+<p>URI: <a href="http://www.w3.org/ns/sosa/hasSimpleResult">sosa:hasSimpleResult</a></p>
 <!-- no inheritance hierarchy -->
 <h2 id="applicable-classes">Applicable Classes</h2>
 <table>
@@ -485,12 +503,12 @@
 <tr>
 <td><a href="../Measurement/">Measurement</a></td>
 <td>A single observed value of a property at a location and time</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../AggregateObservation/">AggregateObservation</a></td>
 <td>A single derived value produced by applying a statistical function to a set o...</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -512,6 +530,10 @@
 <td>Domain Of</td>
 <td><a href="../Measurement/">Measurement</a>, <a href="../AggregateObservation/">AggregateObservation</a></td>
 </tr>
+<tr>
+<td>Slot URI</td>
+<td><a href="http://www.w3.org/ns/sosa/hasSimpleResult">sosa:hasSimpleResult</a></td>
+</tr>
 </tbody>
 </table>
 <h3 id="cardinality-and-requirements">Cardinality and Requirements</h3>
@@ -530,6 +552,10 @@
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/geodata">https://w3id.org/linkml/geodata</a></li>
+</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -541,7 +567,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>geodata:value</td>
+<td>sosa:hasSimpleResult</td>
 </tr>
 <tr>
 <td>native</td>
@@ -552,6 +578,11 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The measured result. Stored as a string to accommodate both numeric and</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">categorical values. Numeric values MUST be parseable as a float.</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/geodata</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sosa:hasSimpleResult</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measurement</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AggregateObservation</span>

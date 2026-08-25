@@ -608,7 +608,7 @@
 <tbody>
 <tr>
 <td><a href="access_rights/">access_rights</a></td>
-<td>Statement of access conditions for specimen data</td>
+<td>Statement of access conditions</td>
 </tr>
 <tr>
 <td><a href="aggregate_observations/">aggregate_observations</a></td>
@@ -664,7 +664,7 @@
 </tr>
 <tr>
 <td><a href="description/">description</a></td>
-<td>Free-text description of the specimen</td>
+<td>Free-text description of this entity</td>
 </tr>
 <tr>
 <td><a href="doi/">doi</a></td>
@@ -700,7 +700,7 @@
 </tr>
 <tr>
 <td><a href="label/">label</a></td>
-<td>Human-readable name for the property (e</td>
+<td>Human-readable name or label for this entity</td>
 </tr>
 <tr>
 <td><a href="laboratory/">laboratory</a></td>
@@ -712,7 +712,7 @@
 </tr>
 <tr>
 <td><a href="license/">license</a></td>
-<td>URI of the license governing use of specimen metadata</td>
+<td>URI of the license governing use of this entity</td>
 </tr>
 <tr>
 <td><a href="longitude/">longitude</a></td>
@@ -732,7 +732,7 @@
 </tr>
 <tr>
 <td><a href="measurement_type/">measurement_type</a></td>
-<td>The property that was measured</td>
+<td>The property that was measured or observed</td>
 </tr>
 <tr>
 <td><a href="measurements/">measurements</a></td>
@@ -779,6 +779,10 @@
 <td>Institution or archive currently holding the specimen</td>
 </tr>
 <tr>
+<td><a href="result_time/">result_time</a></td>
+<td>Date and time at which the measurement was made (ISO 8601)</td>
+</tr>
+<tr>
 <td><a href="sample_count/">sample_count</a></td>
 <td>Number of non-missing input values included in the aggregation</td>
 </tr>
@@ -788,7 +792,7 @@
 </tr>
 <tr>
 <td><a href="spatial_extent/">spatial_extent</a></td>
-<td>Spatial footprint over which aggregation was performed, encoded as WKT</td>
+<td>Spatial footprint encoded as WKT (bounding box, polygon, etc</td>
 </tr>
 <tr>
 <td><a href="specimen/">specimen</a></td>
@@ -808,7 +812,7 @@
 </tr>
 <tr>
 <td><a href="temporal_extent/">temporal_extent</a></td>
-<td>Time interval of the measurement, used in place of <code>time</code> when the observatio...</td>
+<td>Time interval associated with this entity</td>
 </tr>
 <tr>
 <td><a href="temporal_resolution/">temporal_resolution</a></td>
@@ -817,10 +821,6 @@
 <tr>
 <td><a href="term_id/">term_id</a></td>
 <td>URI of the term in a source vocabulary (e</td>
-</tr>
-<tr>
-<td><a href="time/">time</a></td>
-<td>Date and time at which the measurement was made (ISO 8601)</td>
 </tr>
 <tr>
 <td><a href="time_series/">time_series</a></td>

@@ -423,6 +423,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Identifier and Mapping Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -469,8 +486,9 @@
 
 
 <h1 id="slot-spatial_extent">Slot: spatial_extent</h1>
+<p><em>Spatial footprint encoded as WKT (bounding box, polygon, etc.).</em></p>
 <div>
-<p>URI: <a href="https://w3id.org/linkml/geodata/spatial_extent">geodata:spatial_extent</a></p>
+<p>URI: <a href="https://w3id.org/linkml/geodata/spatialExtent">geodata:spatialExtent</a></p>
 <!-- no inheritance hierarchy -->
 <h2 id="applicable-classes">Applicable Classes</h2>
 <table>
@@ -490,7 +508,7 @@
 <tr>
 <td><a href="../Dataset/">Dataset</a></td>
 <td>A named, curated collection of Measurements, TimeSeries, and/or AggregateObse...</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -506,11 +524,15 @@
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../String/">String</a></td>
+<td><a href="../WKTLiteral/">WKTLiteral</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
 <td><a href="../AggregateObservation/">AggregateObservation</a>, <a href="../Dataset/">Dataset</a></td>
+</tr>
+<tr>
+<td>Slot URI</td>
+<td><a href="https://w3id.org/linkml/geodata/spatialExtent">geodata:spatialExtent</a></td>
 </tr>
 </tbody>
 </table>
@@ -530,6 +552,10 @@
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/geodata">https://w3id.org/linkml/geodata</a></li>
+</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -541,7 +567,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>geodata:spatial_extent</td>
+<td>geodata:spatialExtent</td>
 </tr>
 <tr>
 <td>native</td>
@@ -552,10 +578,14 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spatial_extent</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Spatial footprint encoded as WKT (bounding box, polygon, etc.).</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/geodata</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geodata:spatialExtent</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AggregateObservation</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataset</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WKTLiteral</span>
 </code></pre></div>
 </details>
 </div>
