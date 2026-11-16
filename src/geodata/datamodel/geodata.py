@@ -1,5 +1,5 @@
 # Auto generated from geodata.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-11-16T17:21:54
+# Generation date: 2026-11-16T17:24:23
 # Schema: geodata
 #
 # id: https://w3id.org/linkml/geodata
