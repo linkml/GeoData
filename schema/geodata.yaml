@@ -15,8 +15,8 @@ prefixes:
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
-  geodata:
-    prefix_prefix: geodata
+  gd:
+    prefix_prefix: gd
     prefix_reference: https://w3id.org/linkml/geodata/
   schema:
     prefix_prefix: schema
@@ -33,8 +33,8 @@ prefixes:
   unit:
     prefix_prefix: unit
     prefix_reference: http://qudt.org/vocab/unit/
-  envo:
-    prefix_prefix: envo
+  ENVO:
+    prefix_prefix: ENVO
     prefix_reference: http://purl.obolibrary.org/obo/ENVO_
   sweet:
     prefix_prefix: sweet
@@ -42,11 +42,11 @@ prefixes:
   geo:
     prefix_prefix: geo
     prefix_reference: http://www.opengis.net/ont/geosparql#
-  owl_time:
-    prefix_prefix: owl_time
+  TIME:
+    prefix_prefix: TIME
     prefix_reference: http://www.w3.org/2006/time#
-  gl:
-    prefix_prefix: gl
+  geolink:
+    prefix_prefix: geolink
     prefix_reference: http://schema.geolink.org/1.0/base/main#
   nmdc:
     prefix_prefix: nmdc
@@ -60,13 +60,13 @@ prefixes:
   xsd:
     prefix_prefix: xsd
     prefix_reference: http://www.w3.org/2001/XMLSchema#
-  bervo:
-    prefix_prefix: bervo
+  BERVO:
+    prefix_prefix: BERVO
     prefix_reference: http://purl.obolibrary.org/obo/BERVO_
-  pato:
-    prefix_prefix: pato
+  PATO:
+    prefix_prefix: PATO
     prefix_reference: http://purl.obolibrary.org/obo/PATO_
-default_prefix: geodata
+default_prefix: gd
 default_range: string
 types:
   DecimalDegree:
@@ -370,7 +370,7 @@ enums:
     reachable_from:
       source_ontology: obo:envo.owl
       source_nodes:
-      - envo:00010483
+      - ENVO:00010483
       relationship_types:
       - rdfs:subClassOf
       is_direct: false
@@ -496,8 +496,8 @@ slots:
       a specimen was collected (feature of interest at the medium level).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:matrix
-    slot_uri: geodata:matrix
+    - gd:matrix
+    slot_uri: gd:matrix
     owner: MeasurementCollection
     domain_of:
     - Measurement
@@ -510,8 +510,8 @@ slots:
     description: Spatial location associated with this entity.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:geolocation
-    slot_uri: geodata:geolocation
+    - gd:geolocation
+    slot_uri: gd:geolocation
     owner: MeasurementCollection
     domain_of:
     - Measurement
@@ -527,8 +527,8 @@ slots:
       was made on a collected object rather than in situ.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:specimen
-    slot_uri: geodata:specimen
+    - gd:specimen
+    slot_uri: gd:specimen
     owner: AggregateObservation
     domain_of:
     - Measurement
@@ -540,8 +540,8 @@ slots:
     description: QA/QC status of the value.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:quality_flag
-    slot_uri: geodata:quality_flag
+    - gd:quality_flag
+    slot_uri: gd:quality_flag
     owner: AggregateObservation
     domain_of:
     - Measurement
@@ -553,8 +553,8 @@ slots:
     description: Measurement objects belonging to this collection.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:measurements
-    slot_uri: geodata:measurements
+    - gd:measurements
+    slot_uri: gd:measurements
     owner: Dataset
     domain_of:
     - MeasurementCollection
@@ -613,8 +613,8 @@ slots:
     description: Spatial footprint encoded as WKT (bounding box, polygon, etc.).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:spatialExtent
-    slot_uri: geodata:spatialExtent
+    - gd:spatialExtent
+    slot_uri: gd:spatialExtent
     owner: Dataset
     domain_of:
     - AggregateObservation
@@ -698,8 +698,8 @@ slots:
     description: "WGS84 decimal latitude (\u221290 to +90)."
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:latitude
-    slot_uri: geodata:latitude
+    - gd:latitude
+    slot_uri: gd:latitude
     owner: Geolocation
     domain_of:
     - Geolocation
@@ -712,8 +712,8 @@ slots:
     description: "WGS84 decimal longitude (\u2212180 to +180)."
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:longitude
-    slot_uri: geodata:longitude
+    - gd:longitude
+    slot_uri: gd:longitude
     owner: Geolocation
     domain_of:
     - Geolocation
@@ -726,8 +726,8 @@ slots:
     description: Altitude above the WGS84 ellipsoid, in metres.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:altitude
-    slot_uri: geodata:altitude
+    - gd:altitude
+    slot_uri: gd:altitude
     owner: Geolocation
     domain_of:
     - Geolocation
@@ -766,8 +766,8 @@ slots:
       that identifies the location.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:place_uri
-    slot_uri: geodata:place_uri
+    - gd:place_uri
+    slot_uri: gd:place_uri
     owner: Geolocation
     domain_of:
     - Geolocation
@@ -779,8 +779,8 @@ slots:
       when absent.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:coordinate_system
-    slot_uri: geodata:coordinate_system
+    - gd:coordinate_system
+    slot_uri: gd:coordinate_system
     ifabsent: string(WGS84)
     owner: Geolocation
     domain_of:
@@ -792,8 +792,8 @@ slots:
     description: Start of the interval (ISO 8601 datetime).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - owl_time:hasBeginning
-    slot_uri: owl_time:hasBeginning
+    - TIME:hasBeginning
+    slot_uri: TIME:hasBeginning
     owner: TemporalExtent
     domain_of:
     - TemporalExtent
@@ -805,8 +805,8 @@ slots:
     description: End of the interval (ISO 8601 datetime).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - owl_time:hasEnd
-    slot_uri: owl_time:hasEnd
+    - TIME:hasEnd
+    slot_uri: TIME:hasEnd
     owner: TemporalExtent
     domain_of:
     - TemporalExtent
@@ -848,8 +848,8 @@ slots:
     description: The kind of physical specimen.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:specimen_type
-    slot_uri: geodata:specimen_type
+    - gd:specimen_type
+    slot_uri: gd:specimen_type
     owner: Specimen
     domain_of:
     - Specimen
@@ -874,8 +874,8 @@ slots:
     description: Location where the specimen was collected.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:collection_location
-    slot_uri: geodata:collection_location
+    - gd:collection_location
+    slot_uri: gd:collection_location
     owner: Specimen
     domain_of:
     - Specimen
@@ -925,8 +925,8 @@ slots:
     description: Institution or archive currently holding the specimen.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:repository
-    slot_uri: geodata:repository
+    - gd:repository
+    slot_uri: gd:repository
     owner: Specimen
     domain_of:
     - Specimen
@@ -938,8 +938,8 @@ slots:
       Bremen Core Repository, Cabinet 7, Tray 3").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:curation_location
-    slot_uri: geodata:curation_location
+    - gd:curation_location
+    slot_uri: gd:curation_location
     owner: Specimen
     domain_of:
     - Specimen
@@ -950,8 +950,8 @@ slots:
     description: How the specimen was prepared for analysis.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:preparation_method
-    slot_uri: geodata:preparation_method
+    - gd:preparation_method
+    slot_uri: gd:preparation_method
     owner: Specimen
     domain_of:
     - Specimen
@@ -962,8 +962,8 @@ slots:
     description: Mass of the specimen in grams.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:mass
-    slot_uri: geodata:mass
+    - gd:mass
+    slot_uri: gd:mass
     owner: Specimen
     domain_of:
     - Specimen
@@ -1000,8 +1000,8 @@ slots:
       one standard deviation or half-width of a 95 % CI).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:uncertainty
-    slot_uri: geodata:uncertainty
+    - gd:uncertainty
+    slot_uri: gd:uncertainty
     owner: Measurement
     domain_of:
     - Measurement
@@ -1012,8 +1012,8 @@ slots:
     description: Depth below surface in metres (positive downward).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:depth
-    slot_uri: geodata:depth
+    - gd:depth
+    slot_uri: gd:depth
     owner: Measurement
     domain_of:
     - Measurement
@@ -1024,8 +1024,8 @@ slots:
     description: Elevation above reference datum in metres.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:elevation
-    slot_uri: geodata:elevation
+    - gd:elevation
+    slot_uri: gd:elevation
     owner: Measurement
     domain_of:
     - Measurement
@@ -1048,8 +1048,8 @@ slots:
     description: Laboratory or facility where analysis was performed.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:laboratory
-    slot_uri: geodata:laboratory
+    - gd:laboratory
+    slot_uri: gd:laboratory
     owner: Measurement
     domain_of:
     - Measurement
@@ -1060,8 +1060,8 @@ slots:
     description: Project or programme under which the measurement was made.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:project
-    slot_uri: geodata:project
+    - gd:project
+    slot_uri: gd:project
     owner: Measurement
     domain_of:
     - Measurement
@@ -1072,8 +1072,8 @@ slots:
     description: Dataset or collection to which this measurement belongs.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:dataset
-    slot_uri: geodata:dataset
+    - gd:dataset
+    slot_uri: gd:dataset
     owner: Measurement
     domain_of:
     - Measurement
@@ -1128,8 +1128,8 @@ slots:
     description: Number of non-missing input values included in the aggregation.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:sample_count
-    slot_uri: geodata:sample_count
+    - gd:sample_count
+    slot_uri: gd:sample_count
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
@@ -1141,8 +1141,8 @@ slots:
       (e.g. "excluded", "interpolated", "zero-filled").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:missing_value_treatment
-    slot_uri: geodata:missing_value_treatment
+    - gd:missing_value_treatment
+    slot_uri: gd:missing_value_treatment
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
@@ -1154,8 +1154,8 @@ slots:
       hourly, "P1D" = daily, "P1M" = monthly).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:temporal_resolution
-    slot_uri: geodata:temporal_resolution
+    - gd:temporal_resolution
+    slot_uri: gd:temporal_resolution
     owner: TimeSeries
     domain_of:
     - TimeSeries
@@ -1167,8 +1167,8 @@ slots:
       buoy", "flux tower", "research vessel", "satellite").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:platform
-    slot_uri: geodata:platform
+    - gd:platform
+    slot_uri: gd:platform
     owner: MeasurementCollection
     domain_of:
     - MeasurementCollection
@@ -1207,8 +1207,8 @@ slots:
       included in this dataset.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:collections
-    slot_uri: geodata:collections
+    - gd:collections
+    slot_uri: gd:collections
     owner: Dataset
     domain_of:
     - Dataset
@@ -1222,8 +1222,8 @@ slots:
     description: AggregateObservation objects included in this dataset.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:aggregate_observations
-    slot_uri: geodata:aggregate_observations
+    - gd:aggregate_observations
+    slot_uri: gd:aggregate_observations
     owner: Dataset
     domain_of:
     - Dataset
@@ -1286,8 +1286,8 @@ slots:
     description: Digital Object Identifier for this dataset release.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:doi
-    slot_uri: geodata:doi
+    - gd:doi
+    slot_uri: gd:doi
     owner: Dataset
     domain_of:
     - Dataset
@@ -1316,10 +1316,10 @@ slots:
       a specimen was collected (feature of interest at the medium level).
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:matrix
+    - gd:matrix
     is_a: matrix
     domain: Measurement
-    slot_uri: geodata:matrix
+    slot_uri: gd:matrix
     alias: matrix
     owner: Measurement
     domain_of:
@@ -1334,10 +1334,10 @@ slots:
     description: Spatial location associated with this entity.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:geolocation
+    - gd:geolocation
     is_a: geolocation
     domain: Measurement
-    slot_uri: geodata:geolocation
+    slot_uri: gd:geolocation
     alias: geolocation
     owner: Measurement
     domain_of:
@@ -1486,10 +1486,10 @@ slots:
     description: Measurement objects belonging to this collection.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:measurements
+    - gd:measurements
     is_a: measurements
     domain: MeasurementCollection
-    slot_uri: geodata:measurements
+    slot_uri: gd:measurements
     alias: measurements
     owner: MeasurementCollection
     domain_of:
@@ -1544,10 +1544,10 @@ slots:
     description: Fixed horizontal position of the profile.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:geolocation
+    - gd:geolocation
     is_a: geolocation
     domain: Profile
-    slot_uri: geodata:geolocation
+    slot_uri: gd:geolocation
     alias: geolocation
     owner: Profile
     domain_of:
@@ -1669,11 +1669,11 @@ classes:
     description: A closed time interval defined by a start and end instant.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - owl_time:ProperInterval
+    - TIME:ProperInterval
     slots:
     - start_time
     - end_time
-    class_uri: owl_time:ProperInterval
+    class_uri: TIME:ProperInterval
   Specimen:
     name: Specimen
     definition_uri: https://w3id.org/linkml/geodata/Specimen
@@ -1846,7 +1846,7 @@ classes:
       label:
         name: label
         description: Human-readable name for this time series.
-    class_uri: geodata:TimeSeries
+    class_uri: gd:TimeSeries
   Profile:
     name: Profile
     definition_uri: https://w3id.org/linkml/geodata/Profile
@@ -1874,7 +1874,7 @@ classes:
       label:
         name: label
         description: Human-readable name for this profile.
-    class_uri: geodata:Profile
+    class_uri: gd:Profile
   Transect:
     name: Transect
     definition_uri: https://w3id.org/linkml/geodata/Transect
@@ -1902,7 +1902,7 @@ classes:
       label:
         name: label
         description: Human-readable name for this transect.
-    class_uri: geodata:Transect
+    class_uri: gd:Transect
   Dataset:
     name: Dataset
     definition_uri: https://w3id.org/linkml/geodata/Dataset
@@ -1940,7 +1940,7 @@ classes:
     tree_root: true
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-16T22:06:51'
-source_file_size: 23156
-generation_date: '2026-11-16T22:06:59'
+source_file_date: '2026-11-16T22:23:07'
+source_file_size: 22988
+generation_date: '2026-11-16T22:23:17'
 
