@@ -29,6 +29,8 @@ prefixes:
   isam:     https://w3id.org/isample/
   prov:     http://www.w3.org/ns/prov#
   xsd:      http://www.w3.org/2001/XMLSchema#
+  bervo:    http://purl.obolibrary.org/obo/BERVO_
+  pato:     http://purl.obolibrary.org/obo/PATO_
 
 default_prefix: geodata
 default_range: string
@@ -163,15 +165,6 @@ slots:
 
   # --- Previously shared slots (multi-class) --------------------------------
 
-  term_id:
-    range: uri
-    identifier: true
-    required: true
-    slot_uri: schema:identifier
-    description: >-
-      URI of the term in a source vocabulary (e.g. a QUDT unit URI or a
-      CF standard name URI).
-
   matrix:
     range: MatrixEnum
     slot_uri: geodata:matrix
@@ -228,10 +221,13 @@ slots:
       Spatial footprint encoded as WKT (bounding box, polygon, etc.).
 
   measurement_type:
-    range: MeasurementType
-    inlined: true
+    range: uriorcurie
     slot_uri: sosa:observedProperty
-    description: The property that was measured or observed.
+    description: >-
+      The property that was measured or observed, as a CURIE or URI from
+      a source vocabulary (CF Conventions, SWEET, ENVO, etc.).
+      e.g. "https://vocab.nerc.ac.uk/standard_name/air_temperature/" or
+      "sweet:propTemperature/Temperature".
 
   value:
     range: string
@@ -242,10 +238,11 @@ slots:
       as a float.
 
   unit:
-    range: Unit
-    inlined: true
+    range: UCUMExpression
     slot_uri: qudt:hasUnit
-    description: Unit of the measured value.
+    description: >-
+      Unit of the measured value as a UCUM expression
+      (e.g. "Cel", "K", "m/s", "g/cm3", "pH").
 
   license:
     range: uri
@@ -322,25 +319,6 @@ slots:
     required: true
     slot_uri: owl_time:hasEnd
     description: End of the interval (ISO 8601 datetime).
-
-  # --- MeasurementType / Unit slots -----------------------------------------
-
-  source_vocabulary:
-    range: string
-    slot_uri: geodata:source_vocabulary
-    description: >-
-      The vocabulary from which the term is drawn (e.g. "CF
-      Conventions", "SWEET", "ENVO").
-
-  definition:
-    range: string
-    slot_uri: schema:description
-    description: Textual definition of the property.
-
-  ucum_code:
-    range: UCUMExpression
-    slot_uri: qudt:ucumCode
-    description: UCUM expression for the unit (e.g. "Cel", "m/s", "g/cm3").
 
   # --- Specimen slots -------------------------------------------------------
 
@@ -605,36 +583,6 @@ classes:
     slots:
       - start_time
       - end_time
-
-  MeasurementType:
-    description: >-
-      A measured or observed property drawn from a controlled vocabulary
-      such as CF Conventions, SWEET, or ENVO. Maps to
-      sosa:ObservableProperty.
-    class_uri: sosa:ObservableProperty
-    slots:
-      - term_id
-      - label
-      - source_vocabulary
-      - definition
-    slot_usage:
-      label:
-        required: true
-        description: Human-readable name for the property (e.g. "air_temperature").
-
-  Unit:
-    description: >-
-      A unit of measure aligned with QUDT and expressible in UCUM notation.
-      Maps to qudt:Unit.
-    class_uri: qudt:Unit
-    slots:
-      - term_id
-      - label
-      - ucum_code
-    slot_usage:
-      label:
-        required: true
-        description: Human-readable unit label (e.g. "degree Celsius").
 
   # --- Core classes ---------------------------------------------------------
 

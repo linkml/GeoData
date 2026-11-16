@@ -1,0 +1,143 @@
+---
+id: https://w3id.org/linkml/geodata/measurements
+name: geodata-measurements
+title: Earth Science Measurement Microschemas
+description: >-
+  Named subclasses of Measurement for specific earth science observation types.
+  Each class maps the measurement_type slot to equivalent CURIEs from multiple
+  source vocabularies (CF Conventions, SWEET, ENVO, BERVO, PATO) via rules,
+  and constrains valid units (UCUM) and matrices (ENVO).
+version: 0.1.0
+license: BSD-3-Clause
+
+prefixes:
+  linkml:  https://w3id.org/linkml/
+  geodata: https://w3id.org/linkml/geodata/
+  envo:    http://purl.obolibrary.org/obo/ENVO_
+  bervo:   http://purl.obolibrary.org/obo/BERVO_
+  sweet:   http://sweetontology.net/
+  pato:    http://purl.obolibrary.org/obo/PATO_
+
+default_prefix: geodata
+default_range: string
+
+imports:
+  - linkml:types
+  - geodata
+
+# ---------------------------------------------------------------------------
+# Measurement microschemas
+# Each class is a named subclass of Measurement.
+#
+# Rules pattern:
+#   preconditions  — equivalent measurement_type CURIEs / URIs from different
+#                    vocabularies that all denote the same property.
+#   postconditions — constrain unit (UCUM) and matrix (ENVO CURIE) to values
+#                    appropriate for this measurement type.
+#
+# Vocabulary prefixes used in measurement_type equals_string values:
+#   CF standard names: http://vocab.nerc.ac.uk/standard_name/{name}/
+#   SWEET:             http://sweetontology.net/prop*/ClassName
+#   ENVO (property):   ENVO:09200001, ENVO:09200014, ENVO:09200010, ...
+#   BERVO:             BERVO:0001370, BERVO:0002312, BERVO:0000882, ...
+#   PATO:              PATO:0001842, ...
+#
+# ENVO matrix CURIEs used in postconditions:
+#   ENVO:00002005 = air
+#   ENVO:01000810 = atmosphere
+#   ENVO:00002006 = water (generic)
+#   ENVO:00002004 = freshwater
+#   ENVO:00002149 = seawater
+#   ENVO:01001004 = groundwater
+#   ENVO:01001057 = pore water
+#   ENVO:00001998 = soil
+# ---------------------------------------------------------------------------
+
+classes:
+
+  AirTemperatureMeasurement:
+    is_a: Measurement
+    description: >-
+      Measurement of air (atmospheric) temperature. Maps to CF Conventions
+      air_temperature, SWEET Temperature, ENVO:09200001 (temperature of air),
+      and BERVO:0001370. SWEET does not define a dedicated AirTemperature
+      class; matrix constrains this to atmospheric media.
+    comments:
+      - Use result_time for a point-in-time observation.
+      - Use temporal_extent for a measurement averaged over an interval.
+    rules:
+      - preconditions:
+          slot_conditions:
+            measurement_type:
+              any_of:
+                - equals_string: "http://vocab.nerc.ac.uk/standard_name/air_temperature/"
+                - equals_string: "http://sweetontology.net/propTemperature/Temperature"
+                - equals_string: "ENVO:09200001"
+                - equals_string: "BERVO:0001370"
+        postconditions:
+          slot_conditions:
+            unit:
+              any_of:
+                - equals_string: Cel
+                - equals_string: K
+                - equals_string: "[degF]"
+            matrix:
+              any_of:
+                - equals_string: "ENVO:00002005"    # air
+                - equals_string: "ENVO:01000810"    # atmosphere
+
+  WaterTemperatureMeasurement:
+    is_a: Measurement
+    description: >-
+      Measurement of water temperature in any aquatic environment (ocean,
+      lake, river, groundwater, etc.). Maps to CF Conventions
+      sea_water_temperature, SWEET Temperature, ENVO:09200014 (temperature
+      of water), and BERVO:0002312. Matrix constrains this to aquatic media.
+    rules:
+      - preconditions:
+          slot_conditions:
+            measurement_type:
+              any_of:
+                - equals_string: "http://vocab.nerc.ac.uk/standard_name/sea_water_temperature/"
+                - equals_string: "http://sweetontology.net/propTemperature/Temperature"
+                - equals_string: "ENVO:09200014"
+                - equals_string: "BERVO:0002312"
+        postconditions:
+          slot_conditions:
+            unit:
+              any_of:
+                - equals_string: Cel
+                - equals_string: K
+                - equals_string: "[degF]"
+            matrix:
+              any_of:
+                - equals_string: "ENVO:00002006"    # water (generic)
+                - equals_string: "ENVO:00002004"    # freshwater
+                - equals_string: "ENVO:00002149"    # seawater
+                - equals_string: "ENVO:01001004"    # groundwater
+                - equals_string: "ENVO:01001057"    # pore water
+
+  SoilpHMeasurement:
+    is_a: Measurement
+    description: >-
+      Measurement of soil pH (hydrogen ion activity). Maps to SWEET pH,
+      PATO:0001842, ENVO:09200010 (pH of soil), and BERVO:0000882.
+      The UCUM code for pH is [pH]. Matrix is constrained to soil; use a
+      generic Measurement for pH in other matrices (water, sediment).
+    rules:
+      - preconditions:
+          slot_conditions:
+            measurement_type:
+              any_of:
+                - equals_string: "http://sweetontology.net/propChemical/pH"
+                - equals_string: "PATO:0001842"
+                - equals_string: "ENVO:09200010"
+                - equals_string: "BERVO:0000882"
+        postconditions:
+          slot_conditions:
+            unit:
+              any_of:
+                - equals_string: "[pH]"
+            matrix:
+              any_of:
+                - equals_string: "ENVO:00001998"    # soil
