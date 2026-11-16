@@ -357,65 +357,17 @@ enums:
     name: MatrixEnum
     definition_uri: https://w3id.org/linkml/geodata/MatrixEnum
     description: The medium or material in which a measurement was made or from which
-      a specimen was collected. Terms are aligned to ENVO.
+      a specimen was collected. Permissible values are all ENVO "environmental material"
+      terms (ENVO:00010483) and their subclasses, resolved dynamically from the ENVO
+      ontology at schema generation time.
     from_schema: https://w3id.org/linkml/geodata
-    permissible_values:
-      soil:
-        text: soil
-        description: Terrestrial soil
-        meaning: envo:00001998
-      water:
-        text: water
-        description: Generic / unspecified water
-        meaning: envo:00002006
-      freshwater:
-        text: freshwater
-        description: Fresh surface water (rivers, lakes, streams)
-        meaning: envo:00002004
-      seawater:
-        text: seawater
-        description: Marine or ocean water
-        meaning: envo:00002149
-      groundwater:
-        text: groundwater
-        description: Subsurface groundwater
-        meaning: envo:01001004
-      pore_water:
-        text: pore_water
-        description: Water occupying pore spaces of soil or sediment
-        meaning: envo:01001057
-      air:
-        text: air
-        description: Atmospheric air
-        meaning: envo:00002005
-      atmosphere:
-        text: atmosphere
-        description: The atmosphere as a whole-system feature of interest
-        meaning: envo:01000810
-      sediment:
-        text: sediment
-        description: Unconsolidated sediment
-        meaning: envo:00002007
-      rock:
-        text: rock
-        description: Consolidated rock
-        meaning: envo:00001995
-      ice:
-        text: ice
-        description: Glacial or sea ice
-        meaning: envo:00002209
-      snow:
-        text: snow
-        description: Snow pack
-        meaning: envo:01000406
-      permafrost:
-        text: permafrost
-        description: Perennially frozen ground
-        meaning: envo:00000134
-      biota:
-        text: biota
-        description: Living organisms or biological tissue
-        meaning: envo:00000016
+    reachable_from:
+      source_ontology: obo:envo.owl
+      source_nodes:
+      - envo:00010483
+      relationship_types:
+      - rdfs:subClassOf
+      is_direct: false
   AggregationMethodEnum:
     name: AggregationMethodEnum
     definition_uri: https://w3id.org/linkml/geodata/AggregationMethodEnum
@@ -556,11 +508,11 @@ slots:
     mappings:
     - geodata:matrix
     slot_uri: geodata:matrix
-    owner: TimeSeries
+    owner: MeasurementCollection
     domain_of:
     - Measurement
     - AggregateObservation
-    - TimeSeries
+    - MeasurementCollection
     range: MatrixEnum
   geolocation:
     name: geolocation
@@ -570,11 +522,11 @@ slots:
     mappings:
     - geodata:geolocation
     slot_uri: geodata:geolocation
-    owner: TimeSeries
+    owner: MeasurementCollection
     domain_of:
     - Measurement
     - AggregateObservation
-    - TimeSeries
+    - MeasurementCollection
     range: Geolocation
     inlined: true
     inlined_as_list: true
@@ -615,7 +567,7 @@ slots:
     slot_uri: geodata:measurements
     owner: Dataset
     domain_of:
-    - TimeSeries
+    - MeasurementCollection
     - Dataset
     range: Measurement
     multivalued: true
@@ -629,12 +581,12 @@ slots:
     mappings:
     - schema:name
     slot_uri: schema:name
-    owner: TimeSeries
+    owner: MeasurementCollection
     domain_of:
     - MeasurementType
     - Unit
     - Specimen
-    - TimeSeries
+    - MeasurementCollection
     range: string
   description:
     name: description
@@ -647,6 +599,7 @@ slots:
     owner: Dataset
     domain_of:
     - Specimen
+    - MeasurementCollection
     - Dataset
     range: string
   temporal_extent:
@@ -661,7 +614,7 @@ slots:
     domain_of:
     - Measurement
     - AggregateObservation
-    - TimeSeries
+    - MeasurementCollection
     - Dataset
     range: TemporalExtent
     inlined: true
@@ -687,11 +640,11 @@ slots:
     mappings:
     - sosa:observedProperty
     slot_uri: sosa:observedProperty
-    owner: TimeSeries
+    owner: MeasurementCollection
     domain_of:
     - Measurement
     - AggregateObservation
-    - TimeSeries
+    - MeasurementCollection
     range: MeasurementType
     inlined: true
     inlined_as_list: false
@@ -736,7 +689,7 @@ slots:
     domain_of:
     - Specimen
     - Measurement
-    - TimeSeries
+    - MeasurementCollection
     - Dataset
     range: uri
   access_rights:
@@ -804,6 +757,20 @@ slots:
     owner: Geolocation
     domain_of:
     - Geolocation
+    range: WKTLiteral
+  trajectory:
+    name: trajectory
+    definition_uri: https://w3id.org/linkml/geodata/trajectory
+    description: Path of a moving platform or transect line encoded as a WKT LineString
+      (e.g. "LINESTRING(lon1 lat1, lon2 lat2, ...)"). Required for Transect; optional
+      for TimeSeries on a moving platform.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geo:asWKT
+    slot_uri: geo:asWKT
+    owner: MeasurementCollection
+    domain_of:
+    - MeasurementCollection
     range: WKTLiteral
   place_uri:
     name: place_uri
@@ -898,8 +865,9 @@ slots:
   specimen_id:
     name: specimen_id
     definition_uri: https://w3id.org/linkml/geodata/specimen_id
-    description: Globally unique identifier for the specimen. Preferably an IGSN (e.g.
-      https://igsn.org/AU1234567) or another persistent URI.
+    description: Identifier for the specimen. May be a local field number, lab ID,
+      catalog number, or any string that is unique within the dataset. Where a persistent
+      URI exists, prefer that; use the igsn slot for IGSN linkage.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - schema:identifier
@@ -908,8 +876,22 @@ slots:
     owner: Specimen
     domain_of:
     - Specimen
-    range: uri
+    range: string
     required: true
+  igsn:
+    name: igsn
+    definition_uri: https://w3id.org/linkml/geodata/igsn
+    description: International Geo Sample Number (IGSN) for this specimen as a resolvable
+      URI (e.g. https://igsn.org/AU1234567). Optional but strongly recommended for
+      specimens registered with SESAR or another IGSN-minting registry.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:identifier
+    slot_uri: schema:identifier
+    owner: Specimen
+    domain_of:
+    - Specimen
+    range: uri
   specimen_type:
     name: specimen_type
     definition_uri: https://w3id.org/linkml/geodata/specimen_type
@@ -1174,10 +1156,11 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  input_time_series:
-    name: input_time_series
-    definition_uri: https://w3id.org/linkml/geodata/input_time_series
-    description: TimeSeries objects used as input to this aggregation.
+  input_collections:
+    name: input_collections
+    definition_uri: https://w3id.org/linkml/geodata/input_collections
+    description: MeasurementCollection objects (TimeSeries, Profile, Transect, etc.)
+      used as input to this aggregation.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - prov:wasDerivedFrom
@@ -1185,7 +1168,7 @@ slots:
     owner: AggregateObservation
     domain_of:
     - AggregateObservation
-    range: TimeSeries
+    range: MeasurementCollection
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -1236,9 +1219,9 @@ slots:
     mappings:
     - geodata:platform
     slot_uri: geodata:platform
-    owner: TimeSeries
+    owner: MeasurementCollection
     domain_of:
-    - TimeSeries
+    - MeasurementCollection
     range: string
   dataset_id:
     name: dataset_id
@@ -1267,18 +1250,19 @@ slots:
     - Dataset
     range: string
     required: true
-  time_series:
-    name: time_series
-    definition_uri: https://w3id.org/linkml/geodata/time_series
-    description: TimeSeries objects included in this dataset.
+  collections:
+    name: collections
+    definition_uri: https://w3id.org/linkml/geodata/collections
+    description: MeasurementCollection objects (TimeSeries, Profile, Transect, etc.)
+      included in this dataset.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
-    - geodata:time_series
-    slot_uri: geodata:time_series
+    - geodata:collections
+    slot_uri: geodata:collections
     owner: Dataset
     domain_of:
     - Dataset
-    range: TimeSeries
+    range: MeasurementCollection
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -1586,25 +1570,45 @@ slots:
     required: true
     inlined: true
     inlined_as_list: false
-  TimeSeries_measurements:
-    name: TimeSeries_measurements
+  MeasurementCollection_measurements:
+    name: MeasurementCollection_measurements
     definition_uri: https://w3id.org/linkml/geodata/measurements
     description: Measurement objects belonging to this collection.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - geodata:measurements
     is_a: measurements
-    domain: TimeSeries
+    domain: MeasurementCollection
     slot_uri: geodata:measurements
     alias: measurements
-    owner: TimeSeries
+    owner: MeasurementCollection
     domain_of:
-    - TimeSeries
+    - MeasurementCollection
     is_usage_slot: true
     usage_slot_name: measurements
     range: Measurement
     required: true
     multivalued: true
+    inlined: true
+    inlined_as_list: true
+  TimeSeries_temporal_extent:
+    name: TimeSeries_temporal_extent
+    definition_uri: https://w3id.org/linkml/geodata/temporal_extent
+    description: Overall time span of the series.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - sosa:phenomenonTime
+    is_a: temporal_extent
+    domain: TimeSeries
+    slot_uri: sosa:phenomenonTime
+    alias: temporal_extent
+    owner: TimeSeries
+    domain_of:
+    - TimeSeries
+    is_usage_slot: true
+    usage_slot_name: temporal_extent
+    range: TemporalExtent
+    required: true
     inlined: true
     inlined_as_list: true
   TimeSeries_label:
@@ -1621,6 +1625,78 @@ slots:
     owner: TimeSeries
     domain_of:
     - TimeSeries
+    is_usage_slot: true
+    usage_slot_name: label
+    range: string
+  Profile_geolocation:
+    name: Profile_geolocation
+    definition_uri: https://w3id.org/linkml/geodata/geolocation
+    description: Fixed horizontal position of the profile.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geodata:geolocation
+    is_a: geolocation
+    domain: Profile
+    slot_uri: geodata:geolocation
+    alias: geolocation
+    owner: Profile
+    domain_of:
+    - Profile
+    is_usage_slot: true
+    usage_slot_name: geolocation
+    range: Geolocation
+    required: true
+    inlined: true
+    inlined_as_list: true
+  Profile_label:
+    name: Profile_label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable name for this profile.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    is_a: label
+    domain: Profile
+    slot_uri: schema:name
+    alias: label
+    owner: Profile
+    domain_of:
+    - Profile
+    is_usage_slot: true
+    usage_slot_name: label
+    range: string
+  Transect_trajectory:
+    name: Transect_trajectory
+    definition_uri: https://w3id.org/linkml/geodata/trajectory
+    description: The spatial path of the transect as a WKT LineString.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - geo:asWKT
+    is_a: trajectory
+    domain: Transect
+    slot_uri: geo:asWKT
+    alias: trajectory
+    owner: Transect
+    domain_of:
+    - Transect
+    is_usage_slot: true
+    usage_slot_name: trajectory
+    range: WKTLiteral
+    required: true
+  Transect_label:
+    name: Transect_label
+    definition_uri: https://w3id.org/linkml/geodata/label
+    description: Human-readable name for this transect.
+    from_schema: https://w3id.org/linkml/geodata
+    mappings:
+    - schema:name
+    is_a: label
+    domain: Transect
+    slot_uri: schema:name
+    alias: label
+    owner: Transect
+    domain_of:
+    - Transect
     is_usage_slot: true
     usage_slot_name: label
     range: string
@@ -1737,6 +1813,7 @@ classes:
     - sosa:Sample
     slots:
     - specimen_id
+    - igsn
     - specimen_type
     - Specimen_label
     - material
@@ -1824,7 +1901,7 @@ classes:
     - AggregateObservation_unit
     - AggregateObservation_measurement_type
     - input_measurements
-    - input_time_series
+    - input_collections
     - sample_count
     - temporal_extent
     - spatial_extent
@@ -1843,33 +1920,116 @@ classes:
         description: The property being summarised.
         required: true
     class_uri: sosa:Observation
-  TimeSeries:
-    name: TimeSeries
-    definition_uri: https://w3id.org/linkml/geodata/TimeSeries
+  MeasurementCollection:
+    name: MeasurementCollection
+    definition_uri: https://w3id.org/linkml/geodata/MeasurementCollection
     description: An ordered collection of Measurement objects sharing a common measurement
-      type, matrix, and geolocation, varying over time. Maps to sosa:ObservationCollection.
+      type and matrix. The ordering axis (time, depth, or position along a line) is
+      determined by the subclass. Maps to sosa:ObservationCollection.
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:ObservationCollection
     slots:
+    - MeasurementCollection_measurements
+    - measurement_type
     - matrix
     - geolocation
-    - TimeSeries_measurements
+    - trajectory
     - temporal_extent
-    - temporal_resolution
-    - measurement_type
     - platform
-    - TimeSeries_label
+    - label
+    - description
     - license
     slot_usage:
       measurements:
         name: measurements
         required: true
         inlined_as_list: true
+    class_uri: sosa:ObservationCollection
+  TimeSeries:
+    name: TimeSeries
+    definition_uri: https://w3id.org/linkml/geodata/TimeSeries
+    description: A MeasurementCollection ordered by time. Measurements share a common
+      measurement type and matrix at a fixed or moving location. Maps to sosa:ObservationCollection.
+    from_schema: https://w3id.org/linkml/geodata
+    is_a: MeasurementCollection
+    slots:
+    - MeasurementCollection_measurements
+    - measurement_type
+    - matrix
+    - geolocation
+    - trajectory
+    - platform
+    - description
+    - license
+    - temporal_resolution
+    - TimeSeries_temporal_extent
+    - TimeSeries_label
+    slot_usage:
+      temporal_extent:
+        name: temporal_extent
+        description: Overall time span of the series.
+        required: true
       label:
         name: label
         description: Human-readable name for this time series.
-    class_uri: sosa:ObservationCollection
+    class_uri: geodata:TimeSeries
+  Profile:
+    name: Profile
+    definition_uri: https://w3id.org/linkml/geodata/Profile
+    description: A MeasurementCollection ordered by depth or elevation at a fixed
+      horizontal location (e.g. a CTD cast, soil core, or borehole log). Individual
+      Measurement objects carry their own depth or elevation value. Maps to sosa:ObservationCollection.
+    from_schema: https://w3id.org/linkml/geodata
+    is_a: MeasurementCollection
+    slots:
+    - MeasurementCollection_measurements
+    - measurement_type
+    - matrix
+    - trajectory
+    - temporal_extent
+    - platform
+    - description
+    - license
+    - Profile_geolocation
+    - Profile_label
+    slot_usage:
+      geolocation:
+        name: geolocation
+        description: Fixed horizontal position of the profile.
+        required: true
+      label:
+        name: label
+        description: Human-readable name for this profile.
+    class_uri: geodata:Profile
+  Transect:
+    name: Transect
+    definition_uri: https://w3id.org/linkml/geodata/Transect
+    description: A MeasurementCollection ordered by position along a spatial line
+      (e.g. a ship-track survey, vehicle transect, or vegetation transect). Individual
+      Measurement objects carry their own geolocation. Maps to sosa:ObservationCollection.
+    from_schema: https://w3id.org/linkml/geodata
+    is_a: MeasurementCollection
+    slots:
+    - MeasurementCollection_measurements
+    - measurement_type
+    - matrix
+    - geolocation
+    - temporal_extent
+    - platform
+    - description
+    - license
+    - Transect_trajectory
+    - Transect_label
+    slot_usage:
+      trajectory:
+        name: trajectory
+        description: The spatial path of the transect as a WKT LineString.
+        required: true
+      label:
+        name: label
+        description: Human-readable name for this transect.
+    class_uri: geodata:Transect
   Dataset:
     name: Dataset
     definition_uri: https://w3id.org/linkml/geodata/Dataset
@@ -1883,7 +2043,7 @@ classes:
     - title
     - description
     - measurements
-    - time_series
+    - collections
     - aggregate_observations
     - Dataset_temporal_extent
     - Dataset_spatial_extent
@@ -1907,7 +2067,7 @@ classes:
     tree_root: true
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-08-25T15:56:14'
-source_file_size: 22987
-generation_date: '2026-08-25T15:56:25'
+source_file_date: '2026-11-16T21:41:10'
+source_file_size: 24360
+generation_date: '2026-11-16T21:41:17'
 

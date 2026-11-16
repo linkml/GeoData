@@ -576,6 +576,22 @@
 <td>A single observed value of a property at a location and time</td>
 </tr>
 <tr>
+<td><a href="MeasurementCollection/">MeasurementCollection</a></td>
+<td>An ordered collection of Measurement objects sharing a common measurement typ...</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Profile/">Profile</a></td>
+<td>A MeasurementCollection ordered by depth or elevation at a fixed horizontal l...</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TimeSeries/">TimeSeries</a></td>
+<td>A MeasurementCollection ordered by time</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Transect/">Transect</a></td>
+<td>A MeasurementCollection ordered by position along a spatial line (e</td>
+</tr>
+<tr>
 <td><a href="MeasurementType/">MeasurementType</a></td>
 <td>A measured or observed property drawn from a controlled vocabulary such as CF...</td>
 </tr>
@@ -586,10 +602,6 @@
 <tr>
 <td><a href="TemporalExtent/">TemporalExtent</a></td>
 <td>A closed time interval defined by a start and end instant</td>
-</tr>
-<tr>
-<td><a href="TimeSeries/">TimeSeries</a></td>
-<td>An ordered collection of Measurement objects sharing a common measurement typ...</td>
 </tr>
 <tr>
 <td><a href="Unit/">Unit</a></td>
@@ -633,6 +645,10 @@
 <tr>
 <td><a href="collection_time/">collection_time</a></td>
 <td>Date and time of collection (ISO 8601)</td>
+</tr>
+<tr>
+<td><a href="collections/">collections</a></td>
+<td>MeasurementCollection objects (TimeSeries, Profile, Transect, etc</td>
 </tr>
 <tr>
 <td><a href="coordinate_system/">coordinate_system</a></td>
@@ -683,12 +699,16 @@
 <td>Spatial location associated with this entity</td>
 </tr>
 <tr>
-<td><a href="input_measurements/">input_measurements</a></td>
-<td>Measurement objects that were aggregated to produce this value</td>
+<td><a href="igsn/">igsn</a></td>
+<td>International Geo Sample Number (IGSN) for this specimen as a resolvable URI ...</td>
 </tr>
 <tr>
-<td><a href="input_time_series/">input_time_series</a></td>
-<td>TimeSeries objects used as input to this aggregation</td>
+<td><a href="input_collections/">input_collections</a></td>
+<td>MeasurementCollection objects (TimeSeries, Profile, Transect, etc</td>
+</tr>
+<tr>
+<td><a href="input_measurements/">input_measurements</a></td>
+<td>Measurement objects that were aggregated to produce this value</td>
 </tr>
 <tr>
 <td><a href="instrument/">instrument</a></td>
@@ -800,7 +820,7 @@
 </tr>
 <tr>
 <td><a href="specimen_id/">specimen_id</a></td>
-<td>Globally unique identifier for the specimen</td>
+<td>Identifier for the specimen</td>
 </tr>
 <tr>
 <td><a href="specimen_type/">specimen_type</a></td>
@@ -823,12 +843,12 @@
 <td>URI of the term in a source vocabulary (e</td>
 </tr>
 <tr>
-<td><a href="time_series/">time_series</a></td>
-<td>TimeSeries objects included in this dataset</td>
-</tr>
-<tr>
 <td><a href="title/">title</a></td>
 <td>Human-readable title of the dataset</td>
+</tr>
+<tr>
+<td><a href="trajectory/">trajectory</a></td>
+<td>Path of a moving platform or transect line encoded as a WKT LineString (e</td>
 </tr>
 <tr>
 <td><a href="ucum_code/">ucum_code</a></td>

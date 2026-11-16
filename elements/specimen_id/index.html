@@ -486,7 +486,7 @@
 
 
 <h1 id="slot-specimen_id">Slot: specimen_id</h1>
-<p><em>Globally unique identifier for the specimen. Preferably an IGSN (e.g. <a href="https://igsn.org/AU1234567">https://igsn.org/AU1234567</a>) or another persistent URI.</em></p>
+<p><em>Identifier for the specimen. May be a local field number, lab ID, catalog number, or any string that is unique within the dataset. Where a persistent URI exists, prefer that; use the igsn slot for IGSN linkage.</em></p>
 <div>
 <p>URI: <a href="http://schema.org/identifier">schema:identifier</a></p>
 <!-- no inheritance hierarchy -->
@@ -519,7 +519,7 @@
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../Uri/">Uri</a></td>
+<td><a href="../String/">String</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
@@ -591,15 +591,16 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">specimen_id</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Globally unique identifier for the specimen. Preferably an IGSN (e.g.</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">https://igsn.org/AU1234567) or another persistent URI.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifier for the specimen. May be a local field number, lab ID, catalog</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">number, or any string that is unique within the dataset. Where a persistent URI</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">exists, prefer that; use the igsn slot for IGSN linkage.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/geodata</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:identifier</span>
 <span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specimen</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>

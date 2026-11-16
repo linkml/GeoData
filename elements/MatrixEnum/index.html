@@ -365,10 +365,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#permissible-values" class="md-nav__link">
+  <a href="#enumeration-source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permissible Values
+        Enumeration Source
       
     </span>
   </a>
@@ -447,91 +447,15 @@
 
 
 <h1 id="enum-matrixenum">Enum: MatrixEnum</h1>
-<p><em>The medium or material in which a measurement was made or from which a specimen was collected. Terms are aligned to ENVO.</em></p>
+<p><em>The medium or material in which a measurement was made or from which a specimen was collected. Permissible values are all ENVO "environmental material" terms (ENVO:00010483) and their subclasses, resolved dynamically from the ENVO ontology at schema generation time.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/linkml/geodata/MatrixEnum">geodata:MatrixEnum</a></p>
-<h2 id="permissible-values">Permissible Values</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>soil</td>
-<td>envo:00001998</td>
-<td>Terrestrial soil</td>
-</tr>
-<tr>
-<td>water</td>
-<td>envo:00002006</td>
-<td>Generic / unspecified water</td>
-</tr>
-<tr>
-<td>freshwater</td>
-<td>envo:00002004</td>
-<td>Fresh surface water (rivers, lakes, streams)</td>
-</tr>
-<tr>
-<td>seawater</td>
-<td>envo:00002149</td>
-<td>Marine or ocean water</td>
-</tr>
-<tr>
-<td>groundwater</td>
-<td>envo:01001004</td>
-<td>Subsurface groundwater</td>
-</tr>
-<tr>
-<td>pore_water</td>
-<td>envo:01001057</td>
-<td>Water occupying pore spaces of soil or sediment</td>
-</tr>
-<tr>
-<td>air</td>
-<td>envo:00002005</td>
-<td>Atmospheric air</td>
-</tr>
-<tr>
-<td>atmosphere</td>
-<td>envo:01000810</td>
-<td>The atmosphere as a whole-system feature of interest</td>
-</tr>
-<tr>
-<td>sediment</td>
-<td>envo:00002007</td>
-<td>Unconsolidated sediment</td>
-</tr>
-<tr>
-<td>rock</td>
-<td>envo:00001995</td>
-<td>Consolidated rock</td>
-</tr>
-<tr>
-<td>ice</td>
-<td>envo:00002209</td>
-<td>Glacial or sea ice</td>
-</tr>
-<tr>
-<td>snow</td>
-<td>envo:01000406</td>
-<td>Snow pack</td>
-</tr>
-<tr>
-<td>permafrost</td>
-<td>envo:00000134</td>
-<td>Perennially frozen ground</td>
-</tr>
-<tr>
-<td>biota</td>
-<td>envo:00000016</td>
-<td>Living organisms or biological tissue</td>
-</tr>
-</tbody>
-</table>
+<h2 id="enumeration-source">Enumeration Source</h2>
+<p><strong>Reachable From:</strong>
+- <strong>Source:</strong> NONE
+- <strong>Nodes:</strong> envo:00010483
+- <strong>Via:</strong> rdfs:subClassOf</p>
+<p><em>This is a dynamic enum</em></p>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -556,66 +480,18 @@
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MatrixEnum</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The medium or material in which a measurement was made or from which</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">a specimen was collected. Terms are aligned to ENVO.</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">a specimen was collected. Permissible values are all ENVO "environmental material"</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">terms (ENVO:00010483) and their subclasses, resolved dynamically from the ENVO ontology</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">at schema generation time.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/geodata</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="nt">permissible_values</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">soil</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">soil</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Terrestrial soil</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00001998</span>
-<span class="w">  </span><span class="nt">water</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">water</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generic / unspecified water</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00002006</span>
-<span class="w">  </span><span class="nt">freshwater</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">freshwater</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fresh surface water (rivers, lakes, streams)</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00002004</span>
-<span class="w">  </span><span class="nt">seawater</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seawater</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Marine or ocean water</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00002149</span>
-<span class="w">  </span><span class="nt">groundwater</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">groundwater</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Subsurface groundwater</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:01001004</span>
-<span class="w">  </span><span class="nt">pore_water</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pore_water</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Water occupying pore spaces of soil or sediment</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:01001057</span>
-<span class="w">  </span><span class="nt">air</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">air</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Atmospheric air</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00002005</span>
-<span class="w">  </span><span class="nt">atmosphere</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">atmosphere</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The atmosphere as a whole-system feature of interest</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:01000810</span>
-<span class="w">  </span><span class="nt">sediment</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sediment</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unconsolidated sediment</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00002007</span>
-<span class="w">  </span><span class="nt">rock</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rock</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Consolidated rock</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00001995</span>
-<span class="w">  </span><span class="nt">ice</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ice</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Glacial or sea ice</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00002209</span>
-<span class="w">  </span><span class="nt">snow</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snow</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Snow pack</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:01000406</span>
-<span class="w">  </span><span class="nt">permafrost</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">permafrost</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Perennially frozen ground</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00000134</span>
-<span class="w">  </span><span class="nt">biota</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">biota</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Living organisms or biological tissue</span>
-<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00000016</span>
+<span class="nt">reachable_from</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">source_ontology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">obo:envo.owl</span>
+<span class="w">  </span><span class="nt">source_nodes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envo:00010483</span>
+<span class="w">  </span><span class="nt">relationship_types</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rdfs:subClassOf</span>
+<span class="w">  </span><span class="nt">is_direct</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 </details>
 </div>
