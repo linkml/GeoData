@@ -18,32 +18,20 @@ temporal_extent:
   start_time: "2023-06-15T00:00:00Z"
   end_time: "2023-06-15T16:00:00Z"
 measurements:
-  - measurement_type:
-      term_id: http://purl.obolibrary.org/obo/ENVO_09200011
-      label: soil_pH
-      source_vocabulary: ENVO
+  - measurement_type: "ENVO:09200010"
     value: "7.2"
-    unit:
-      term_id: http://qudt.org/vocab/unit/UNITLESS
-      label: pH
-      ucum_code: "[pH]"
-    matrix: soil
+    unit: "[pH]"
+    matrix: "ENVO:00001998"
     geolocation:
       latitude: 36.4072
       longitude: -105.5767
     result_time: "2023-06-15T14:30:00Z"
     depth: 0.15
     quality_flag: good
-  - measurement_type:
-      term_id: http://vocab.nerc.ac.uk/standard_name/sea_water_turbidity/
-      label: water_turbidity
-      source_vocabulary: CF Conventions
+  - measurement_type: "http://vocab.nerc.ac.uk/standard_name/sea_water_turbidity/"
     value: "3.4"
-    unit:
-      term_id: http://qudt.org/vocab/unit/NTU
-      label: nephelometric turbidity unit
-      ucum_code: "[NTU]"
-    matrix: freshwater
+    unit: "[NTU]"
+    matrix: "ENVO:00002004"
     geolocation:
       latitude: 36.4180
       longitude: -105.5620

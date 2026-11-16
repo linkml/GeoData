@@ -1,5 +1,5 @@
 # Auto generated from geodata.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-08-25T11:39:57
+# Generation date: 2026-11-16T17:21:54
 # Schema: geodata
 #
 # id: https://w3id.org/linkml/geodata
@@ -56,21 +56,23 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Datetime, Float, Integer, String, Uri
-from linkml_runtime.utils.metamodelcore import URI, XSDDateTime
+from linkml_runtime.linkml_model.types import Datetime, Float, Integer, String, Uri, Uriorcurie
+from linkml_runtime.utils.metamodelcore import URI, URIorCURIE, XSDDateTime
 
 metamodel_version = "1.11.0"
 version = "0.1.0"
 
 # Namespaces
-ENVO = CurieNamespace('envo', 'http://purl.obolibrary.org/obo/ENVO_')
+BERVO = CurieNamespace('BERVO', 'http://purl.obolibrary.org/obo/BERVO_')
+ENVO = CurieNamespace('ENVO', 'http://purl.obolibrary.org/obo/ENVO_')
+PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
+TIME = CurieNamespace('TIME', 'http://www.w3.org/2006/time#')
+GD = CurieNamespace('gd', 'https://w3id.org/linkml/geodata/')
 GEO = CurieNamespace('geo', 'http://www.opengis.net/ont/geosparql#')
-GEODATA = CurieNamespace('geodata', 'https://w3id.org/linkml/geodata/')
-GL = CurieNamespace('gl', 'http://schema.geolink.org/1.0/base/main#')
+GEOLINK = CurieNamespace('geolink', 'http://schema.geolink.org/1.0/base/main#')
 ISAM = CurieNamespace('isam', 'https://w3id.org/isample/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NMDC = CurieNamespace('nmdc', 'https://w3id.org/nmdc/')
-OWL_TIME = CurieNamespace('owl_time', 'http://www.w3.org/2006/time#')
 PROV = CurieNamespace('prov', 'http://www.w3.org/ns/prov#')
 QUDT = CurieNamespace('qudt', 'http://qudt.org/schema/qudt/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
@@ -79,7 +81,7 @@ SSN = CurieNamespace('ssn', 'http://www.w3.org/ns/ssn/')
 SWEET = CurieNamespace('sweet', 'http://sweetontology.net/')
 UNIT = CurieNamespace('unit', 'http://qudt.org/vocab/unit/')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
-DEFAULT_ = GEODATA
+DEFAULT_ = GD
 
 
 # Types
@@ -88,7 +90,7 @@ class DecimalDegree(float):
     type_class_uri = XSD["double"]
     type_class_curie = "xsd:double"
     type_name = "DecimalDegree"
-    type_model_uri = GEODATA.DecimalDegree
+    type_model_uri = GD.DecimalDegree
 
 
 class UCUMExpression(str):
@@ -96,7 +98,7 @@ class UCUMExpression(str):
     type_class_uri = XSD["string"]
     type_class_curie = "xsd:string"
     type_name = "UCUMExpression"
-    type_model_uri = GEODATA.UCUMExpression
+    type_model_uri = GD.UCUMExpression
 
 
 class WKTLiteral(str):
@@ -104,19 +106,11 @@ class WKTLiteral(str):
     type_class_uri = GEO["wktLiteral"]
     type_class_curie = "geo:wktLiteral"
     type_name = "WKTLiteral"
-    type_model_uri = GEODATA.WKTLiteral
+    type_model_uri = GD.WKTLiteral
 
 
 # Class references
-class MeasurementTypeTermId(URI):
-    pass
-
-
-class UnitTermId(URI):
-    pass
-
-
-class SpecimenSpecimenId(URI):
+class SpecimenSpecimenId(extended_str):
     pass
 
 
@@ -135,7 +129,7 @@ class Geolocation(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = GEO["Feature"]
     class_class_curie: ClassVar[str] = "geo:Feature"
     class_name: ClassVar[str] = "Geolocation"
-    class_model_uri: ClassVar[URIRef] = GEODATA.Geolocation
+    class_model_uri: ClassVar[URIRef] = GD.Geolocation
 
     latitude: Optional[float] = None
     longitude: Optional[float] = None
@@ -173,10 +167,10 @@ class TemporalExtent(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = OWL_TIME["ProperInterval"]
-    class_class_curie: ClassVar[str] = "owl_time:ProperInterval"
+    class_class_uri: ClassVar[URIRef] = TIME["ProperInterval"]
+    class_class_curie: ClassVar[str] = "TIME:ProperInterval"
     class_name: ClassVar[str] = "TemporalExtent"
-    class_model_uri: ClassVar[URIRef] = GEODATA.TemporalExtent
+    class_model_uri: ClassVar[URIRef] = GD.TemporalExtent
 
     start_time: Union[str, XSDDateTime] = None
     end_time: Union[str, XSDDateTime] = None
@@ -196,77 +190,6 @@ class TemporalExtent(YAMLRoot):
 
 
 @dataclass(repr=False)
-class MeasurementType(YAMLRoot):
-    """
-    A measured or observed property drawn from a controlled vocabulary such as CF Conventions, SWEET, or ENVO. Maps to
-    sosa:ObservableProperty.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = SOSA["ObservableProperty"]
-    class_class_curie: ClassVar[str] = "sosa:ObservableProperty"
-    class_name: ClassVar[str] = "MeasurementType"
-    class_model_uri: ClassVar[URIRef] = GEODATA.MeasurementType
-
-    term_id: Union[str, MeasurementTypeTermId] = None
-    label: str = None
-    source_vocabulary: Optional[str] = None
-    definition: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.term_id):
-            self.MissingRequiredField("term_id")
-        if not isinstance(self.term_id, MeasurementTypeTermId):
-            self.term_id = MeasurementTypeTermId(self.term_id)
-
-        if self._is_empty(self.label):
-            self.MissingRequiredField("label")
-        if not isinstance(self.label, str):
-            self.label = str(self.label)
-
-        if self.source_vocabulary is not None and not isinstance(self.source_vocabulary, str):
-            self.source_vocabulary = str(self.source_vocabulary)
-
-        if self.definition is not None and not isinstance(self.definition, str):
-            self.definition = str(self.definition)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class Unit(YAMLRoot):
-    """
-    A unit of measure aligned with QUDT and expressible in UCUM notation. Maps to qudt:Unit.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = QUDT["Unit"]
-    class_class_curie: ClassVar[str] = "qudt:Unit"
-    class_name: ClassVar[str] = "Unit"
-    class_model_uri: ClassVar[URIRef] = GEODATA.Unit
-
-    term_id: Union[str, UnitTermId] = None
-    label: str = None
-    ucum_code: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.term_id):
-            self.MissingRequiredField("term_id")
-        if not isinstance(self.term_id, UnitTermId):
-            self.term_id = UnitTermId(self.term_id)
-
-        if self._is_empty(self.label):
-            self.MissingRequiredField("label")
-        if not isinstance(self.label, str):
-            self.label = str(self.label)
-
-        if self.ucum_code is not None and not isinstance(self.ucum_code, str):
-            self.ucum_code = str(self.ucum_code)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
 class Specimen(YAMLRoot):
     """
     A discrete physical or digital object collected from the environment and subsequently measured or analysed.
@@ -278,10 +201,11 @@ class Specimen(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = SOSA["Sample"]
     class_class_curie: ClassVar[str] = "sosa:Sample"
     class_name: ClassVar[str] = "Specimen"
-    class_model_uri: ClassVar[URIRef] = GEODATA.Specimen
+    class_model_uri: ClassVar[URIRef] = GD.Specimen
 
     specimen_id: Union[str, SpecimenSpecimenId] = None
     specimen_type: Union[str, "SpecimenTypeEnum"] = None
+    igsn: Optional[Union[str, URI]] = None
     label: Optional[str] = None
     material: Optional[str] = None
     collection_location: Optional[Union[dict, Geolocation]] = None
@@ -306,6 +230,9 @@ class Specimen(YAMLRoot):
             self.MissingRequiredField("specimen_type")
         if not isinstance(self.specimen_type, SpecimenTypeEnum):
             self.specimen_type = SpecimenTypeEnum(self.specimen_type)
+
+        if self.igsn is not None and not isinstance(self.igsn, URI):
+            self.igsn = URI(self.igsn)
 
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
@@ -360,13 +287,13 @@ class Measurement(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = SOSA["Observation"]
     class_class_curie: ClassVar[str] = "sosa:Observation"
     class_name: ClassVar[str] = "Measurement"
-    class_model_uri: ClassVar[URIRef] = GEODATA.Measurement
+    class_model_uri: ClassVar[URIRef] = GD.Measurement
 
     matrix: Union[str, "MatrixEnum"] = None
     geolocation: Union[dict, Geolocation] = None
-    measurement_type: Union[dict, MeasurementType] = None
+    measurement_type: Union[str, URIorCURIE] = None
     value: str = None
-    unit: Union[dict, Unit] = None
+    unit: str = None
     result_time: Union[str, XSDDateTime] = None
     specimen: Optional[Union[str, SpecimenSpecimenId]] = None
     quality_flag: Optional[Union[str, "QualityFlagEnum"]] = None
@@ -383,11 +310,6 @@ class Measurement(YAMLRoot):
     access_rights: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.matrix):
-            self.MissingRequiredField("matrix")
-        if not isinstance(self.matrix, MatrixEnum):
-            self.matrix = MatrixEnum(self.matrix)
-
         if self._is_empty(self.geolocation):
             self.MissingRequiredField("geolocation")
         if not isinstance(self.geolocation, Geolocation):
@@ -395,8 +317,8 @@ class Measurement(YAMLRoot):
 
         if self._is_empty(self.measurement_type):
             self.MissingRequiredField("measurement_type")
-        if not isinstance(self.measurement_type, MeasurementType):
-            self.measurement_type = MeasurementType(**as_dict(self.measurement_type))
+        if not isinstance(self.measurement_type, URIorCURIE):
+            self.measurement_type = URIorCURIE(self.measurement_type)
 
         if self._is_empty(self.value):
             self.MissingRequiredField("value")
@@ -405,8 +327,8 @@ class Measurement(YAMLRoot):
 
         if self._is_empty(self.unit):
             self.MissingRequiredField("unit")
-        if not isinstance(self.unit, Unit):
-            self.unit = Unit(**as_dict(self.unit))
+        if not isinstance(self.unit, str):
+            self.unit = str(self.unit)
 
         if self._is_empty(self.result_time):
             self.MissingRequiredField("result_time")
@@ -467,18 +389,18 @@ class AggregateObservation(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = SOSA["Observation"]
     class_class_curie: ClassVar[str] = "sosa:Observation"
     class_name: ClassVar[str] = "AggregateObservation"
-    class_model_uri: ClassVar[URIRef] = GEODATA.AggregateObservation
+    class_model_uri: ClassVar[URIRef] = GD.AggregateObservation
 
     aggregation_method: Union[str, "AggregationMethodEnum"] = None
     value: float = None
-    unit: Union[dict, Unit] = None
-    measurement_type: Union[dict, MeasurementType] = None
+    unit: str = None
+    measurement_type: Union[str, URIorCURIE] = None
     matrix: Optional[Union[str, "MatrixEnum"]] = None
     geolocation: Optional[Union[dict, Geolocation]] = None
     specimen: Optional[Union[str, SpecimenSpecimenId]] = None
     quality_flag: Optional[Union[str, "QualityFlagEnum"]] = None
     input_measurements: Optional[Union[Union[dict, Measurement], list[Union[dict, Measurement]]]] = empty_list()
-    input_time_series: Optional[Union[Union[dict, "TimeSeries"], list[Union[dict, "TimeSeries"]]]] = empty_list()
+    input_collections: Optional[Union[Union[dict, "MeasurementCollection"], list[Union[dict, "MeasurementCollection"]]]] = empty_list()
     sample_count: Optional[int] = None
     temporal_extent: Optional[Union[dict, TemporalExtent]] = None
     spatial_extent: Optional[str] = None
@@ -497,16 +419,13 @@ class AggregateObservation(YAMLRoot):
 
         if self._is_empty(self.unit):
             self.MissingRequiredField("unit")
-        if not isinstance(self.unit, Unit):
-            self.unit = Unit(**as_dict(self.unit))
+        if not isinstance(self.unit, str):
+            self.unit = str(self.unit)
 
         if self._is_empty(self.measurement_type):
             self.MissingRequiredField("measurement_type")
-        if not isinstance(self.measurement_type, MeasurementType):
-            self.measurement_type = MeasurementType(**as_dict(self.measurement_type))
-
-        if self.matrix is not None and not isinstance(self.matrix, MatrixEnum):
-            self.matrix = MatrixEnum(self.matrix)
+        if not isinstance(self.measurement_type, URIorCURIE):
+            self.measurement_type = URIorCURIE(self.measurement_type)
 
         if self.geolocation is not None and not isinstance(self.geolocation, Geolocation):
             self.geolocation = Geolocation(**as_dict(self.geolocation))
@@ -519,9 +438,9 @@ class AggregateObservation(YAMLRoot):
 
         self._normalize_inlined_as_list(slot_name="input_measurements", slot_type=Measurement, key_name="matrix", keyed=False)
 
-        if not isinstance(self.input_time_series, list):
-            self.input_time_series = [self.input_time_series] if self.input_time_series is not None else []
-        self.input_time_series = [v if isinstance(v, TimeSeries) else TimeSeries(**as_dict(v)) for v in self.input_time_series]
+        if not isinstance(self.input_collections, list):
+            self.input_collections = [self.input_collections] if self.input_collections is not None else []
+        self.input_collections = [v if isinstance(v, MeasurementCollection) else MeasurementCollection(**as_dict(v)) for v in self.input_collections]
 
         if self.sample_count is not None and not isinstance(self.sample_count, int):
             self.sample_count = int(self.sample_count)
@@ -539,26 +458,27 @@ class AggregateObservation(YAMLRoot):
 
 
 @dataclass(repr=False)
-class TimeSeries(YAMLRoot):
+class MeasurementCollection(YAMLRoot):
     """
-    An ordered collection of Measurement objects sharing a common measurement type, matrix, and geolocation, varying
-    over time. Maps to sosa:ObservationCollection.
+    An ordered collection of Measurement objects sharing a common measurement type and matrix. The ordering axis
+    (time, depth, or position along a line) is determined by the subclass. Maps to sosa:ObservationCollection.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
     class_class_uri: ClassVar[URIRef] = SOSA["ObservationCollection"]
     class_class_curie: ClassVar[str] = "sosa:ObservationCollection"
-    class_name: ClassVar[str] = "TimeSeries"
-    class_model_uri: ClassVar[URIRef] = GEODATA.TimeSeries
+    class_name: ClassVar[str] = "MeasurementCollection"
+    class_model_uri: ClassVar[URIRef] = GD.MeasurementCollection
 
     measurements: Union[Union[dict, Measurement], list[Union[dict, Measurement]]] = None
+    measurement_type: Optional[Union[str, URIorCURIE]] = None
     matrix: Optional[Union[str, "MatrixEnum"]] = None
     geolocation: Optional[Union[dict, Geolocation]] = None
+    trajectory: Optional[str] = None
     temporal_extent: Optional[Union[dict, TemporalExtent]] = None
-    temporal_resolution: Optional[str] = None
-    measurement_type: Optional[Union[dict, MeasurementType]] = None
     platform: Optional[str] = None
     label: Optional[str] = None
+    description: Optional[str] = None
     license: Optional[Union[str, URI]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -566,20 +486,17 @@ class TimeSeries(YAMLRoot):
             self.MissingRequiredField("measurements")
         self._normalize_inlined_as_list(slot_name="measurements", slot_type=Measurement, key_name="matrix", keyed=False)
 
-        if self.matrix is not None and not isinstance(self.matrix, MatrixEnum):
-            self.matrix = MatrixEnum(self.matrix)
+        if self.measurement_type is not None and not isinstance(self.measurement_type, URIorCURIE):
+            self.measurement_type = URIorCURIE(self.measurement_type)
 
         if self.geolocation is not None and not isinstance(self.geolocation, Geolocation):
             self.geolocation = Geolocation(**as_dict(self.geolocation))
 
+        if self.trajectory is not None and not isinstance(self.trajectory, str):
+            self.trajectory = str(self.trajectory)
+
         if self.temporal_extent is not None and not isinstance(self.temporal_extent, TemporalExtent):
             self.temporal_extent = TemporalExtent(**as_dict(self.temporal_extent))
-
-        if self.temporal_resolution is not None and not isinstance(self.temporal_resolution, str):
-            self.temporal_resolution = str(self.temporal_resolution)
-
-        if self.measurement_type is not None and not isinstance(self.measurement_type, MeasurementType):
-            self.measurement_type = MeasurementType(**as_dict(self.measurement_type))
 
         if self.platform is not None and not isinstance(self.platform, str):
             self.platform = str(self.platform)
@@ -587,8 +504,104 @@ class TimeSeries(YAMLRoot):
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
 
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
         if self.license is not None and not isinstance(self.license, URI):
             self.license = URI(self.license)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class TimeSeries(MeasurementCollection):
+    """
+    A MeasurementCollection ordered by time. Measurements share a common measurement type and matrix at a fixed or
+    moving location. Maps to sosa:ObservationCollection.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GD["TimeSeries"]
+    class_class_curie: ClassVar[str] = "gd:TimeSeries"
+    class_name: ClassVar[str] = "TimeSeries"
+    class_model_uri: ClassVar[URIRef] = GD.TimeSeries
+
+    measurements: Union[Union[dict, Measurement], list[Union[dict, Measurement]]] = None
+    temporal_extent: Union[dict, TemporalExtent] = None
+    temporal_resolution: Optional[str] = None
+    label: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.temporal_extent):
+            self.MissingRequiredField("temporal_extent")
+        if not isinstance(self.temporal_extent, TemporalExtent):
+            self.temporal_extent = TemporalExtent(**as_dict(self.temporal_extent))
+
+        if self.temporal_resolution is not None and not isinstance(self.temporal_resolution, str):
+            self.temporal_resolution = str(self.temporal_resolution)
+
+        if self.label is not None and not isinstance(self.label, str):
+            self.label = str(self.label)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Profile(MeasurementCollection):
+    """
+    A MeasurementCollection ordered by depth or elevation at a fixed horizontal location (e.g. a CTD cast, soil core,
+    or borehole log). Individual Measurement objects carry their own depth or elevation value. Maps to
+    sosa:ObservationCollection.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GD["Profile"]
+    class_class_curie: ClassVar[str] = "gd:Profile"
+    class_name: ClassVar[str] = "Profile"
+    class_model_uri: ClassVar[URIRef] = GD.Profile
+
+    measurements: Union[Union[dict, Measurement], list[Union[dict, Measurement]]] = None
+    geolocation: Union[dict, Geolocation] = None
+    label: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.geolocation):
+            self.MissingRequiredField("geolocation")
+        if not isinstance(self.geolocation, Geolocation):
+            self.geolocation = Geolocation(**as_dict(self.geolocation))
+
+        if self.label is not None and not isinstance(self.label, str):
+            self.label = str(self.label)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Transect(MeasurementCollection):
+    """
+    A MeasurementCollection ordered by position along a spatial line (e.g. a ship-track survey, vehicle transect, or
+    vegetation transect). Individual Measurement objects carry their own geolocation. Maps to
+    sosa:ObservationCollection.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = GD["Transect"]
+    class_class_curie: ClassVar[str] = "gd:Transect"
+    class_name: ClassVar[str] = "Transect"
+    class_model_uri: ClassVar[URIRef] = GD.Transect
+
+    measurements: Union[Union[dict, Measurement], list[Union[dict, Measurement]]] = None
+    trajectory: str = None
+    label: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.trajectory):
+            self.MissingRequiredField("trajectory")
+        if not isinstance(self.trajectory, str):
+            self.trajectory = str(self.trajectory)
+
+        if self.label is not None and not isinstance(self.label, str):
+            self.label = str(self.label)
 
         super().__post_init__(**kwargs)
 
@@ -604,13 +617,13 @@ class Dataset(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = SCHEMA["Dataset"]
     class_class_curie: ClassVar[str] = "schema:Dataset"
     class_name: ClassVar[str] = "Dataset"
-    class_model_uri: ClassVar[URIRef] = GEODATA.Dataset
+    class_model_uri: ClassVar[URIRef] = GD.Dataset
 
     dataset_id: Union[str, DatasetDatasetId] = None
     title: str = None
     description: Optional[str] = None
     measurements: Optional[Union[Union[dict, Measurement], list[Union[dict, Measurement]]]] = empty_list()
-    time_series: Optional[Union[Union[dict, TimeSeries], list[Union[dict, TimeSeries]]]] = empty_list()
+    collections: Optional[Union[Union[dict, MeasurementCollection], list[Union[dict, MeasurementCollection]]]] = empty_list()
     aggregate_observations: Optional[Union[Union[dict, AggregateObservation], list[Union[dict, AggregateObservation]]]] = empty_list()
     temporal_extent: Optional[Union[dict, TemporalExtent]] = None
     spatial_extent: Optional[str] = None
@@ -637,9 +650,9 @@ class Dataset(YAMLRoot):
 
         self._normalize_inlined_as_list(slot_name="measurements", slot_type=Measurement, key_name="matrix", keyed=False)
 
-        if not isinstance(self.time_series, list):
-            self.time_series = [self.time_series] if self.time_series is not None else []
-        self.time_series = [v if isinstance(v, TimeSeries) else TimeSeries(**as_dict(v)) for v in self.time_series]
+        if not isinstance(self.collections, list):
+            self.collections = [self.collections] if self.collections is not None else []
+        self.collections = [v if isinstance(v, MeasurementCollection) else MeasurementCollection(**as_dict(v)) for v in self.collections]
 
         self._normalize_inlined_as_list(slot_name="aggregate_observations", slot_type=AggregateObservation, key_name="aggregation_method", keyed=False)
 
@@ -674,69 +687,13 @@ class Dataset(YAMLRoot):
 # Enumerations
 class MatrixEnum(EnumDefinitionImpl):
     """
-    The medium or material in which a measurement was made or from which a specimen was collected. Terms are aligned
-    to ENVO.
+    The medium or material in which a measurement was made or from which a specimen was collected. Permissible values
+    are all ENVO "environmental material" terms (ENVO:00010483) and their subclasses, resolved dynamically from the
+    ENVO ontology at schema generation time.
     """
-    soil = PermissibleValue(
-        text="soil",
-        description="Terrestrial soil",
-        meaning=ENVO["00001998"])
-    water = PermissibleValue(
-        text="water",
-        description="Generic / unspecified water",
-        meaning=ENVO["00002006"])
-    freshwater = PermissibleValue(
-        text="freshwater",
-        description="Fresh surface water (rivers, lakes, streams)",
-        meaning=ENVO["00002004"])
-    seawater = PermissibleValue(
-        text="seawater",
-        description="Marine or ocean water",
-        meaning=ENVO["00002149"])
-    groundwater = PermissibleValue(
-        text="groundwater",
-        description="Subsurface groundwater",
-        meaning=ENVO["01001004"])
-    pore_water = PermissibleValue(
-        text="pore_water",
-        description="Water occupying pore spaces of soil or sediment",
-        meaning=ENVO["01001057"])
-    air = PermissibleValue(
-        text="air",
-        description="Atmospheric air",
-        meaning=ENVO["00002005"])
-    atmosphere = PermissibleValue(
-        text="atmosphere",
-        description="The atmosphere as a whole-system feature of interest",
-        meaning=ENVO["01000810"])
-    sediment = PermissibleValue(
-        text="sediment",
-        description="Unconsolidated sediment",
-        meaning=ENVO["00002007"])
-    rock = PermissibleValue(
-        text="rock",
-        description="Consolidated rock",
-        meaning=ENVO["00001995"])
-    ice = PermissibleValue(
-        text="ice",
-        description="Glacial or sea ice",
-        meaning=ENVO["00002209"])
-    snow = PermissibleValue(
-        text="snow",
-        description="Snow pack",
-        meaning=ENVO["01000406"])
-    permafrost = PermissibleValue(
-        text="permafrost",
-        description="Perennially frozen ground",
-        meaning=ENVO["00000134"])
-    biota = PermissibleValue(
-        text="biota",
-        description="Living organisms or biological tissue",
-        meaning=ENVO["00000016"])
-
     _defn = EnumDefinition(
         name="MatrixEnum",
-        description="""The medium or material in which a measurement was made or from which a specimen was collected. Terms are aligned to ENVO.""",
+        description="""The medium or material in which a measurement was made or from which a specimen was collected. Permissible values are all ENVO \"environmental material\" terms (ENVO:00010483) and their subclasses, resolved dynamically from the ENVO ontology at schema generation time.""",
     )
 
 class AggregationMethodEnum(EnumDefinitionImpl):
@@ -869,236 +826,239 @@ class QualityFlagEnum(EnumDefinitionImpl):
 class slots:
     pass
 
-slots.term_id = Slot(uri=SCHEMA.identifier, name="term_id", curie=SCHEMA.curie('identifier'),
-                   model_uri=GEODATA.term_id, domain=None, range=URIRef)
+slots.matrix = Slot(uri=GD.matrix, name="matrix", curie=GD.curie('matrix'),
+                   model_uri=GD.matrix, domain=None, range=Optional[Union[str, "MatrixEnum"]])
 
-slots.matrix = Slot(uri=GEODATA.matrix, name="matrix", curie=GEODATA.curie('matrix'),
-                   model_uri=GEODATA.matrix, domain=None, range=Optional[Union[str, "MatrixEnum"]])
+slots.geolocation = Slot(uri=GD.geolocation, name="geolocation", curie=GD.curie('geolocation'),
+                   model_uri=GD.geolocation, domain=None, range=Optional[Union[dict, Geolocation]])
 
-slots.geolocation = Slot(uri=GEODATA.geolocation, name="geolocation", curie=GEODATA.curie('geolocation'),
-                   model_uri=GEODATA.geolocation, domain=None, range=Optional[Union[dict, Geolocation]])
+slots.specimen = Slot(uri=GD.specimen, name="specimen", curie=GD.curie('specimen'),
+                   model_uri=GD.specimen, domain=None, range=Optional[Union[str, SpecimenSpecimenId]])
 
-slots.specimen = Slot(uri=GEODATA.specimen, name="specimen", curie=GEODATA.curie('specimen'),
-                   model_uri=GEODATA.specimen, domain=None, range=Optional[Union[str, SpecimenSpecimenId]])
+slots.quality_flag = Slot(uri=GD.quality_flag, name="quality_flag", curie=GD.curie('quality_flag'),
+                   model_uri=GD.quality_flag, domain=None, range=Optional[Union[str, "QualityFlagEnum"]])
 
-slots.quality_flag = Slot(uri=GEODATA.quality_flag, name="quality_flag", curie=GEODATA.curie('quality_flag'),
-                   model_uri=GEODATA.quality_flag, domain=None, range=Optional[Union[str, "QualityFlagEnum"]])
-
-slots.measurements = Slot(uri=GEODATA.measurements, name="measurements", curie=GEODATA.curie('measurements'),
-                   model_uri=GEODATA.measurements, domain=None, range=Optional[Union[Union[dict, Measurement], list[Union[dict, Measurement]]]])
+slots.measurements = Slot(uri=GD.measurements, name="measurements", curie=GD.curie('measurements'),
+                   model_uri=GD.measurements, domain=None, range=Optional[Union[Union[dict, Measurement], list[Union[dict, Measurement]]]])
 
 slots.label = Slot(uri=SCHEMA.name, name="label", curie=SCHEMA.curie('name'),
-                   model_uri=GEODATA.label, domain=None, range=Optional[str])
+                   model_uri=GD.label, domain=None, range=Optional[str])
 
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
-                   model_uri=GEODATA.description, domain=None, range=Optional[str])
+                   model_uri=GD.description, domain=None, range=Optional[str])
 
 slots.temporal_extent = Slot(uri=SOSA.phenomenonTime, name="temporal_extent", curie=SOSA.curie('phenomenonTime'),
-                   model_uri=GEODATA.temporal_extent, domain=None, range=Optional[Union[dict, TemporalExtent]])
+                   model_uri=GD.temporal_extent, domain=None, range=Optional[Union[dict, TemporalExtent]])
 
-slots.spatial_extent = Slot(uri=GEODATA.spatialExtent, name="spatial_extent", curie=GEODATA.curie('spatialExtent'),
-                   model_uri=GEODATA.spatial_extent, domain=None, range=Optional[str])
+slots.spatial_extent = Slot(uri=GD.spatialExtent, name="spatial_extent", curie=GD.curie('spatialExtent'),
+                   model_uri=GD.spatial_extent, domain=None, range=Optional[str])
 
 slots.measurement_type = Slot(uri=SOSA.observedProperty, name="measurement_type", curie=SOSA.curie('observedProperty'),
-                   model_uri=GEODATA.measurement_type, domain=None, range=Optional[Union[dict, MeasurementType]])
+                   model_uri=GD.measurement_type, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.value = Slot(uri=SOSA.hasSimpleResult, name="value", curie=SOSA.curie('hasSimpleResult'),
-                   model_uri=GEODATA.value, domain=None, range=Optional[str])
+                   model_uri=GD.value, domain=None, range=Optional[str])
 
 slots.unit = Slot(uri=QUDT.hasUnit, name="unit", curie=QUDT.curie('hasUnit'),
-                   model_uri=GEODATA.unit, domain=None, range=Optional[Union[dict, Unit]])
+                   model_uri=GD.unit, domain=None, range=Optional[str])
 
 slots.license = Slot(uri=SCHEMA.license, name="license", curie=SCHEMA.curie('license'),
-                   model_uri=GEODATA.license, domain=None, range=Optional[Union[str, URI]])
+                   model_uri=GD.license, domain=None, range=Optional[Union[str, URI]])
 
 slots.access_rights = Slot(uri=SCHEMA.conditionsOfAccess, name="access_rights", curie=SCHEMA.curie('conditionsOfAccess'),
-                   model_uri=GEODATA.access_rights, domain=None, range=Optional[str])
+                   model_uri=GD.access_rights, domain=None, range=Optional[str])
 
-slots.latitude = Slot(uri=GEODATA.latitude, name="latitude", curie=GEODATA.curie('latitude'),
-                   model_uri=GEODATA.latitude, domain=None, range=Optional[float])
+slots.latitude = Slot(uri=GD.latitude, name="latitude", curie=GD.curie('latitude'),
+                   model_uri=GD.latitude, domain=None, range=Optional[float])
 
-slots.longitude = Slot(uri=GEODATA.longitude, name="longitude", curie=GEODATA.curie('longitude'),
-                   model_uri=GEODATA.longitude, domain=None, range=Optional[float])
+slots.longitude = Slot(uri=GD.longitude, name="longitude", curie=GD.curie('longitude'),
+                   model_uri=GD.longitude, domain=None, range=Optional[float])
 
-slots.altitude = Slot(uri=GEODATA.altitude, name="altitude", curie=GEODATA.curie('altitude'),
-                   model_uri=GEODATA.altitude, domain=None, range=Optional[float])
+slots.altitude = Slot(uri=GD.altitude, name="altitude", curie=GD.curie('altitude'),
+                   model_uri=GD.altitude, domain=None, range=Optional[float])
 
 slots.wkt_geometry = Slot(uri=GEO.asWKT, name="wkt_geometry", curie=GEO.curie('asWKT'),
-                   model_uri=GEODATA.wkt_geometry, domain=None, range=Optional[str])
+                   model_uri=GD.wkt_geometry, domain=None, range=Optional[str])
 
-slots.place_uri = Slot(uri=GEODATA.place_uri, name="place_uri", curie=GEODATA.curie('place_uri'),
-                   model_uri=GEODATA.place_uri, domain=None, range=Optional[Union[str, URI]])
+slots.trajectory = Slot(uri=GEO.asWKT, name="trajectory", curie=GEO.curie('asWKT'),
+                   model_uri=GD.trajectory, domain=None, range=Optional[str])
 
-slots.coordinate_system = Slot(uri=GEODATA.coordinate_system, name="coordinate_system", curie=GEODATA.curie('coordinate_system'),
-                   model_uri=GEODATA.coordinate_system, domain=None, range=Optional[str])
+slots.place_uri = Slot(uri=GD.place_uri, name="place_uri", curie=GD.curie('place_uri'),
+                   model_uri=GD.place_uri, domain=None, range=Optional[Union[str, URI]])
 
-slots.start_time = Slot(uri=OWL_TIME.hasBeginning, name="start_time", curie=OWL_TIME.curie('hasBeginning'),
-                   model_uri=GEODATA.start_time, domain=None, range=Union[str, XSDDateTime])
+slots.coordinate_system = Slot(uri=GD.coordinate_system, name="coordinate_system", curie=GD.curie('coordinate_system'),
+                   model_uri=GD.coordinate_system, domain=None, range=Optional[str])
 
-slots.end_time = Slot(uri=OWL_TIME.hasEnd, name="end_time", curie=OWL_TIME.curie('hasEnd'),
-                   model_uri=GEODATA.end_time, domain=None, range=Union[str, XSDDateTime])
+slots.start_time = Slot(uri=TIME.hasBeginning, name="start_time", curie=TIME.curie('hasBeginning'),
+                   model_uri=GD.start_time, domain=None, range=Union[str, XSDDateTime])
 
-slots.source_vocabulary = Slot(uri=GEODATA.source_vocabulary, name="source_vocabulary", curie=GEODATA.curie('source_vocabulary'),
-                   model_uri=GEODATA.source_vocabulary, domain=None, range=Optional[str])
-
-slots.definition = Slot(uri=SCHEMA.description, name="definition", curie=SCHEMA.curie('description'),
-                   model_uri=GEODATA.definition, domain=None, range=Optional[str])
-
-slots.ucum_code = Slot(uri=QUDT.ucumCode, name="ucum_code", curie=QUDT.curie('ucumCode'),
-                   model_uri=GEODATA.ucum_code, domain=None, range=Optional[str])
+slots.end_time = Slot(uri=TIME.hasEnd, name="end_time", curie=TIME.curie('hasEnd'),
+                   model_uri=GD.end_time, domain=None, range=Union[str, XSDDateTime])
 
 slots.specimen_id = Slot(uri=SCHEMA.identifier, name="specimen_id", curie=SCHEMA.curie('identifier'),
-                   model_uri=GEODATA.specimen_id, domain=None, range=URIRef)
+                   model_uri=GD.specimen_id, domain=None, range=URIRef)
 
-slots.specimen_type = Slot(uri=GEODATA.specimen_type, name="specimen_type", curie=GEODATA.curie('specimen_type'),
-                   model_uri=GEODATA.specimen_type, domain=None, range=Union[str, "SpecimenTypeEnum"])
+slots.igsn = Slot(uri=SCHEMA.identifier, name="igsn", curie=SCHEMA.curie('identifier'),
+                   model_uri=GD.igsn, domain=None, range=Optional[Union[str, URI]])
+
+slots.specimen_type = Slot(uri=GD.specimen_type, name="specimen_type", curie=GD.curie('specimen_type'),
+                   model_uri=GD.specimen_type, domain=None, range=Union[str, "SpecimenTypeEnum"])
 
 slots.material = Slot(uri=ISAM.material, name="material", curie=ISAM.curie('material'),
-                   model_uri=GEODATA.material, domain=None, range=Optional[str])
+                   model_uri=GD.material, domain=None, range=Optional[str])
 
-slots.collection_location = Slot(uri=GEODATA.collection_location, name="collection_location", curie=GEODATA.curie('collection_location'),
-                   model_uri=GEODATA.collection_location, domain=None, range=Optional[Union[dict, Geolocation]])
+slots.collection_location = Slot(uri=GD.collection_location, name="collection_location", curie=GD.curie('collection_location'),
+                   model_uri=GD.collection_location, domain=None, range=Optional[Union[dict, Geolocation]])
 
 slots.collection_time = Slot(uri=SOSA.resultTime, name="collection_time", curie=SOSA.curie('resultTime'),
-                   model_uri=GEODATA.collection_time, domain=None, range=Optional[Union[str, XSDDateTime]])
+                   model_uri=GD.collection_time, domain=None, range=Optional[Union[str, XSDDateTime]])
 
 slots.collected_by = Slot(uri=SCHEMA.contributor, name="collected_by", curie=SCHEMA.curie('contributor'),
-                   model_uri=GEODATA.collected_by, domain=None, range=Optional[str])
+                   model_uri=GD.collected_by, domain=None, range=Optional[str])
 
 slots.parent_specimen = Slot(uri=SOSA.isSampleOf, name="parent_specimen", curie=SOSA.curie('isSampleOf'),
-                   model_uri=GEODATA.parent_specimen, domain=None, range=Optional[Union[str, SpecimenSpecimenId]])
+                   model_uri=GD.parent_specimen, domain=None, range=Optional[Union[str, SpecimenSpecimenId]])
 
-slots.repository = Slot(uri=GEODATA.repository, name="repository", curie=GEODATA.curie('repository'),
-                   model_uri=GEODATA.repository, domain=None, range=Optional[str])
+slots.repository = Slot(uri=GD.repository, name="repository", curie=GD.curie('repository'),
+                   model_uri=GD.repository, domain=None, range=Optional[str])
 
-slots.curation_location = Slot(uri=GEODATA.curation_location, name="curation_location", curie=GEODATA.curie('curation_location'),
-                   model_uri=GEODATA.curation_location, domain=None, range=Optional[str])
+slots.curation_location = Slot(uri=GD.curation_location, name="curation_location", curie=GD.curie('curation_location'),
+                   model_uri=GD.curation_location, domain=None, range=Optional[str])
 
-slots.preparation_method = Slot(uri=GEODATA.preparation_method, name="preparation_method", curie=GEODATA.curie('preparation_method'),
-                   model_uri=GEODATA.preparation_method, domain=None, range=Optional[str])
+slots.preparation_method = Slot(uri=GD.preparation_method, name="preparation_method", curie=GD.curie('preparation_method'),
+                   model_uri=GD.preparation_method, domain=None, range=Optional[str])
 
-slots.mass = Slot(uri=GEODATA.mass, name="mass", curie=GEODATA.curie('mass'),
-                   model_uri=GEODATA.mass, domain=None, range=Optional[float])
+slots.mass = Slot(uri=GD.mass, name="mass", curie=GD.curie('mass'),
+                   model_uri=GD.mass, domain=None, range=Optional[float])
 
 slots.result_time = Slot(uri=SOSA.resultTime, name="result_time", curie=SOSA.curie('resultTime'),
-                   model_uri=GEODATA.result_time, domain=None, range=Optional[Union[str, XSDDateTime]])
+                   model_uri=GD.result_time, domain=None, range=Optional[Union[str, XSDDateTime]])
 
 slots.instrument = Slot(uri=SOSA.madeBySensor, name="instrument", curie=SOSA.curie('madeBySensor'),
-                   model_uri=GEODATA.instrument, domain=None, range=Optional[str])
+                   model_uri=GD.instrument, domain=None, range=Optional[str])
 
-slots.uncertainty = Slot(uri=GEODATA.uncertainty, name="uncertainty", curie=GEODATA.curie('uncertainty'),
-                   model_uri=GEODATA.uncertainty, domain=None, range=Optional[float])
+slots.uncertainty = Slot(uri=GD.uncertainty, name="uncertainty", curie=GD.curie('uncertainty'),
+                   model_uri=GD.uncertainty, domain=None, range=Optional[float])
 
-slots.depth = Slot(uri=GEODATA.depth, name="depth", curie=GEODATA.curie('depth'),
-                   model_uri=GEODATA.depth, domain=None, range=Optional[float])
+slots.depth = Slot(uri=GD.depth, name="depth", curie=GD.curie('depth'),
+                   model_uri=GD.depth, domain=None, range=Optional[float])
 
-slots.elevation = Slot(uri=GEODATA.elevation, name="elevation", curie=GEODATA.curie('elevation'),
-                   model_uri=GEODATA.elevation, domain=None, range=Optional[float])
+slots.elevation = Slot(uri=GD.elevation, name="elevation", curie=GD.curie('elevation'),
+                   model_uri=GD.elevation, domain=None, range=Optional[float])
 
 slots.observer = Slot(uri=PROV.wasAssociatedWith, name="observer", curie=PROV.curie('wasAssociatedWith'),
-                   model_uri=GEODATA.observer, domain=None, range=Optional[str])
+                   model_uri=GD.observer, domain=None, range=Optional[str])
 
-slots.laboratory = Slot(uri=GEODATA.laboratory, name="laboratory", curie=GEODATA.curie('laboratory'),
-                   model_uri=GEODATA.laboratory, domain=None, range=Optional[str])
+slots.laboratory = Slot(uri=GD.laboratory, name="laboratory", curie=GD.curie('laboratory'),
+                   model_uri=GD.laboratory, domain=None, range=Optional[str])
 
-slots.project = Slot(uri=GEODATA.project, name="project", curie=GEODATA.curie('project'),
-                   model_uri=GEODATA.project, domain=None, range=Optional[str])
+slots.project = Slot(uri=GD.project, name="project", curie=GD.curie('project'),
+                   model_uri=GD.project, domain=None, range=Optional[str])
 
-slots.dataset = Slot(uri=GEODATA.dataset, name="dataset", curie=GEODATA.curie('dataset'),
-                   model_uri=GEODATA.dataset, domain=None, range=Optional[str])
+slots.dataset = Slot(uri=GD.dataset, name="dataset", curie=GD.curie('dataset'),
+                   model_uri=GD.dataset, domain=None, range=Optional[str])
 
 slots.aggregation_method = Slot(uri=SOSA.usedProcedure, name="aggregation_method", curie=SOSA.curie('usedProcedure'),
-                   model_uri=GEODATA.aggregation_method, domain=None, range=Union[str, "AggregationMethodEnum"])
+                   model_uri=GD.aggregation_method, domain=None, range=Union[str, "AggregationMethodEnum"])
 
 slots.input_measurements = Slot(uri=PROV.wasDerivedFrom, name="input_measurements", curie=PROV.curie('wasDerivedFrom'),
-                   model_uri=GEODATA.input_measurements, domain=None, range=Optional[Union[Union[dict, Measurement], list[Union[dict, Measurement]]]])
+                   model_uri=GD.input_measurements, domain=None, range=Optional[Union[Union[dict, Measurement], list[Union[dict, Measurement]]]])
 
-slots.input_time_series = Slot(uri=PROV.wasDerivedFrom, name="input_time_series", curie=PROV.curie('wasDerivedFrom'),
-                   model_uri=GEODATA.input_time_series, domain=None, range=Optional[Union[Union[dict, TimeSeries], list[Union[dict, TimeSeries]]]])
+slots.input_collections = Slot(uri=PROV.wasDerivedFrom, name="input_collections", curie=PROV.curie('wasDerivedFrom'),
+                   model_uri=GD.input_collections, domain=None, range=Optional[Union[Union[dict, MeasurementCollection], list[Union[dict, MeasurementCollection]]]])
 
-slots.sample_count = Slot(uri=GEODATA.sample_count, name="sample_count", curie=GEODATA.curie('sample_count'),
-                   model_uri=GEODATA.sample_count, domain=None, range=Optional[int])
+slots.sample_count = Slot(uri=GD.sample_count, name="sample_count", curie=GD.curie('sample_count'),
+                   model_uri=GD.sample_count, domain=None, range=Optional[int])
 
-slots.missing_value_treatment = Slot(uri=GEODATA.missing_value_treatment, name="missing_value_treatment", curie=GEODATA.curie('missing_value_treatment'),
-                   model_uri=GEODATA.missing_value_treatment, domain=None, range=Optional[str])
+slots.missing_value_treatment = Slot(uri=GD.missing_value_treatment, name="missing_value_treatment", curie=GD.curie('missing_value_treatment'),
+                   model_uri=GD.missing_value_treatment, domain=None, range=Optional[str])
 
-slots.temporal_resolution = Slot(uri=GEODATA.temporal_resolution, name="temporal_resolution", curie=GEODATA.curie('temporal_resolution'),
-                   model_uri=GEODATA.temporal_resolution, domain=None, range=Optional[str])
+slots.temporal_resolution = Slot(uri=GD.temporal_resolution, name="temporal_resolution", curie=GD.curie('temporal_resolution'),
+                   model_uri=GD.temporal_resolution, domain=None, range=Optional[str])
 
-slots.platform = Slot(uri=GEODATA.platform, name="platform", curie=GEODATA.curie('platform'),
-                   model_uri=GEODATA.platform, domain=None, range=Optional[str])
+slots.platform = Slot(uri=GD.platform, name="platform", curie=GD.curie('platform'),
+                   model_uri=GD.platform, domain=None, range=Optional[str])
 
 slots.dataset_id = Slot(uri=SCHEMA.identifier, name="dataset_id", curie=SCHEMA.curie('identifier'),
-                   model_uri=GEODATA.dataset_id, domain=None, range=URIRef)
+                   model_uri=GD.dataset_id, domain=None, range=URIRef)
 
 slots.title = Slot(uri=SCHEMA.name, name="title", curie=SCHEMA.curie('name'),
-                   model_uri=GEODATA.title, domain=None, range=str)
+                   model_uri=GD.title, domain=None, range=str)
 
-slots.time_series = Slot(uri=GEODATA.time_series, name="time_series", curie=GEODATA.curie('time_series'),
-                   model_uri=GEODATA.time_series, domain=None, range=Optional[Union[Union[dict, TimeSeries], list[Union[dict, TimeSeries]]]])
+slots.collections = Slot(uri=GD.collections, name="collections", curie=GD.curie('collections'),
+                   model_uri=GD.collections, domain=None, range=Optional[Union[Union[dict, MeasurementCollection], list[Union[dict, MeasurementCollection]]]])
 
-slots.aggregate_observations = Slot(uri=GEODATA.aggregate_observations, name="aggregate_observations", curie=GEODATA.curie('aggregate_observations'),
-                   model_uri=GEODATA.aggregate_observations, domain=None, range=Optional[Union[Union[dict, AggregateObservation], list[Union[dict, AggregateObservation]]]])
+slots.aggregate_observations = Slot(uri=GD.aggregate_observations, name="aggregate_observations", curie=GD.curie('aggregate_observations'),
+                   model_uri=GD.aggregate_observations, domain=None, range=Optional[Union[Union[dict, AggregateObservation], list[Union[dict, AggregateObservation]]]])
 
 slots.creator = Slot(uri=SCHEMA.creator, name="creator", curie=SCHEMA.curie('creator'),
-                   model_uri=GEODATA.creator, domain=None, range=Optional[str])
+                   model_uri=GD.creator, domain=None, range=Optional[str])
 
 slots.publisher = Slot(uri=SCHEMA.publisher, name="publisher", curie=SCHEMA.curie('publisher'),
-                   model_uri=GEODATA.publisher, domain=None, range=Optional[str])
+                   model_uri=GD.publisher, domain=None, range=Optional[str])
 
 slots.keywords = Slot(uri=SCHEMA.keywords, name="keywords", curie=SCHEMA.curie('keywords'),
-                   model_uri=GEODATA.keywords, domain=None, range=Optional[Union[str, list[str]]])
+                   model_uri=GD.keywords, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.version = Slot(uri=SCHEMA.version, name="version", curie=SCHEMA.curie('version'),
-                   model_uri=GEODATA.version, domain=None, range=Optional[str])
+                   model_uri=GD.version, domain=None, range=Optional[str])
 
-slots.doi = Slot(uri=GEODATA.doi, name="doi", curie=GEODATA.curie('doi'),
-                   model_uri=GEODATA.doi, domain=None, range=Optional[Union[str, URI]])
-
-slots.MeasurementType_label = Slot(uri=SCHEMA.name, name="MeasurementType_label", curie=SCHEMA.curie('name'),
-                   model_uri=GEODATA.MeasurementType_label, domain=MeasurementType, range=str)
-
-slots.Unit_label = Slot(uri=SCHEMA.name, name="Unit_label", curie=SCHEMA.curie('name'),
-                   model_uri=GEODATA.Unit_label, domain=Unit, range=str)
+slots.doi = Slot(uri=GD.doi, name="doi", curie=GD.curie('doi'),
+                   model_uri=GD.doi, domain=None, range=Optional[Union[str, URI]])
 
 slots.Specimen_label = Slot(uri=SCHEMA.name, name="Specimen_label", curie=SCHEMA.curie('name'),
-                   model_uri=GEODATA.Specimen_label, domain=Specimen, range=Optional[str])
+                   model_uri=GD.Specimen_label, domain=Specimen, range=Optional[str])
 
-slots.Measurement_matrix = Slot(uri=GEODATA.matrix, name="Measurement_matrix", curie=GEODATA.curie('matrix'),
-                   model_uri=GEODATA.Measurement_matrix, domain=Measurement, range=Union[str, "MatrixEnum"])
+slots.Measurement_matrix = Slot(uri=GD.matrix, name="Measurement_matrix", curie=GD.curie('matrix'),
+                   model_uri=GD.Measurement_matrix, domain=Measurement, range=Union[str, "MatrixEnum"])
 
-slots.Measurement_geolocation = Slot(uri=GEODATA.geolocation, name="Measurement_geolocation", curie=GEODATA.curie('geolocation'),
-                   model_uri=GEODATA.Measurement_geolocation, domain=Measurement, range=Union[dict, Geolocation])
+slots.Measurement_geolocation = Slot(uri=GD.geolocation, name="Measurement_geolocation", curie=GD.curie('geolocation'),
+                   model_uri=GD.Measurement_geolocation, domain=Measurement, range=Union[dict, Geolocation])
 
 slots.Measurement_measurement_type = Slot(uri=SOSA.observedProperty, name="Measurement_measurement_type", curie=SOSA.curie('observedProperty'),
-                   model_uri=GEODATA.Measurement_measurement_type, domain=Measurement, range=Union[dict, MeasurementType])
+                   model_uri=GD.Measurement_measurement_type, domain=Measurement, range=Union[str, URIorCURIE])
 
 slots.Measurement_value = Slot(uri=SOSA.hasSimpleResult, name="Measurement_value", curie=SOSA.curie('hasSimpleResult'),
-                   model_uri=GEODATA.Measurement_value, domain=Measurement, range=str)
+                   model_uri=GD.Measurement_value, domain=Measurement, range=str)
 
 slots.Measurement_unit = Slot(uri=QUDT.hasUnit, name="Measurement_unit", curie=QUDT.curie('hasUnit'),
-                   model_uri=GEODATA.Measurement_unit, domain=Measurement, range=Union[dict, Unit])
+                   model_uri=GD.Measurement_unit, domain=Measurement, range=str)
 
 slots.Measurement_result_time = Slot(uri=SOSA.resultTime, name="Measurement_result_time", curie=SOSA.curie('resultTime'),
-                   model_uri=GEODATA.Measurement_result_time, domain=Measurement, range=Union[str, XSDDateTime])
+                   model_uri=GD.Measurement_result_time, domain=Measurement, range=Union[str, XSDDateTime])
 
 slots.AggregateObservation_value = Slot(uri=SOSA.hasSimpleResult, name="AggregateObservation_value", curie=SOSA.curie('hasSimpleResult'),
-                   model_uri=GEODATA.AggregateObservation_value, domain=AggregateObservation, range=float)
+                   model_uri=GD.AggregateObservation_value, domain=AggregateObservation, range=float)
 
 slots.AggregateObservation_unit = Slot(uri=QUDT.hasUnit, name="AggregateObservation_unit", curie=QUDT.curie('hasUnit'),
-                   model_uri=GEODATA.AggregateObservation_unit, domain=AggregateObservation, range=Union[dict, Unit])
+                   model_uri=GD.AggregateObservation_unit, domain=AggregateObservation, range=str)
 
 slots.AggregateObservation_measurement_type = Slot(uri=SOSA.observedProperty, name="AggregateObservation_measurement_type", curie=SOSA.curie('observedProperty'),
-                   model_uri=GEODATA.AggregateObservation_measurement_type, domain=AggregateObservation, range=Union[dict, MeasurementType])
+                   model_uri=GD.AggregateObservation_measurement_type, domain=AggregateObservation, range=Union[str, URIorCURIE])
 
-slots.TimeSeries_measurements = Slot(uri=GEODATA.measurements, name="TimeSeries_measurements", curie=GEODATA.curie('measurements'),
-                   model_uri=GEODATA.TimeSeries_measurements, domain=TimeSeries, range=Union[Union[dict, Measurement], list[Union[dict, Measurement]]])
+slots.MeasurementCollection_measurements = Slot(uri=GD.measurements, name="MeasurementCollection_measurements", curie=GD.curie('measurements'),
+                   model_uri=GD.MeasurementCollection_measurements, domain=MeasurementCollection, range=Union[Union[dict, Measurement], list[Union[dict, Measurement]]])
+
+slots.TimeSeries_temporal_extent = Slot(uri=SOSA.phenomenonTime, name="TimeSeries_temporal_extent", curie=SOSA.curie('phenomenonTime'),
+                   model_uri=GD.TimeSeries_temporal_extent, domain=TimeSeries, range=Union[dict, TemporalExtent])
 
 slots.TimeSeries_label = Slot(uri=SCHEMA.name, name="TimeSeries_label", curie=SCHEMA.curie('name'),
-                   model_uri=GEODATA.TimeSeries_label, domain=TimeSeries, range=Optional[str])
+                   model_uri=GD.TimeSeries_label, domain=TimeSeries, range=Optional[str])
+
+slots.Profile_geolocation = Slot(uri=GD.geolocation, name="Profile_geolocation", curie=GD.curie('geolocation'),
+                   model_uri=GD.Profile_geolocation, domain=Profile, range=Union[dict, Geolocation])
+
+slots.Profile_label = Slot(uri=SCHEMA.name, name="Profile_label", curie=SCHEMA.curie('name'),
+                   model_uri=GD.Profile_label, domain=Profile, range=Optional[str])
+
+slots.Transect_trajectory = Slot(uri=GEO.asWKT, name="Transect_trajectory", curie=GEO.curie('asWKT'),
+                   model_uri=GD.Transect_trajectory, domain=Transect, range=str)
+
+slots.Transect_label = Slot(uri=SCHEMA.name, name="Transect_label", curie=SCHEMA.curie('name'),
+                   model_uri=GD.Transect_label, domain=Transect, range=Optional[str])
 
 slots.Dataset_temporal_extent = Slot(uri=SCHEMA.temporalCoverage, name="Dataset_temporal_extent", curie=SCHEMA.curie('temporalCoverage'),
-                   model_uri=GEODATA.Dataset_temporal_extent, domain=Dataset, range=Optional[Union[dict, TemporalExtent]])
+                   model_uri=GD.Dataset_temporal_extent, domain=Dataset, range=Optional[Union[dict, TemporalExtent]])
 
 slots.Dataset_spatial_extent = Slot(uri=SCHEMA.spatialCoverage, name="Dataset_spatial_extent", curie=SCHEMA.curie('spatialCoverage'),
-                   model_uri=GEODATA.Dataset_spatial_extent, domain=Dataset, range=Optional[str])
+                   model_uri=GD.Dataset_spatial_extent, domain=Dataset, range=Optional[str])

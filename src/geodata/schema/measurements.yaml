@@ -12,13 +12,13 @@ license: BSD-3-Clause
 
 prefixes:
   linkml:  https://w3id.org/linkml/
-  geodata: https://w3id.org/linkml/geodata/
-  envo:    http://purl.obolibrary.org/obo/ENVO_
-  bervo:   http://purl.obolibrary.org/obo/BERVO_
+  gd:      https://w3id.org/linkml/geodata/
+  ENVO:    http://purl.obolibrary.org/obo/ENVO_
+  BERVO:   http://purl.obolibrary.org/obo/BERVO_
   sweet:   http://sweetontology.net/
-  pato:    http://purl.obolibrary.org/obo/PATO_
+  PATO:    http://purl.obolibrary.org/obo/PATO_
 
-default_prefix: geodata
+default_prefix: gd
 default_range: string
 
 imports:

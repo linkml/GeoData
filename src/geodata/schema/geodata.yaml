@@ -14,25 +14,25 @@ see_also:
 
 prefixes:
   linkml:   https://w3id.org/linkml/
-  geodata:  https://w3id.org/linkml/geodata/
+  gd:       https://w3id.org/linkml/geodata/
   schema:   http://schema.org/
   sosa:     http://www.w3.org/ns/sosa/
   ssn:      http://www.w3.org/ns/ssn/
   qudt:     http://qudt.org/schema/qudt/
   unit:     http://qudt.org/vocab/unit/
-  envo:     http://purl.obolibrary.org/obo/ENVO_
+  ENVO:     http://purl.obolibrary.org/obo/ENVO_
   sweet:    http://sweetontology.net/
   geo:      http://www.opengis.net/ont/geosparql#
-  owl_time: http://www.w3.org/2006/time#
-  gl:       http://schema.geolink.org/1.0/base/main#
+  TIME:    http://www.w3.org/2006/time#
+  geolink:  http://schema.geolink.org/1.0/base/main#
   nmdc:     https://w3id.org/nmdc/
   isam:     https://w3id.org/isample/
   prov:     http://www.w3.org/ns/prov#
   xsd:      http://www.w3.org/2001/XMLSchema#
-  bervo:    http://purl.obolibrary.org/obo/BERVO_
-  pato:     http://purl.obolibrary.org/obo/PATO_
+  BERVO:    http://purl.obolibrary.org/obo/BERVO_
+  PATO:     http://purl.obolibrary.org/obo/PATO_
 
-default_prefix: geodata
+default_prefix: gd
 default_range: string
 
 imports:
@@ -74,7 +74,7 @@ enums:
     reachable_from:
       source_ontology: obo:envo.owl
       source_nodes:
-        - envo:00010483
+        - ENVO:00010483
       is_direct: false
       relationship_types:
         - rdfs:subClassOf
@@ -167,7 +167,7 @@ slots:
 
   matrix:
     range: MatrixEnum
-    slot_uri: geodata:matrix
+    slot_uri: gd:matrix
     description: >-
       The medium or material in which a measurement was made or from which
       a specimen was collected (feature of interest at the medium level).
@@ -175,25 +175,25 @@ slots:
   geolocation:
     range: Geolocation
     inlined: true
-    slot_uri: geodata:geolocation
+    slot_uri: gd:geolocation
     description: Spatial location associated with this entity.
 
   specimen:
     range: Specimen
-    slot_uri: geodata:specimen
+    slot_uri: gd:specimen
     description: >-
       Physical specimen associated with the observation, if the measurement
       was made on a collected object rather than in situ.
 
   quality_flag:
     range: QualityFlagEnum
-    slot_uri: geodata:quality_flag
+    slot_uri: gd:quality_flag
     description: QA/QC status of the value.
 
   measurements:
     range: Measurement
     multivalued: true
-    slot_uri: geodata:measurements
+    slot_uri: gd:measurements
     description: Measurement objects belonging to this collection.
 
   # --- Shared descriptor slots (appear in 2+ classes) ----------------------
@@ -216,7 +216,7 @@ slots:
 
   spatial_extent:
     range: WKTLiteral
-    slot_uri: geodata:spatialExtent
+    slot_uri: gd:spatialExtent
     description: >-
       Spatial footprint encoded as WKT (bounding box, polygon, etc.).
 
@@ -258,21 +258,21 @@ slots:
 
   latitude:
     range: DecimalDegree
-    slot_uri: geodata:latitude
+    slot_uri: gd:latitude
     description: WGS84 decimal latitude (−90 to +90).
     minimum_value: -90
     maximum_value: 90
 
   longitude:
     range: DecimalDegree
-    slot_uri: geodata:longitude
+    slot_uri: gd:longitude
     description: WGS84 decimal longitude (−180 to +180).
     minimum_value: -180
     maximum_value: 180
 
   altitude:
     range: float
-    slot_uri: geodata:altitude
+    slot_uri: gd:altitude
     description: Altitude above the WGS84 ellipsoid, in metres.
 
   wkt_geometry:
@@ -293,14 +293,14 @@ slots:
 
   place_uri:
     range: uri
-    slot_uri: geodata:place_uri
+    slot_uri: gd:place_uri
     description: >-
       URI of a named place (e.g. a GeoNames, Wikidata, or GeoLink
       feature) that identifies the location.
 
   coordinate_system:
     range: string
-    slot_uri: geodata:coordinate_system
+    slot_uri: gd:coordinate_system
     description: >-
       Coordinate reference system identifier. Defaults to WGS84
       (EPSG:4326) when absent.
@@ -311,13 +311,13 @@ slots:
   start_time:
     range: datetime
     required: true
-    slot_uri: owl_time:hasBeginning
+    slot_uri: TIME:hasBeginning
     description: Start of the interval (ISO 8601 datetime).
 
   end_time:
     range: datetime
     required: true
-    slot_uri: owl_time:hasEnd
+    slot_uri: TIME:hasEnd
     description: End of the interval (ISO 8601 datetime).
 
   # --- Specimen slots -------------------------------------------------------
@@ -345,7 +345,7 @@ slots:
   specimen_type:
     range: SpecimenTypeEnum
     required: true
-    slot_uri: geodata:specimen_type
+    slot_uri: gd:specimen_type
     description: The kind of physical specimen.
 
   material:
@@ -359,7 +359,7 @@ slots:
   collection_location:
     range: Geolocation
     inlined: true
-    slot_uri: geodata:collection_location
+    slot_uri: gd:collection_location
     description: Location where the specimen was collected.
 
   collection_time:
@@ -381,24 +381,24 @@ slots:
 
   repository:
     range: string
-    slot_uri: geodata:repository
+    slot_uri: gd:repository
     description: Institution or archive currently holding the specimen.
 
   curation_location:
     range: string
-    slot_uri: geodata:curation_location
+    slot_uri: gd:curation_location
     description: >-
       Current physical storage location within the repository
       (e.g. "IODP Bremen Core Repository, Cabinet 7, Tray 3").
 
   preparation_method:
     range: string
-    slot_uri: geodata:preparation_method
+    slot_uri: gd:preparation_method
     description: How the specimen was prepared for analysis.
 
   mass:
     range: float
-    slot_uri: geodata:mass
+    slot_uri: gd:mass
     description: Mass of the specimen in grams.
 
   # --- Measurement slots ----------------------------------------------------
@@ -417,19 +417,19 @@ slots:
 
   uncertainty:
     range: float
-    slot_uri: geodata:uncertainty
+    slot_uri: gd:uncertainty
     description: >-
       Measurement uncertainty expressed in the same unit as value
       (e.g. one standard deviation or half-width of a 95 % CI).
 
   depth:
     range: float
-    slot_uri: geodata:depth
+    slot_uri: gd:depth
     description: Depth below surface in metres (positive downward).
 
   elevation:
     range: float
-    slot_uri: geodata:elevation
+    slot_uri: gd:elevation
     description: Elevation above reference datum in metres.
 
   observer:
@@ -439,17 +439,17 @@ slots:
 
   laboratory:
     range: string
-    slot_uri: geodata:laboratory
+    slot_uri: gd:laboratory
     description: Laboratory or facility where analysis was performed.
 
   project:
     range: string
-    slot_uri: geodata:project
+    slot_uri: gd:project
     description: Project or programme under which the measurement was made.
 
   dataset:
     range: string
-    slot_uri: geodata:dataset
+    slot_uri: gd:dataset
     description: Dataset or collection to which this measurement belongs.
 
   # --- AggregateObservation slots -------------------------------------------
@@ -474,12 +474,12 @@ slots:
 
   sample_count:
     range: integer
-    slot_uri: geodata:sample_count
+    slot_uri: gd:sample_count
     description: Number of non-missing input values included in the aggregation.
 
   missing_value_treatment:
     range: string
-    slot_uri: geodata:missing_value_treatment
+    slot_uri: gd:missing_value_treatment
     description: >-
       How missing or null input values were handled prior to
       aggregation (e.g. "excluded", "interpolated", "zero-filled").
@@ -488,14 +488,14 @@ slots:
 
   temporal_resolution:
     range: string
-    slot_uri: geodata:temporal_resolution
+    slot_uri: gd:temporal_resolution
     description: >-
       Nominal sampling interval as an ISO 8601 duration
       (e.g. "PT1H" = hourly, "P1D" = daily, "P1M" = monthly).
 
   platform:
     range: string
-    slot_uri: geodata:platform
+    slot_uri: gd:platform
     description: >-
       Observing platform or station type (e.g. "weather station",
       "moored buoy", "flux tower", "research vessel", "satellite").
@@ -518,7 +518,7 @@ slots:
   collections:
     range: MeasurementCollection
     multivalued: true
-    slot_uri: geodata:collections
+    slot_uri: gd:collections
     description: >-
       MeasurementCollection objects (TimeSeries, Profile, Transect, etc.)
       included in this dataset.
@@ -526,7 +526,7 @@ slots:
   aggregate_observations:
     range: AggregateObservation
     multivalued: true
-    slot_uri: geodata:aggregate_observations
+    slot_uri: gd:aggregate_observations
     description: AggregateObservation objects included in this dataset.
 
   creator:
@@ -552,7 +552,7 @@ slots:
 
   doi:
     range: uri
-    slot_uri: geodata:doi
+    slot_uri: gd:doi
     description: Digital Object Identifier for this dataset release.
 
 # ---------------------------------------------------------------------------
@@ -579,7 +579,7 @@ classes:
 
   TemporalExtent:
     description: A closed time interval defined by a start and end instant.
-    class_uri: owl_time:ProperInterval
+    class_uri: TIME:ProperInterval
     slots:
       - start_time
       - end_time
