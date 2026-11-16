@@ -66,50 +66,16 @@ enums:
   MatrixEnum:
     description: >-
       The medium or material in which a measurement was made or from which
-      a specimen was collected. Terms are aligned to ENVO.
-    permissible_values:
-      soil:
-        description: Terrestrial soil
-        meaning: envo:00001998
-      water:
-        description: Generic / unspecified water
-        meaning: envo:00002006
-      freshwater:
-        description: Fresh surface water (rivers, lakes, streams)
-        meaning: envo:00002004
-      seawater:
-        description: Marine or ocean water
-        meaning: envo:00002149
-      groundwater:
-        description: Subsurface groundwater
-        meaning: envo:01001004
-      pore_water:
-        description: Water occupying pore spaces of soil or sediment
-        meaning: envo:01001057
-      air:
-        description: Atmospheric air
-        meaning: envo:00002005
-      atmosphere:
-        description: The atmosphere as a whole-system feature of interest
-        meaning: envo:01000810
-      sediment:
-        description: Unconsolidated sediment
-        meaning: envo:00002007
-      rock:
-        description: Consolidated rock
-        meaning: envo:00001995
-      ice:
-        description: Glacial or sea ice
-        meaning: envo:00002209
-      snow:
-        description: Snow pack
-        meaning: envo:01000406
-      permafrost:
-        description: Perennially frozen ground
-        meaning: envo:00000134
-      biota:
-        description: Living organisms or biological tissue
-        meaning: envo:00000016
+      a specimen was collected. Permissible values are all ENVO
+      "environmental material" terms (ENVO:00010483) and their subclasses,
+      resolved dynamically from the ENVO ontology at schema generation time.
+    reachable_from:
+      source_ontology: obo:envo.owl
+      source_nodes:
+        - envo:00010483
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
 
   AggregationMethodEnum:
     description: Statistical function used to derive an AggregateObservation.
@@ -320,6 +286,14 @@ slots:
       a WKT literal. Use for transects, polygonal areas, or when a
       point is insufficient.
 
+  trajectory:
+    range: WKTLiteral
+    slot_uri: geo:asWKT
+    description: >-
+      Path of a moving platform or transect line encoded as a WKT
+      LineString (e.g. "LINESTRING(lon1 lat1, lon2 lat2, ...)").
+      Required for Transect; optional for TimeSeries on a moving platform.
+
   place_uri:
     range: uri
     slot_uri: geodata:place_uri
@@ -371,13 +345,24 @@ slots:
   # --- Specimen slots -------------------------------------------------------
 
   specimen_id:
-    range: uri
+    range: string
     identifier: true
     required: true
     slot_uri: schema:identifier
     description: >-
-      Globally unique identifier for the specimen. Preferably an IGSN
-      (e.g. https://igsn.org/AU1234567) or another persistent URI.
+      Identifier for the specimen. May be a local field number, lab ID,
+      catalog number, or any string that is unique within the dataset.
+      Where a persistent URI exists, prefer that; use the igsn slot for
+      IGSN linkage.
+
+  igsn:
+    range: uri
+    slot_uri: schema:identifier
+    description: >-
+      International Geo Sample Number (IGSN) for this specimen as a
+      resolvable URI (e.g. https://igsn.org/AU1234567). Optional but
+      strongly recommended for specimens registered with SESAR or another
+      IGSN-minting registry.
 
   specimen_type:
     range: SpecimenTypeEnum
@@ -503,11 +488,11 @@ slots:
     slot_uri: prov:wasDerivedFrom
     description: Measurement objects that were aggregated to produce this value.
 
-  input_time_series:
-    range: TimeSeries
+  input_collections:
+    range: MeasurementCollection
     multivalued: true
     slot_uri: prov:wasDerivedFrom
-    description: TimeSeries objects used as input to this aggregation.
+    description: MeasurementCollection objects (TimeSeries, Profile, Transect, etc.) used as input to this aggregation.
 
   sample_count:
     range: integer
@@ -552,11 +537,13 @@ slots:
     slot_uri: schema:name
     description: Human-readable title of the dataset.
 
-  time_series:
-    range: TimeSeries
+  collections:
+    range: MeasurementCollection
     multivalued: true
-    slot_uri: geodata:time_series
-    description: TimeSeries objects included in this dataset.
+    slot_uri: geodata:collections
+    description: >-
+      MeasurementCollection objects (TimeSeries, Profile, Transect, etc.)
+      included in this dataset.
 
   aggregate_observations:
     range: AggregateObservation
@@ -660,6 +647,7 @@ classes:
     class_uri: sosa:Sample
     slots:
       - specimen_id
+      - igsn
       - specimen_type
       - label
       - material
@@ -736,7 +724,7 @@ classes:
       - unit
       - measurement_type
       - input_measurements
-      - input_time_series
+      - input_collections
       - sample_count
       - temporal_extent
       - spatial_extent
@@ -752,28 +740,71 @@ classes:
         required: true
         description: The property being summarised.
 
-  TimeSeries:
+  MeasurementCollection:
     description: >-
       An ordered collection of Measurement objects sharing a common
-      measurement type, matrix, and geolocation, varying over time.
+      measurement type and matrix. The ordering axis (time, depth, or
+      position along a line) is determined by the subclass.
       Maps to sosa:ObservationCollection.
     class_uri: sosa:ObservationCollection
     slots:
+      - measurements
+      - measurement_type
       - matrix
       - geolocation
-      - measurements
+      - trajectory
       - temporal_extent
-      - temporal_resolution
-      - measurement_type
       - platform
       - label
+      - description
       - license
     slot_usage:
       measurements:
         required: true
         inlined_as_list: true
+
+  TimeSeries:
+    description: >-
+      A MeasurementCollection ordered by time. Measurements share a
+      common measurement type and matrix at a fixed or moving location.
+      Maps to sosa:ObservationCollection.
+    is_a: MeasurementCollection
+    slots:
+      - temporal_resolution
+    slot_usage:
+      temporal_extent:
+        required: true
+        description: Overall time span of the series.
       label:
         description: Human-readable name for this time series.
+
+  Profile:
+    description: >-
+      A MeasurementCollection ordered by depth or elevation at a fixed
+      horizontal location (e.g. a CTD cast, soil core, or borehole log).
+      Individual Measurement objects carry their own depth or elevation value.
+      Maps to sosa:ObservationCollection.
+    is_a: MeasurementCollection
+    slot_usage:
+      geolocation:
+        required: true
+        description: Fixed horizontal position of the profile.
+      label:
+        description: Human-readable name for this profile.
+
+  Transect:
+    description: >-
+      A MeasurementCollection ordered by position along a spatial line
+      (e.g. a ship-track survey, vehicle transect, or vegetation transect).
+      Individual Measurement objects carry their own geolocation.
+      Maps to sosa:ObservationCollection.
+    is_a: MeasurementCollection
+    slot_usage:
+      trajectory:
+        required: true
+        description: The spatial path of the transect as a WKT LineString.
+      label:
+        description: Human-readable name for this transect.
 
   Dataset:
     description: >-
@@ -786,7 +817,7 @@ classes:
       - title
       - description
       - measurements
-      - time_series
+      - collections
       - aggregate_observations
       - temporal_extent
       - spatial_extent

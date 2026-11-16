@@ -236,6 +236,12 @@ The schema will use W3C SOSA/SSN as the foundational observation model, since it
 
 ### Phase 3 — Cross-Schema Mappings
 - [ ] Write OWL / SSSOM mapping files for NMDC, iSamples, SOSO, GeoLink, SoTerML.
+- [ ] Draft `mappings/isamples_mapping.sssom.tsv` covering:
+  - `Specimen` → `isam:PhysicalSample`
+  - `Specimen.specimen_type` terms → iSamples SampleType vocabulary
+  - `Specimen.material` terms → iSamples Material vocabulary
+  - `Specimen.collection_location` → `isam:SamplingLocation`
+  - `Specimen.repository` / `curation_location` → `isam:curationLocation`
 - [ ] Validate mappings with at least one representative dataset from each target schema.
 
 ### Phase 4 — Validation and Examples
@@ -283,14 +289,14 @@ GeoData/
 
 ## 8. Open Questions / Decisions Needed
 
-1. **URI persistence** — will this schema live under an institutional domain, a W3ID PURL, or a community namespace?
-2. **Measurement type vocabulary** — use a single top-level controlled vocabulary, or accept terms from multiple source ontologies (CF, SWEET, ENVO) with SKOS mappings?
-3. **Matrix granularity** — flat enumeration vs. hierarchical class from ENVO?
-4. **Geolocation model** — support moving platforms (ships, aircraft, satellites) from the start, or defer?
-5. **Multi-matrix measurements** — e.g., pore water in soil; how to handle compound matrices?
-6. **Versioning strategy** — semver on the schema YAML, or date-based versions like NMDC uses?
-7. **Specimen vs. Sample distinction** — should `Specimen` subsume the former `Sample` concept entirely, or is a lightweight `Sample` (anonymous aliquot with no persistent ID) also needed as a separate class?
-8. **Specimen identifier minting** — require an IGSN, accept any URI, or allow local identifiers with optional IGSN linkage?
+1. **URI persistence** — ✅ W3ID PURL. Using `https://w3id.org/linkml/geodata` as the base namespace (current placeholder).
+2. **Measurement type vocabulary** — ✅ Accept CURIEs from multiple ontologies (CF Conventions, SWEET, ENVO, etc.). The `MeasurementType.term_id` field holds the source URI; `source_vocabulary` names the ontology. SKOS `exactMatch`/`closeMatch` mappings will be used to link equivalent terms across vocabularies (Phase 2).
+3. **Matrix granularity** — ✅ Dynamic enum (`reachable_from`) sourced from ENVO `environmental material` (ENVO:00010483) and all subclasses via `rdfs:subClassOf`. Terms are resolved from `obo:envo.owl` at schema generation time, so the list stays in sync with ENVO releases automatically.
+4. **Geolocation model** — ✅ Support moving platforms, transects, and profiles from the start. Introduced a `MeasurementCollection` base class (maps to `sosa:ObservationCollection`) with `TimeSeries`, `Profile`, and `Transect` as subclasses. A `trajectory` slot (WKT LineString) handles moving-platform paths and transect lines. `Dataset.time_series` replaced by `Dataset.collections` (range: `MeasurementCollection`) to accept any collection subtype.
+5. **Multi-matrix measurements** — ✅ Resolved by Q3. ENVO already has terms for compound matrices (e.g. `envo:06105238` "pore water in soil"). Since `MatrixEnum` is a dynamic enum over all subclasses of `envo:00010483`, these terms are included automatically with no schema changes needed.
+6. **Versioning strategy** — ✅ Semver on the schema YAML (already set to `0.1.0`).
+7. **Specimen vs. Sample distinction** — ✅ `Specimen` subsumes `Sample`. Subsamples, aliquots, and thin sections are handled via the optional `parent_specimen` slot (`sosa:isSampleOf`), which allows arbitrarily deep specimen hierarchies.
+8. **Specimen identifier minting** — ✅ Accept any identifier string in `specimen_id` (local field numbers, lab IDs, catalog numbers, URIs). An optional `igsn` slot (URI, `schema:identifier`) provides IGSN linkage where available. Modelled after iSamples practice.
 
 ---
 
