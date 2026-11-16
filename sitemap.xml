@@ -89,10 +89,6 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
-         <loc>https://linkml.github.io/geodata/elements/MeasurementType/</loc>
-         <lastmod>2026-11-16</lastmod>
-    </url>
-    <url>
          <loc>https://linkml.github.io/geodata/elements/Ncname/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -146,10 +142,6 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/UCUMExpression/</loc>
-         <lastmod>2026-11-16</lastmod>
-    </url>
-    <url>
-         <loc>https://linkml.github.io/geodata/elements/Unit/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -214,10 +206,6 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/dataset_id/</loc>
-         <lastmod>2026-11-16</lastmod>
-    </url>
-    <url>
-         <loc>https://linkml.github.io/geodata/elements/definition/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -357,10 +345,6 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
-         <loc>https://linkml.github.io/geodata/elements/source_vocabulary/</loc>
-         <lastmod>2026-11-16</lastmod>
-    </url>
-    <url>
          <loc>https://linkml.github.io/geodata/elements/spatial_extent/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -389,19 +373,11 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
-         <loc>https://linkml.github.io/geodata/elements/term_id/</loc>
-         <lastmod>2026-11-16</lastmod>
-    </url>
-    <url>
          <loc>https://linkml.github.io/geodata/elements/title/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/trajectory/</loc>
-         <lastmod>2026-11-16</lastmod>
-    </url>
-    <url>
-         <loc>https://linkml.github.io/geodata/elements/ucum_code/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>

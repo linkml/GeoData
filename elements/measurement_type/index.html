@@ -486,7 +486,7 @@
 
 
 <h1 id="slot-measurement_type">Slot: measurement_type</h1>
-<p><em>The property that was measured or observed.</em></p>
+<p><em>The property that was measured or observed, as a CURIE or URI from a source vocabulary (CF Conventions, SWEET, ENVO, etc.). e.g. "<a href="https://vocab.nerc.ac.uk/standard_name/air_temperature/">https://vocab.nerc.ac.uk/standard_name/air_temperature/</a>" or "sweet:propTemperature/Temperature".</em></p>
 <div>
 <p>URI: <a href="http://www.w3.org/ns/sosa/observedProperty">sosa:observedProperty</a></p>
 <!-- no inheritance hierarchy -->
@@ -544,7 +544,7 @@
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../MeasurementType/">MeasurementType</a></td>
+<td><a href="../Uriorcurie/">Uriorcurie</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
@@ -598,7 +598,9 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">measurement_type</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The property that was measured or observed.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The property that was measured or observed, as a CURIE or URI from a</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">source vocabulary (CF Conventions, SWEET, ENVO, etc.). e.g. "https://vocab.nerc.ac.uk/standard_name/air_temperature/"</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">or "sweet:propTemperature/Temperature".</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/geodata</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sosa:observedProperty</span>
@@ -606,8 +608,7 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Measurement</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AggregateObservation</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MeasurementCollection</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MeasurementType</span>
-<span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uriorcurie</span>
 </code></pre></div>
 </details>
 </div>

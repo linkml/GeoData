@@ -60,6 +60,12 @@ prefixes:
   xsd:
     prefix_prefix: xsd
     prefix_reference: http://www.w3.org/2001/XMLSchema#
+  bervo:
+    prefix_prefix: bervo
+    prefix_reference: http://purl.obolibrary.org/obo/BERVO_
+  pato:
+    prefix_prefix: pato
+    prefix_reference: http://purl.obolibrary.org/obo/PATO_
 default_prefix: geodata
 default_range: string
 types:
@@ -483,22 +489,6 @@ enums:
         text: estimated
         description: Value was estimated or gap-filled
 slots:
-  term_id:
-    name: term_id
-    definition_uri: https://w3id.org/linkml/geodata/term_id
-    description: URI of the term in a source vocabulary (e.g. a QUDT unit URI or a
-      CF standard name URI).
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:identifier
-    slot_uri: schema:identifier
-    identifier: true
-    owner: Unit
-    domain_of:
-    - MeasurementType
-    - Unit
-    range: uri
-    required: true
   matrix:
     name: matrix
     definition_uri: https://w3id.org/linkml/geodata/matrix
@@ -583,8 +573,6 @@ slots:
     slot_uri: schema:name
     owner: MeasurementCollection
     domain_of:
-    - MeasurementType
-    - Unit
     - Specimen
     - MeasurementCollection
     range: string
@@ -635,7 +623,9 @@ slots:
   measurement_type:
     name: measurement_type
     definition_uri: https://w3id.org/linkml/geodata/measurement_type
-    description: The property that was measured or observed.
+    description: The property that was measured or observed, as a CURIE or URI from
+      a source vocabulary (CF Conventions, SWEET, ENVO, etc.). e.g. "https://vocab.nerc.ac.uk/standard_name/air_temperature/"
+      or "sweet:propTemperature/Temperature".
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:observedProperty
@@ -645,9 +635,7 @@ slots:
     - Measurement
     - AggregateObservation
     - MeasurementCollection
-    range: MeasurementType
-    inlined: true
-    inlined_as_list: false
+    range: uriorcurie
   value:
     name: value
     definition_uri: https://w3id.org/linkml/geodata/value
@@ -665,7 +653,8 @@ slots:
   unit:
     name: unit
     definition_uri: https://w3id.org/linkml/geodata/unit
-    description: Unit of the measured value.
+    description: Unit of the measured value as a UCUM expression (e.g. "Cel", "K",
+      "m/s", "g/cm3", "pH").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - qudt:hasUnit
@@ -674,9 +663,7 @@ slots:
     domain_of:
     - Measurement
     - AggregateObservation
-    range: Unit
-    inlined: true
-    inlined_as_list: false
+    range: UCUMExpression
   license:
     name: license
     definition_uri: https://w3id.org/linkml/geodata/license
@@ -825,43 +812,6 @@ slots:
     - TemporalExtent
     range: datetime
     required: true
-  source_vocabulary:
-    name: source_vocabulary
-    definition_uri: https://w3id.org/linkml/geodata/source_vocabulary
-    description: The vocabulary from which the term is drawn (e.g. "CF Conventions",
-      "SWEET", "ENVO").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - geodata:source_vocabulary
-    slot_uri: geodata:source_vocabulary
-    owner: MeasurementType
-    domain_of:
-    - MeasurementType
-    range: string
-  definition:
-    name: definition
-    definition_uri: https://w3id.org/linkml/geodata/definition
-    description: Textual definition of the property.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:description
-    slot_uri: schema:description
-    owner: MeasurementType
-    domain_of:
-    - MeasurementType
-    range: string
-  ucum_code:
-    name: ucum_code
-    definition_uri: https://w3id.org/linkml/geodata/ucum_code
-    description: UCUM expression for the unit (e.g. "Cel", "m/s", "g/cm3").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - qudt:ucumCode
-    slot_uri: qudt:ucumCode
-    owner: Unit
-    domain_of:
-    - Unit
-    range: UCUMExpression
   specimen_id:
     name: specimen_id
     definition_uri: https://w3id.org/linkml/geodata/specimen_id
@@ -1342,42 +1292,6 @@ slots:
     domain_of:
     - Dataset
     range: uri
-  MeasurementType_label:
-    name: MeasurementType_label
-    definition_uri: https://w3id.org/linkml/geodata/label
-    description: Human-readable name for the property (e.g. "air_temperature").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:name
-    is_a: label
-    domain: MeasurementType
-    slot_uri: schema:name
-    alias: label
-    owner: MeasurementType
-    domain_of:
-    - MeasurementType
-    is_usage_slot: true
-    usage_slot_name: label
-    range: string
-    required: true
-  Unit_label:
-    name: Unit_label
-    definition_uri: https://w3id.org/linkml/geodata/label
-    description: Human-readable unit label (e.g. "degree Celsius").
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - schema:name
-    is_a: label
-    domain: Unit
-    slot_uri: schema:name
-    alias: label
-    owner: Unit
-    domain_of:
-    - Unit
-    is_usage_slot: true
-    usage_slot_name: label
-    range: string
-    required: true
   Specimen_label:
     name: Specimen_label
     definition_uri: https://w3id.org/linkml/geodata/label
@@ -1437,7 +1351,9 @@ slots:
   Measurement_measurement_type:
     name: Measurement_measurement_type
     definition_uri: https://w3id.org/linkml/geodata/measurement_type
-    description: The property that was measured or observed.
+    description: The property that was measured or observed, as a CURIE or URI from
+      a source vocabulary (CF Conventions, SWEET, ENVO, etc.). e.g. "https://vocab.nerc.ac.uk/standard_name/air_temperature/"
+      or "sweet:propTemperature/Temperature".
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - sosa:observedProperty
@@ -1450,10 +1366,8 @@ slots:
     - Measurement
     is_usage_slot: true
     usage_slot_name: measurement_type
-    range: MeasurementType
+    range: uriorcurie
     required: true
-    inlined: true
-    inlined_as_list: false
   Measurement_value:
     name: Measurement_value
     definition_uri: https://w3id.org/linkml/geodata/value
@@ -1476,7 +1390,8 @@ slots:
   Measurement_unit:
     name: Measurement_unit
     definition_uri: https://w3id.org/linkml/geodata/unit
-    description: Unit of the measured value.
+    description: Unit of the measured value as a UCUM expression (e.g. "Cel", "K",
+      "m/s", "g/cm3", "pH").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - qudt:hasUnit
@@ -1489,10 +1404,8 @@ slots:
     - Measurement
     is_usage_slot: true
     usage_slot_name: unit
-    range: Unit
+    range: UCUMExpression
     required: true
-    inlined: true
-    inlined_as_list: false
   Measurement_result_time:
     name: Measurement_result_time
     definition_uri: https://w3id.org/linkml/geodata/result_time
@@ -1533,7 +1446,8 @@ slots:
   AggregateObservation_unit:
     name: AggregateObservation_unit
     definition_uri: https://w3id.org/linkml/geodata/unit
-    description: Unit of the measured value.
+    description: Unit of the measured value as a UCUM expression (e.g. "Cel", "K",
+      "m/s", "g/cm3", "pH").
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - qudt:hasUnit
@@ -1546,10 +1460,8 @@ slots:
     - AggregateObservation
     is_usage_slot: true
     usage_slot_name: unit
-    range: Unit
+    range: UCUMExpression
     required: true
-    inlined: true
-    inlined_as_list: false
   AggregateObservation_measurement_type:
     name: AggregateObservation_measurement_type
     definition_uri: https://w3id.org/linkml/geodata/measurement_type
@@ -1566,10 +1478,8 @@ slots:
     - AggregateObservation
     is_usage_slot: true
     usage_slot_name: measurement_type
-    range: MeasurementType
+    range: uriorcurie
     required: true
-    inlined: true
-    inlined_as_list: false
   MeasurementCollection_measurements:
     name: MeasurementCollection_measurements
     definition_uri: https://w3id.org/linkml/geodata/measurements
@@ -1764,43 +1674,6 @@ classes:
     - start_time
     - end_time
     class_uri: owl_time:ProperInterval
-  MeasurementType:
-    name: MeasurementType
-    definition_uri: https://w3id.org/linkml/geodata/MeasurementType
-    description: A measured or observed property drawn from a controlled vocabulary
-      such as CF Conventions, SWEET, or ENVO. Maps to sosa:ObservableProperty.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - sosa:ObservableProperty
-    slots:
-    - term_id
-    - MeasurementType_label
-    - source_vocabulary
-    - definition
-    slot_usage:
-      label:
-        name: label
-        description: Human-readable name for the property (e.g. "air_temperature").
-        required: true
-    class_uri: sosa:ObservableProperty
-  Unit:
-    name: Unit
-    definition_uri: https://w3id.org/linkml/geodata/Unit
-    description: A unit of measure aligned with QUDT and expressible in UCUM notation.
-      Maps to qudt:Unit.
-    from_schema: https://w3id.org/linkml/geodata
-    mappings:
-    - qudt:Unit
-    slots:
-    - term_id
-    - Unit_label
-    - ucum_code
-    slot_usage:
-      label:
-        name: label
-        description: Human-readable unit label (e.g. "degree Celsius").
-        required: true
-    class_uri: qudt:Unit
   Specimen:
     name: Specimen
     definition_uri: https://w3id.org/linkml/geodata/Specimen
@@ -2067,7 +1940,7 @@ classes:
     tree_root: true
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-16T21:41:10'
-source_file_size: 24360
-generation_date: '2026-11-16T21:41:17'
+source_file_date: '2026-11-16T22:06:51'
+source_file_size: 23156
+generation_date: '2026-11-16T22:06:59'
 
