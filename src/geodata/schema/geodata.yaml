@@ -37,6 +37,7 @@ default_range: string
 
 imports:
   - linkml:types
+  - https://raw.githubusercontent.com/linkml/linkml-microschema-profile/v0.3.0/src/linkml_microschema_profile/schema/linkml_microschema_profile
 
 # ---------------------------------------------------------------------------
 # Custom types
@@ -620,6 +621,8 @@ classes:
       The fundamental atomic unit of the schema.
       Maps to sosa:Observation.
     class_uri: sosa:Observation
+    instantiates:
+      - MicroschemaDefinition
     slots:
       - matrix
       - geolocation

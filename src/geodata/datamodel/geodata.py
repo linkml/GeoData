@@ -1,5 +1,5 @@
 # Auto generated from geodata.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-11-16T17:24:23
+# Generation date: 2026-11-16T17:33:12
 # Schema: geodata
 #
 # id: https://w3id.org/linkml/geodata
@@ -56,8 +56,8 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Datetime, Float, Integer, String, Uri, Uriorcurie
-from linkml_runtime.utils.metamodelcore import URI, URIorCURIE, XSDDateTime
+from linkml_runtime.linkml_model.types import Datetime, Decimal, Float, Integer, String, Uri, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Decimal, URI, URIorCURIE, XSDDateTime
 
 metamodel_version = "1.11.0"
 version = "0.1.0"
@@ -684,6 +684,208 @@ class Dataset(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
+class MicroschemaDefinition(YAMLRoot):
+    """
+    A metaclass for classes that conform to the Microschema profile. Classes that instantiate this are designed for
+    inline composition.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/MicroschemaDefinition"]
+    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/MicroschemaDefinition"
+    class_name: ClassVar[str] = "MicroschemaDefinition"
+    class_model_uri: ClassVar[URIRef] = GD.MicroschemaDefinition
+
+    subject: str = None
+    observation_type: str = None
+    location: str = None
+    temporality: str = None
+    methodology: str = None
+    observation_result: Union[dict, "ValueMicroschemaDefinition"] = None
+    profile_version: Optional[str] = None
+    domain_of_use: Optional[Union[str, list[str]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.subject):
+            self.MissingRequiredField("subject")
+        if not isinstance(self.subject, str):
+            self.subject = str(self.subject)
+
+        if self._is_empty(self.observation_type):
+            self.MissingRequiredField("observation_type")
+        if not isinstance(self.observation_type, str):
+            self.observation_type = str(self.observation_type)
+
+        if self._is_empty(self.location):
+            self.MissingRequiredField("location")
+        if not isinstance(self.location, str):
+            self.location = str(self.location)
+
+        if self._is_empty(self.temporality):
+            self.MissingRequiredField("temporality")
+        if not isinstance(self.temporality, str):
+            self.temporality = str(self.temporality)
+
+        if self._is_empty(self.methodology):
+            self.MissingRequiredField("methodology")
+        if not isinstance(self.methodology, str):
+            self.methodology = str(self.methodology)
+
+        if self._is_empty(self.observation_result):
+            self.MissingRequiredField("observation_result")
+        if not isinstance(self.observation_result, ValueMicroschemaDefinition):
+            self.observation_result = ValueMicroschemaDefinition()
+
+        if self.profile_version is not None and not isinstance(self.profile_version, str):
+            self.profile_version = str(self.profile_version)
+
+        if not isinstance(self.domain_of_use, list):
+            self.domain_of_use = [self.domain_of_use] if self.domain_of_use is not None else []
+        self.domain_of_use = [v if isinstance(v, str) else str(v) for v in self.domain_of_use]
+
+        super().__post_init__(**kwargs)
+
+
+class ValueMicroschemaDefinition(YAMLRoot):
+    """
+    A microschema representing a typed value with optional unit/system. Examples: Quantity, Timepoint, CodedValue,
+    Range. This is the range for observation result
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/ValueMicroschemaDefinition"]
+    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/ValueMicroschemaDefinition"
+    class_name: ClassVar[str] = "ValueMicroschemaDefinition"
+    class_model_uri: ClassVar[URIRef] = GD.ValueMicroschemaDefinition
+
+
+@dataclass(repr=False)
+class Quantity(YAMLRoot):
+    """
+    A numerical value with unit
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/Quantity"]
+    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/Quantity"
+    class_name: ClassVar[str] = "Quantity"
+    class_model_uri: ClassVar[URIRef] = GD.Quantity
+
+    quantity_value: Decimal = None
+    quantity_unit: Union[str, URIorCURIE] = None
+    comparator: Optional[Union[str, "ComparatorEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.quantity_value):
+            self.MissingRequiredField("quantity_value")
+        if not isinstance(self.quantity_value, Decimal):
+            self.quantity_value = Decimal(self.quantity_value)
+
+        if self._is_empty(self.quantity_unit):
+            self.MissingRequiredField("quantity_unit")
+        if not isinstance(self.quantity_unit, URIorCURIE):
+            self.quantity_unit = URIorCURIE(self.quantity_unit)
+
+        if self.comparator is not None and not isinstance(self.comparator, ComparatorEnum):
+            self.comparator = ComparatorEnum(self.comparator)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Timepoint(YAMLRoot):
+    """
+    A point in time, potentially relative
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/Timepoint"]
+    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/Timepoint"
+    class_name: ClassVar[str] = "Timepoint"
+    class_model_uri: ClassVar[URIRef] = GD.Timepoint
+
+    datetime: Optional[Union[str, XSDDateTime]] = None
+    relative_to_event: Optional[Union[str, URIorCURIE]] = None
+    offset: Optional[Union[dict, Quantity]] = None
+    subject_age: Optional[Union[dict, Quantity]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.datetime is not None and not isinstance(self.datetime, XSDDateTime):
+            self.datetime = XSDDateTime(self.datetime)
+
+        if self.relative_to_event is not None and not isinstance(self.relative_to_event, URIorCURIE):
+            self.relative_to_event = URIorCURIE(self.relative_to_event)
+
+        if self.offset is not None and not isinstance(self.offset, Quantity):
+            self.offset = Quantity(**as_dict(self.offset))
+
+        if self.subject_age is not None and not isinstance(self.subject_age, Quantity):
+            self.subject_age = Quantity(**as_dict(self.subject_age))
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class TimeInterval(YAMLRoot):
+    """
+    A period between two timepoints
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/TimeInterval"]
+    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/TimeInterval"
+    class_name: ClassVar[str] = "TimeInterval"
+    class_model_uri: ClassVar[URIRef] = GD.TimeInterval
+
+    interval_start: Optional[Union[dict, Timepoint]] = None
+    interval_end: Optional[Union[dict, Timepoint]] = None
+    duration: Optional[Union[dict, Quantity]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.interval_start is not None and not isinstance(self.interval_start, Timepoint):
+            self.interval_start = Timepoint(**as_dict(self.interval_start))
+
+        if self.interval_end is not None and not isinstance(self.interval_end, Timepoint):
+            self.interval_end = Timepoint(**as_dict(self.interval_end))
+
+        if self.duration is not None and not isinstance(self.duration, Quantity):
+            self.duration = Quantity(**as_dict(self.duration))
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class CodedValue(YAMLRoot):
+    """
+    A value from a controlled vocabulary
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/CodedValue"]
+    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/CodedValue"
+    class_name: ClassVar[str] = "CodedValue"
+    class_model_uri: ClassVar[URIRef] = GD.CodedValue
+
+    code: Union[str, URIorCURIE] = None
+    code_label: Optional[str] = None
+    code_system: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.code):
+            self.MissingRequiredField("code")
+        if not isinstance(self.code, URIorCURIE):
+            self.code = URIorCURIE(self.code)
+
+        if self.code_label is not None and not isinstance(self.code_label, str):
+            self.code_label = str(self.code_label)
+
+        if self.code_system is not None and not isinstance(self.code_system, URIorCURIE):
+            self.code_system = URIorCURIE(self.code_system)
+
+        super().__post_init__(**kwargs)
+
+
 # Enumerations
 class MatrixEnum(EnumDefinitionImpl):
     """
@@ -820,6 +1022,28 @@ class QualityFlagEnum(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="QualityFlagEnum",
         description="QA/QC status of a measurement or aggregate observation.",
+    )
+
+class ComparatorEnum(EnumDefinitionImpl):
+    """
+    Comparator for quantity values
+    """
+    lt = PermissibleValue(
+        text="lt",
+        description="Less than")
+    le = PermissibleValue(
+        text="le",
+        description="Less than or equal to")
+    ge = PermissibleValue(
+        text="ge",
+        description="Greater than or equal to")
+    gt = PermissibleValue(
+        text="gt",
+        description="Greater than")
+
+    _defn = EnumDefinition(
+        name="ComparatorEnum",
+        description="Comparator for quantity values",
     )
 
 # Slots
@@ -1005,6 +1229,69 @@ slots.version = Slot(uri=SCHEMA.version, name="version", curie=SCHEMA.curie('ver
 
 slots.doi = Slot(uri=GD.doi, name="doi", curie=GD.curie('doi'),
                    model_uri=GD.doi, domain=None, range=Optional[Union[str, URI]])
+
+slots.profile_version = Slot(uri=LINKML['linkml-microschema-profile/profile_version'], name="profile_version", curie=LINKML.curie('linkml-microschema-profile/profile_version'),
+                   model_uri=GD.profile_version, domain=None, range=Optional[str])
+
+slots.domain_of_use = Slot(uri=LINKML['linkml-microschema-profile/domain_of_use'], name="domain_of_use", curie=LINKML.curie('linkml-microschema-profile/domain_of_use'),
+                   model_uri=GD.domain_of_use, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.subject = Slot(uri=LINKML['linkml-microschema-profile/subject'], name="subject", curie=LINKML.curie('linkml-microschema-profile/subject'),
+                   model_uri=GD.subject, domain=None, range=str)
+
+slots.observation_type = Slot(uri=LINKML['linkml-microschema-profile/observation_type'], name="observation_type", curie=LINKML.curie('linkml-microschema-profile/observation_type'),
+                   model_uri=GD.observation_type, domain=None, range=str)
+
+slots.location = Slot(uri=LINKML['linkml-microschema-profile/location'], name="location", curie=LINKML.curie('linkml-microschema-profile/location'),
+                   model_uri=GD.location, domain=None, range=str)
+
+slots.temporality = Slot(uri=LINKML['linkml-microschema-profile/temporality'], name="temporality", curie=LINKML.curie('linkml-microschema-profile/temporality'),
+                   model_uri=GD.temporality, domain=None, range=str)
+
+slots.methodology = Slot(uri=LINKML['linkml-microschema-profile/methodology'], name="methodology", curie=LINKML.curie('linkml-microschema-profile/methodology'),
+                   model_uri=GD.methodology, domain=None, range=str)
+
+slots.observation_result = Slot(uri=LINKML['linkml-microschema-profile/observation_result'], name="observation_result", curie=LINKML.curie('linkml-microschema-profile/observation_result'),
+                   model_uri=GD.observation_result, domain=None, range=Union[dict, ValueMicroschemaDefinition])
+
+slots.quantity_value = Slot(uri=LINKML['linkml-microschema-profile/quantity_value'], name="quantity_value", curie=LINKML.curie('linkml-microschema-profile/quantity_value'),
+                   model_uri=GD.quantity_value, domain=None, range=Decimal)
+
+slots.quantity_unit = Slot(uri=SCHEMA.unitCode, name="quantity_unit", curie=SCHEMA.curie('unitCode'),
+                   model_uri=GD.quantity_unit, domain=None, range=Union[str, URIorCURIE])
+
+slots.comparator = Slot(uri=LINKML['linkml-microschema-profile/comparator'], name="comparator", curie=LINKML.curie('linkml-microschema-profile/comparator'),
+                   model_uri=GD.comparator, domain=None, range=Optional[Union[str, "ComparatorEnum"]])
+
+slots.datetime = Slot(uri=LINKML['linkml-microschema-profile/datetime'], name="datetime", curie=LINKML.curie('linkml-microschema-profile/datetime'),
+                   model_uri=GD.datetime, domain=None, range=Optional[Union[str, XSDDateTime]])
+
+slots.relative_to_event = Slot(uri=LINKML['linkml-microschema-profile/relative_to_event'], name="relative_to_event", curie=LINKML.curie('linkml-microschema-profile/relative_to_event'),
+                   model_uri=GD.relative_to_event, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.offset = Slot(uri=LINKML['linkml-microschema-profile/offset'], name="offset", curie=LINKML.curie('linkml-microschema-profile/offset'),
+                   model_uri=GD.offset, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.subject_age = Slot(uri=LINKML['linkml-microschema-profile/subject_age'], name="subject_age", curie=LINKML.curie('linkml-microschema-profile/subject_age'),
+                   model_uri=GD.subject_age, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.interval_start = Slot(uri=LINKML['linkml-microschema-profile/interval_start'], name="interval_start", curie=LINKML.curie('linkml-microschema-profile/interval_start'),
+                   model_uri=GD.interval_start, domain=None, range=Optional[Union[dict, Timepoint]])
+
+slots.interval_end = Slot(uri=LINKML['linkml-microschema-profile/interval_end'], name="interval_end", curie=LINKML.curie('linkml-microschema-profile/interval_end'),
+                   model_uri=GD.interval_end, domain=None, range=Optional[Union[dict, Timepoint]])
+
+slots.duration = Slot(uri=LINKML['linkml-microschema-profile/duration'], name="duration", curie=LINKML.curie('linkml-microschema-profile/duration'),
+                   model_uri=GD.duration, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.code = Slot(uri=LINKML['linkml-microschema-profile/code'], name="code", curie=LINKML.curie('linkml-microschema-profile/code'),
+                   model_uri=GD.code, domain=None, range=Union[str, URIorCURIE])
+
+slots.code_label = Slot(uri=LINKML['linkml-microschema-profile/code_label'], name="code_label", curie=LINKML.curie('linkml-microschema-profile/code_label'),
+                   model_uri=GD.code_label, domain=None, range=Optional[str])
+
+slots.code_system = Slot(uri=LINKML['linkml-microschema-profile/code_system'], name="code_system", curie=LINKML.curie('linkml-microschema-profile/code_system'),
+                   model_uri=GD.code_system, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.Specimen_label = Slot(uri=SCHEMA.name, name="Specimen_label", curie=SCHEMA.curie('name'),
                    model_uri=GD.Specimen_label, domain=Specimen, range=Optional[str])

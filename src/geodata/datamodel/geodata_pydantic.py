@@ -74,7 +74,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'gd',
                     'alignment to SOSA/SSN, iSamples, NMDC, Science on Schema.org, '
                     'and GeoLink.',
      'id': 'https://w3id.org/linkml/geodata',
-     'imports': ['linkml:types'],
+     'imports': ['linkml:types',
+                 'https://raw.githubusercontent.com/linkml/linkml-microschema-profile/v0.3.0/src/linkml_microschema_profile/schema/linkml_microschema_profile'],
      'license': 'BSD-3-Clause',
      'name': 'geodata',
      'prefixes': {'BERVO': {'prefix_prefix': 'BERVO',
@@ -135,6 +136,28 @@ linkml_meta = LinkMLMeta({'default_prefix': 'gd',
                               'from_schema': 'https://w3id.org/linkml/geodata',
                               'name': 'WKTLiteral',
                               'uri': 'geo:wktLiteral'}}} )
+
+class ComparatorEnum(str, Enum):
+    """
+    Comparator for quantity values
+    """
+    lt = "lt"
+    """
+    Less than
+    """
+    le = "le"
+    """
+    Less than or equal to
+    """
+    ge = "ge"
+    """
+    Greater than or equal to
+    """
+    gt = "gt"
+    """
+    Greater than
+    """
+
 
 class MatrixEnum(str):
     """
@@ -290,6 +313,96 @@ class QualityFlagEnum(str, Enum):
 
 
 
+class MicroschemaDefinition(ConfiguredBaseModel):
+    """
+    A metaclass for classes that conform to the Microschema profile. Classes that instantiate this are designed for inline composition.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
+         'annotations': {'must_be_inlined': {'tag': 'must_be_inlined', 'value': True},
+                         'must_not_have_id_slot': {'tag': 'must_not_have_id_slot',
+                                                   'value': True}},
+         'comments': ['Classes instantiating this SHOULD NOT have identifier slots',
+                      'Classes instantiating this SHOULD be used with inlined=true',
+                      'Classes instantiating this MAY compose other microschemas via '
+                      'attributes'],
+         'from_schema': 'https://w3id.org/linkml/linkml-microschema-profile'})
+
+    profile_version: Optional[str] = Field(default=None, description="""Version of microschema profile this conforms to""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    domain_of_use: Optional[list[str]] = Field(default=None, description="""Domains where this microschema is applicable""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    subject: str = Field(default=..., description="""Entity being measured, observed, or interviewed - person, animal, specimen, or environmental material""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    observation_type: str = Field(default=..., description="""Question being asked, measurement being taken, quality being observed""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    location: str = Field(default=..., description="""Spatial metadata specifying where the observation was made - geolocation, place name, site id, environment, or biome""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    temporality: str = Field(default=..., description="""Temporal metadata specifying when an observation was made. This can be relative or absolute - datetime, age of person, season, or geologic era""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    methodology: str = Field(default=..., description="""Information about how an observation was made - method, instrument, reagent kit, statistical modifier""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+    observation_result: ValueMicroschemaDefinition = Field(default=..., description="""The outcome of the observation type - answer, value, result, determination""", json_schema_extra = { "linkml_meta": {'domain_of': ['MicroschemaDefinition']} })
+
+
+class ValueMicroschemaDefinition(ConfiguredBaseModel):
+    """
+    A microschema representing a typed value with optional unit/system. Examples: Quantity, Timepoint, CodedValue, Range. This is the range for observation result
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
+         'annotations': {'must_be_inlined': {'tag': 'must_be_inlined', 'value': True},
+                         'must_not_have_id_slot': {'tag': 'must_not_have_id_slot',
+                                                   'value': True}},
+         'comments': ['Classes instantiating this SHOULD NOT have identifier slots',
+                      'Classes instantiating this SHOULD be used with inlined=true',
+                      'Classes instantiating this MAY compose other microschemas via '
+                      'attributes'],
+         'from_schema': 'https://w3id.org/linkml/linkml-microschema-profile'})
+
+    pass
+
+
+class Quantity(ConfiguredBaseModel):
+    """
+    A numerical value with unit
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/linkml/linkml-microschema-profile',
+         'instantiates': ['ValueMicroschemaDefinition']})
+
+    quantity_value: Decimal = Field(default=..., description="""The numeric value""", json_schema_extra = { "linkml_meta": {'domain_of': ['Quantity']} })
+    quantity_unit: str = Field(default=..., description="""Unit (UCUM, UO, QUDT, etc.)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Quantity'], 'slot_uri': 'schema:unitCode'} })
+    comparator: Optional[ComparatorEnum] = Field(default=None, description="""Comparison operator (less than, greater than, etc.) or exact if null""", json_schema_extra = { "linkml_meta": {'domain_of': ['Quantity']} })
+
+
+class Timepoint(ConfiguredBaseModel):
+    """
+    A point in time, potentially relative
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/linkml/linkml-microschema-profile',
+         'instantiates': ['ValueMicroschemaDefinition']})
+
+    datetime: Optional[datetime ] = Field(default=None, description="""Absolute timestamp""", json_schema_extra = { "linkml_meta": {'domain_of': ['Timepoint']} })
+    relative_to_event: Optional[str] = Field(default=None, description="""Event this is relative to""", json_schema_extra = { "linkml_meta": {'domain_of': ['Timepoint']} })
+    offset: Optional[Quantity] = Field(default=None, description="""Offset from event (e.g., \"+3 days\")""", json_schema_extra = { "linkml_meta": {'domain_of': ['Timepoint']} })
+    subject_age: Optional[Quantity] = Field(default=None, description="""Age of the subject at this timepoint (e.g., age when the event occurred)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Timepoint']} })
+
+
+class TimeInterval(ConfiguredBaseModel):
+    """
+    A period between two timepoints
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/linkml/linkml-microschema-profile',
+         'instantiates': ['ValueMicroschemaDefinition']})
+
+    interval_start: Optional[Timepoint] = Field(default=None, description="""Start of the interval""", json_schema_extra = { "linkml_meta": {'domain_of': ['TimeInterval']} })
+    interval_end: Optional[Timepoint] = Field(default=None, description="""End of the interval""", json_schema_extra = { "linkml_meta": {'domain_of': ['TimeInterval']} })
+    duration: Optional[Quantity] = Field(default=None, description="""Duration as alternative to start/end""", json_schema_extra = { "linkml_meta": {'domain_of': ['TimeInterval']} })
+
+
+class CodedValue(ConfiguredBaseModel):
+    """
+    A value from a controlled vocabulary
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/linkml/linkml-microschema-profile',
+         'instantiates': ['ValueMicroschemaDefinition']})
+
+    code: str = Field(default=..., description="""The code value as a CURIE""", json_schema_extra = { "linkml_meta": {'domain_of': ['CodedValue']} })
+    code_label: Optional[str] = Field(default=None, description="""Human-readable label for the code""", json_schema_extra = { "linkml_meta": {'domain_of': ['CodedValue']} })
+    code_system: Optional[str] = Field(default=None, description="""The code system URI""", json_schema_extra = { "linkml_meta": {'domain_of': ['CodedValue']} })
+
+
 class Geolocation(ConfiguredBaseModel):
     """
     A spatial location expressed as a point, geometry, or named feature. At least one of (latitude + longitude), wkt_geometry, or place_uri MUST be provided.
@@ -354,6 +467,7 @@ class Measurement(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'sosa:Observation',
          'from_schema': 'https://w3id.org/linkml/geodata',
+         'instantiates': ['MicroschemaDefinition'],
          'slot_usage': {'geolocation': {'name': 'geolocation', 'required': True},
                         'matrix': {'name': 'matrix', 'required': True},
                         'measurement_type': {'name': 'measurement_type',
@@ -622,6 +736,12 @@ class Dataset(ConfiguredBaseModel):
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
+MicroschemaDefinition.model_rebuild()
+ValueMicroschemaDefinition.model_rebuild()
+Quantity.model_rebuild()
+Timepoint.model_rebuild()
+TimeInterval.model_rebuild()
+CodedValue.model_rebuild()
 Geolocation.model_rebuild()
 TemporalExtent.model_rebuild()
 Specimen.model_rebuild()
