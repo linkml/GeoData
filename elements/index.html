@@ -564,6 +564,10 @@
 <td>A single derived value produced by applying a statistical function to a set o...</td>
 </tr>
 <tr>
+<td><a href="CodedValue/">CodedValue</a></td>
+<td>A value from a controlled vocabulary</td>
+</tr>
+<tr>
 <td><a href="Dataset/">Dataset</a></td>
 <td>A named, curated collection of Measurements, TimeSeries, and/or AggregateObse...</td>
 </tr>
@@ -592,12 +596,32 @@
 <td>A MeasurementCollection ordered by position along a spatial line (e</td>
 </tr>
 <tr>
+<td><a href="MicroschemaDefinition/">MicroschemaDefinition</a></td>
+<td>A metaclass for classes that conform to the Microschema profile</td>
+</tr>
+<tr>
+<td><a href="Quantity/">Quantity</a></td>
+<td>A numerical value with unit</td>
+</tr>
+<tr>
 <td><a href="Specimen/">Specimen</a></td>
 <td>A discrete physical or digital object collected from the environment and subs...</td>
 </tr>
 <tr>
 <td><a href="TemporalExtent/">TemporalExtent</a></td>
 <td>A closed time interval defined by a start and end instant</td>
+</tr>
+<tr>
+<td><a href="TimeInterval/">TimeInterval</a></td>
+<td>A period between two timepoints</td>
+</tr>
+<tr>
+<td><a href="Timepoint/">Timepoint</a></td>
+<td>A point in time, potentially relative</td>
+</tr>
+<tr>
+<td><a href="ValueMicroschemaDefinition/">ValueMicroschemaDefinition</a></td>
+<td>A microschema representing a typed value with optional unit/system</td>
 </tr>
 </tbody>
 </table>
@@ -627,6 +651,18 @@
 <td>Altitude above the WGS84 ellipsoid, in metres</td>
 </tr>
 <tr>
+<td><a href="code/">code</a></td>
+<td>The code value as a CURIE</td>
+</tr>
+<tr>
+<td><a href="code_label/">code_label</a></td>
+<td>Human-readable label for the code</td>
+</tr>
+<tr>
+<td><a href="code_system/">code_system</a></td>
+<td>The code system URI</td>
+</tr>
+<tr>
 <td><a href="collected_by/">collected_by</a></td>
 <td>Person or organisation responsible for collection</td>
 </tr>
@@ -641,6 +677,10 @@
 <tr>
 <td><a href="collections/">collections</a></td>
 <td>MeasurementCollection objects (TimeSeries, Profile, Transect, etc</td>
+</tr>
+<tr>
+<td><a href="comparator/">comparator</a></td>
+<td>Comparison operator (less than, greater than, etc</td>
 </tr>
 <tr>
 <td><a href="coordinate_system/">coordinate_system</a></td>
@@ -663,6 +703,10 @@
 <td>Globally unique identifier for the dataset (URI or DOI)</td>
 </tr>
 <tr>
+<td><a href="datetime/">datetime</a></td>
+<td>Absolute timestamp</td>
+</tr>
+<tr>
 <td><a href="depth/">depth</a></td>
 <td>Depth below surface in metres (positive downward)</td>
 </tr>
@@ -673,6 +717,14 @@
 <tr>
 <td><a href="doi/">doi</a></td>
 <td>Digital Object Identifier for this dataset release</td>
+</tr>
+<tr>
+<td><a href="domain_of_use/">domain_of_use</a></td>
+<td>Domains where this microschema is applicable</td>
+</tr>
+<tr>
+<td><a href="duration/">duration</a></td>
+<td>Duration as alternative to start/end</td>
 </tr>
 <tr>
 <td><a href="elevation/">elevation</a></td>
@@ -703,6 +755,14 @@
 <td>Sensor, instrument, or analytical method used</td>
 </tr>
 <tr>
+<td><a href="interval_end/">interval_end</a></td>
+<td>End of the interval</td>
+</tr>
+<tr>
+<td><a href="interval_start/">interval_start</a></td>
+<td>Start of the interval</td>
+</tr>
+<tr>
 <td><a href="keywords/">keywords</a></td>
 <td>Keywords or subject terms describing the dataset content</td>
 </tr>
@@ -721,6 +781,10 @@
 <tr>
 <td><a href="license/">license</a></td>
 <td>URI of the license governing use of this entity</td>
+</tr>
+<tr>
+<td><a href="location/">location</a></td>
+<td>Spatial metadata specifying where the observation was made - geolocation, pla...</td>
 </tr>
 <tr>
 <td><a href="longitude/">longitude</a></td>
@@ -747,12 +811,28 @@
 <td>Measurement objects belonging to this collection</td>
 </tr>
 <tr>
+<td><a href="methodology/">methodology</a></td>
+<td>Information about how an observation was made - method, instrument, reagent k...</td>
+</tr>
+<tr>
 <td><a href="missing_value_treatment/">missing_value_treatment</a></td>
 <td>How missing or null input values were handled prior to aggregation (e</td>
 </tr>
 <tr>
+<td><a href="observation_result/">observation_result</a></td>
+<td>The outcome of the observation type - answer, value, result, determination</td>
+</tr>
+<tr>
+<td><a href="observation_type/">observation_type</a></td>
+<td>Question being asked, measurement being taken, quality being observed</td>
+</tr>
+<tr>
 <td><a href="observer/">observer</a></td>
 <td>Person or organisation who made the measurement</td>
+</tr>
+<tr>
+<td><a href="offset/">offset</a></td>
+<td>Offset from event (e</td>
 </tr>
 <tr>
 <td><a href="parent_specimen/">parent_specimen</a></td>
@@ -771,6 +851,10 @@
 <td>How the specimen was prepared for analysis</td>
 </tr>
 <tr>
+<td><a href="profile_version/">profile_version</a></td>
+<td>Version of microschema profile this conforms to</td>
+</tr>
+<tr>
 <td><a href="project/">project</a></td>
 <td>Project or programme under which the measurement was made</td>
 </tr>
@@ -781,6 +865,18 @@
 <tr>
 <td><a href="quality_flag/">quality_flag</a></td>
 <td>QA/QC status of the value</td>
+</tr>
+<tr>
+<td><a href="quantity_unit/">quantity_unit</a></td>
+<td>Unit (UCUM, UO, QUDT, etc</td>
+</tr>
+<tr>
+<td><a href="quantity_value/">quantity_value</a></td>
+<td>The numeric value</td>
+</tr>
+<tr>
+<td><a href="relative_to_event/">relative_to_event</a></td>
+<td>Event this is relative to</td>
 </tr>
 <tr>
 <td><a href="repository/">repository</a></td>
@@ -815,12 +911,24 @@
 <td>Start of the interval (ISO 8601 datetime)</td>
 </tr>
 <tr>
+<td><a href="subject/">subject</a></td>
+<td>Entity being measured, observed, or interviewed - person, animal, specimen, o...</td>
+</tr>
+<tr>
+<td><a href="subject_age/">subject_age</a></td>
+<td>Age of the subject at this timepoint (e</td>
+</tr>
+<tr>
 <td><a href="temporal_extent/">temporal_extent</a></td>
 <td>Time interval associated with this entity</td>
 </tr>
 <tr>
 <td><a href="temporal_resolution/">temporal_resolution</a></td>
 <td>Nominal sampling interval as an ISO 8601 duration (e</td>
+</tr>
+<tr>
+<td><a href="temporality/">temporality</a></td>
+<td>Temporal metadata specifying when an observation was made</td>
 </tr>
 <tr>
 <td><a href="title/">title</a></td>
@@ -864,6 +972,10 @@
 <tr>
 <td><a href="AggregationMethodEnum/">AggregationMethodEnum</a></td>
 <td>Statistical function used to derive an AggregateObservation</td>
+</tr>
+<tr>
+<td><a href="ComparatorEnum/">ComparatorEnum</a></td>
+<td>Comparator for quantity values</td>
 </tr>
 <tr>
 <td><a href="MatrixEnum/">MatrixEnum</a></td>

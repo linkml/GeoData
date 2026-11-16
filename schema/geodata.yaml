@@ -10,6 +10,7 @@ id: https://w3id.org/linkml/geodata
 version: 0.1.0
 imports:
 - linkml:types
+- https://raw.githubusercontent.com/linkml/linkml-microschema-profile/v0.3.0/src/linkml_microschema_profile/schema/linkml_microschema_profile
 license: BSD-3-Clause
 prefixes:
   linkml:
@@ -488,6 +489,24 @@ enums:
       estimated:
         text: estimated
         description: Value was estimated or gap-filled
+  ComparatorEnum:
+    name: ComparatorEnum
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/ComparatorEnum
+    description: Comparator for quantity values
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    permissible_values:
+      lt:
+        text: lt
+        description: Less than
+      le:
+        text: le
+        description: Less than or equal to
+      ge:
+        text: ge
+        description: Greater than or equal to
+      gt:
+        text: gt
+        description: Greater than
 slots:
   matrix:
     name: matrix
@@ -1292,6 +1311,244 @@ slots:
     domain_of:
     - Dataset
     range: uri
+  profile_version:
+    name: profile_version
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/profile_version
+    description: Version of microschema profile this conforms to
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/profile_version
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+  domain_of_use:
+    name: domain_of_use
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/domain_of_use
+    description: Domains where this microschema is applicable
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/domain_of_use
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+    multivalued: true
+  subject:
+    name: subject
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/subject
+    description: Entity being measured, observed, or interviewed - person, animal,
+      specimen, or environmental material
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/subject
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+    required: true
+  observation_type:
+    name: observation_type
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/observation_type
+    description: Question being asked, measurement being taken, quality being observed
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/observation_type
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+    required: true
+  location:
+    name: location
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/location
+    description: Spatial metadata specifying where the observation was made - geolocation,
+      place name, site id, environment, or biome
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/location
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+    required: true
+  temporality:
+    name: temporality
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/temporality
+    description: Temporal metadata specifying when an observation was made. This can
+      be relative or absolute - datetime, age of person, season, or geologic era
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/temporality
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+    required: true
+  methodology:
+    name: methodology
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/methodology
+    description: Information about how an observation was made - method, instrument,
+      reagent kit, statistical modifier
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/methodology
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: string
+    required: true
+  observation_result:
+    name: observation_result
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/observation_result
+    description: The outcome of the observation type - answer, value, result, determination
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/observation_result
+    owner: MicroschemaDefinition
+    domain_of:
+    - MicroschemaDefinition
+    range: ValueMicroschemaDefinition
+    required: true
+    inlined: true
+    inlined_as_list: true
+  quantity_value:
+    name: quantity_value
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/quantity_value
+    description: The numeric value
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/quantity_value
+    owner: Quantity
+    domain_of:
+    - Quantity
+    range: decimal
+    required: true
+  quantity_unit:
+    name: quantity_unit
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/quantity_unit
+    description: Unit (UCUM, UO, QUDT, etc.)
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    mappings:
+    - schema:unitCode
+    slot_uri: schema:unitCode
+    owner: Quantity
+    domain_of:
+    - Quantity
+    range: uriorcurie
+    required: true
+  comparator:
+    name: comparator
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/comparator
+    description: Comparison operator (less than, greater than, etc.) or exact if null
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/comparator
+    owner: Quantity
+    domain_of:
+    - Quantity
+    range: ComparatorEnum
+  datetime:
+    name: datetime
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/datetime
+    description: Absolute timestamp
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/datetime
+    owner: Timepoint
+    domain_of:
+    - Timepoint
+    range: datetime
+  relative_to_event:
+    name: relative_to_event
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/relative_to_event
+    description: Event this is relative to
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/relative_to_event
+    owner: Timepoint
+    domain_of:
+    - Timepoint
+    range: uriorcurie
+  offset:
+    name: offset
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/offset
+    description: Offset from event (e.g., "+3 days")
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/offset
+    owner: Timepoint
+    domain_of:
+    - Timepoint
+    range: Quantity
+    inlined: true
+    inlined_as_list: true
+  subject_age:
+    name: subject_age
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/subject_age
+    description: Age of the subject at this timepoint (e.g., age when the event occurred)
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/subject_age
+    owner: Timepoint
+    domain_of:
+    - Timepoint
+    range: Quantity
+    inlined: true
+    inlined_as_list: true
+  interval_start:
+    name: interval_start
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/interval_start
+    description: Start of the interval
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/interval_start
+    owner: TimeInterval
+    domain_of:
+    - TimeInterval
+    range: Timepoint
+    inlined: true
+    inlined_as_list: true
+  interval_end:
+    name: interval_end
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/interval_end
+    description: End of the interval
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/interval_end
+    owner: TimeInterval
+    domain_of:
+    - TimeInterval
+    range: Timepoint
+    inlined: true
+    inlined_as_list: true
+  duration:
+    name: duration
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/duration
+    description: Duration as alternative to start/end
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/duration
+    owner: TimeInterval
+    domain_of:
+    - TimeInterval
+    range: Quantity
+    inlined: true
+    inlined_as_list: true
+  code:
+    name: code
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/code
+    description: The code value as a CURIE
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/code
+    owner: CodedValue
+    domain_of:
+    - CodedValue
+    range: uriorcurie
+    required: true
+  code_label:
+    name: code_label
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/code_label
+    description: Human-readable label for the code
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/code_label
+    owner: CodedValue
+    domain_of:
+    - CodedValue
+    range: string
+  code_system:
+    name: code_system
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/code_system
+    description: The code system URI
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slot_uri: https://w3id.org/linkml/linkml-microschema-profile/code_system
+    owner: CodedValue
+    domain_of:
+    - CodedValue
+    range: uriorcurie
   Specimen_label:
     name: Specimen_label
     definition_uri: https://w3id.org/linkml/geodata/label
@@ -1709,6 +1966,8 @@ classes:
   Measurement:
     name: Measurement
     definition_uri: https://w3id.org/linkml/geodata/Measurement
+    instantiates:
+    - MicroschemaDefinition
     description: A single observed value of a property at a location and time. The
       fundamental atomic unit of the schema. Maps to sosa:Observation.
     from_schema: https://w3id.org/linkml/geodata
@@ -1938,9 +2197,106 @@ classes:
         slot_uri: schema:spatialCoverage
     class_uri: schema:Dataset
     tree_root: true
+  MicroschemaDefinition:
+    name: MicroschemaDefinition
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/MicroschemaDefinition
+    annotations:
+      must_not_have_id_slot:
+        tag: must_not_have_id_slot
+        value: true
+      must_be_inlined:
+        tag: must_be_inlined
+        value: true
+    description: A metaclass for classes that conform to the Microschema profile.
+      Classes that instantiate this are designed for inline composition.
+    comments:
+    - Classes instantiating this SHOULD NOT have identifier slots
+    - Classes instantiating this SHOULD be used with inlined=true
+    - Classes instantiating this MAY compose other microschemas via attributes
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    abstract: true
+    slots:
+    - profile_version
+    - domain_of_use
+    - subject
+    - observation_type
+    - location
+    - temporality
+    - methodology
+    - observation_result
+    class_uri: https://w3id.org/linkml/linkml-microschema-profile/MicroschemaDefinition
+  ValueMicroschemaDefinition:
+    name: ValueMicroschemaDefinition
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/ValueMicroschemaDefinition
+    annotations:
+      must_not_have_id_slot:
+        tag: must_not_have_id_slot
+        value: true
+      must_be_inlined:
+        tag: must_be_inlined
+        value: true
+    description: 'A microschema representing a typed value with optional unit/system.
+      Examples: Quantity, Timepoint, CodedValue, Range. This is the range for observation
+      result'
+    comments:
+    - Classes instantiating this SHOULD NOT have identifier slots
+    - Classes instantiating this SHOULD be used with inlined=true
+    - Classes instantiating this MAY compose other microschemas via attributes
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    abstract: true
+    class_uri: https://w3id.org/linkml/linkml-microschema-profile/ValueMicroschemaDefinition
+  Quantity:
+    name: Quantity
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/Quantity
+    instantiates:
+    - ValueMicroschemaDefinition
+    description: A numerical value with unit
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slots:
+    - quantity_value
+    - quantity_unit
+    - comparator
+    class_uri: https://w3id.org/linkml/linkml-microschema-profile/Quantity
+  Timepoint:
+    name: Timepoint
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/Timepoint
+    instantiates:
+    - ValueMicroschemaDefinition
+    description: A point in time, potentially relative
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slots:
+    - datetime
+    - relative_to_event
+    - offset
+    - subject_age
+    class_uri: https://w3id.org/linkml/linkml-microschema-profile/Timepoint
+  TimeInterval:
+    name: TimeInterval
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/TimeInterval
+    instantiates:
+    - ValueMicroschemaDefinition
+    description: A period between two timepoints
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slots:
+    - interval_start
+    - interval_end
+    - duration
+    class_uri: https://w3id.org/linkml/linkml-microschema-profile/TimeInterval
+  CodedValue:
+    name: CodedValue
+    definition_uri: https://w3id.org/linkml/linkml-microschema-profile/CodedValue
+    instantiates:
+    - ValueMicroschemaDefinition
+    description: A value from a controlled vocabulary
+    from_schema: https://w3id.org/linkml/linkml-microschema-profile
+    slots:
+    - code
+    - code_label
+    - code_system
+    class_uri: https://w3id.org/linkml/linkml-microschema-profile/CodedValue
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-16T22:28:39'
-source_file_size: 22988
-generation_date: '2026-11-16T22:28:48'
+source_file_date: '2026-11-16T22:38:32'
+source_file_size: 23180
+generation_date: '2026-11-16T22:38:41'
 

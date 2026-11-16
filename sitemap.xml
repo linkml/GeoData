@@ -25,6 +25,14 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/CodedValue/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/ComparatorEnum/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/Curie/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -89,6 +97,10 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/MicroschemaDefinition/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/Ncname/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -106,6 +118,10 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/QualityFlagEnum/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/Quantity/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -133,7 +149,15 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/TimeInterval/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/TimeSeries/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/Timepoint/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -150,6 +174,10 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/Uriorcurie/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/ValueMicroschemaDefinition/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -173,6 +201,18 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/code/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/code_label/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/code_system/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/collected_by/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -186,6 +226,10 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/collections/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/comparator/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -209,6 +253,10 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/datetime/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/depth/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -218,6 +266,14 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/doi/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/domain_of_use/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/duration/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -253,6 +309,14 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/interval_end/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/interval_start/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/keywords/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -270,6 +334,10 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/license/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/location/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -297,11 +365,27 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/methodology/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/missing_value_treatment/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/observation_result/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/observation_type/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/observer/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/offset/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -321,6 +405,10 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/profile_version/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/project/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
@@ -330,6 +418,18 @@
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/quality_flag/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/quantity_unit/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/quantity_value/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/relative_to_event/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
@@ -365,11 +465,23 @@
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
+         <loc>https://linkml.github.io/geodata/elements/subject/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/subject_age/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
          <loc>https://linkml.github.io/geodata/elements/temporal_extent/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
          <loc>https://linkml.github.io/geodata/elements/temporal_resolution/</loc>
+         <lastmod>2026-11-16</lastmod>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/geodata/elements/temporality/</loc>
          <lastmod>2026-11-16</lastmod>
     </url>
     <url>
