@@ -223,16 +223,17 @@ The schema will use W3C SOSA/SSN as the foundational observation model, since it
 
 ## 6. Phased Implementation Plan
 
-### Phase 1 — Core Schema Definition
-- [ ] Define LinkML schema (`geodata.yaml`) with `Measurement`, `AggregateObservation`, `Specimen`, and `TimeSeries` classes.
-- [ ] Define enumerations for `matrix`, `specimen_type`, and `aggregation_method` (mean, max, min, median, std_dev, sum, count).
-- [ ] Define slot ranges using QUDT for units and SOSA for observation properties.
-- [ ] Generate JSON Schema, JSON-LD context, and OWL from LinkML.
+### Phase 1 — Core Schema Definition ✅
+- [x] Define LinkML schema (`geodata.yaml`) with `Measurement`, `AggregateObservation`, `Specimen`, `TimeSeries`, `Profile`, `Transect`, and `MeasurementCollection` classes.
+- [x] Define enumerations for `matrix` (dynamic ENVO reachable_from), `specimen_type`, and `aggregation_method`.
+- [x] Define slot ranges using QUDT unit URIs (`unit:` prefix) and SOSA for observation properties; `measurement_type` and `unit` are both `uriorcurie`.
+- [x] Generate JSON Schema, JSON-LD context, OWL, Python dataclasses, Pydantic, TypeScript, and Java from LinkML.
+- [x] Import `linkml-microschema-profile`; annotate `Measurement` as `MicroschemaDefinition`.
 
-### Phase 2 — Vocabulary Integration
-- [ ] Create a `MeasurementType` registry mapping common earth science parameters to CF, SWEET, and ENVO terms.
-- [ ] Create a `Unit` registry aligned with QUDT.
-- [ ] Add SKOS mappings for matrix terms to ENVO and iSamples Material vocabulary.
+### Phase 2 — Vocabulary Integration (in progress)
+- [x] Create measurement microschemas (`src/geodata/schema/measurements.yaml`) as named `Measurement` subclasses with rules mapping `measurement_type` to equivalent CURIEs from CF Conventions, SWEET, ENVO, BERVO, and PATO, with postconditions constraining QUDT units and ENVO matrix terms. Initial microschemas: `AirTemperatureMeasurement`, `WaterTemperatureMeasurement`, `SoilpHMeasurement`.
+- [x] Unit vocabulary: `unit` slot uses QUDT unit URIs/CURIEs directly (`unit:DEG_C`, `unit:K`, etc.). QUDT itself serves as the unit registry; a separate unit registry file is not needed.
+- [ ] Add SKOS mappings for matrix terms to iSamples Material vocabulary.
 
 ### Phase 3 — Cross-Schema Mappings
 - [ ] Write OWL / SSSOM mapping files for NMDC, iSamples, SOSO, GeoLink, SoTerML.
