@@ -2297,7 +2297,7 @@ classes:
     class_uri: https://w3id.org/linkml/linkml-microschema-profile/CodedValue
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-17T14:05:23'
+source_file_date: '2026-11-17T14:06:01'
 source_file_size: 23348
-generation_date: '2026-11-17T14:05:32'
+generation_date: '2026-11-17T14:06:08'
 
