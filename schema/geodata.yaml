@@ -67,6 +67,12 @@ prefixes:
   PATO:
     prefix_prefix: PATO
     prefix_reference: http://purl.obolibrary.org/obo/PATO_
+  mat:
+    prefix_prefix: mat
+    prefix_reference: https://w3id.org/isample/vocabulary/material/
+  msot:
+    prefix_prefix: msot
+    prefix_reference: https://w3id.org/isample/vocabulary/materialsampleobjecttype/
 default_prefix: gd
 default_range: string
 types:
@@ -424,51 +430,67 @@ enums:
       rock:
         text: rock
         description: Consolidated rock sample
+        meaning: msot:nonbiologicsolidobject
       sediment:
         text: sediment
         description: Loose unconsolidated sediment
+        meaning: msot:nonbiologicsolidobject
       sediment_core:
         text: sediment_core
         description: A drilled or pushed sediment core
+        meaning: msot:nonbiologicsolidobject
       ice_core:
         text: ice_core
         description: A drilled ice core
+        meaning: msot:nonbiologicsolidobject
       soil:
         text: soil
         description: Soil sample
+        meaning: msot:nonbiologicsolidobject
       water:
         text: water
         description: Collected water sample (bottle, bag, etc.)
+        meaning: msot:fluidincontainer
       biological_tissue:
         text: biological_tissue
         description: Biological tissue or whole organism
+        meaning: msot:organismpart
       mineral:
         text: mineral
         description: Individual mineral specimen
+        meaning: msot:nonbiologicsolidobject
       fluid:
         text: fluid
         description: Non-water fluid sample (e.g. hydrothermal fluid, oil)
+        meaning: msot:fluidincontainer
       gas:
         text: gas
         description: Gas sample
+        meaning: msot:fluidincontainer
       peat:
         text: peat
         description: Peat or organic-rich deposit
+        meaning: msot:solidmaterialsample
       coral:
         text: coral
         description: Coral skeleton
+        meaning: msot:biologicalmaterialsample
       tree_ring:
         text: tree_ring
         description: Tree ring / dendrochronology sample
+        meaning: msot:biologicalmaterialsample
       speleothem:
         text: speleothem
         description: Cave deposit (stalactite, stalagmite, flowstone, etc.)
+        meaning: msot:nonbiologicsolidobject
       dust:
         text: dust
         description: Atmospheric dust or aerosol trap sample
+        meaning: msot:anyaggregation
       other:
         text: other
         description: Specimen type not covered by the other terms
+        meaning: msot:materialsample
   QualityFlagEnum:
     name: QualityFlagEnum
     definition_uri: https://w3id.org/linkml/geodata/QualityFlagEnum
@@ -2297,7 +2319,7 @@ classes:
     class_uri: https://w3id.org/linkml/linkml-microschema-profile/CodedValue
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-17T15:30:16'
-source_file_size: 23348
-generation_date: '2026-11-17T15:30:23'
+source_file_date: '2026-11-17T15:47:58'
+source_file_size: 24157
+generation_date: '2026-11-17T15:48:06'
 
