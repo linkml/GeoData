@@ -20,7 +20,7 @@ temporal_extent:
 measurements:
   - measurement_type: "ENVO:09200010"
     value: "7.2"
-    unit: "[pH]"
+    unit: "unit:PH"
     matrix: "ENVO:00001998"
     geolocation:
       latitude: 36.4072
@@ -30,7 +30,7 @@ measurements:
     quality_flag: good
   - measurement_type: "http://vocab.nerc.ac.uk/standard_name/sea_water_turbidity/"
     value: "3.4"
-    unit: "[NTU]"
+    unit: "unit:NTU"
     matrix: "ENVO:00002004"
     geolocation:
       latitude: 36.4180

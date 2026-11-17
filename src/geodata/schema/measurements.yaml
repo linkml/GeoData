@@ -78,9 +78,9 @@ classes:
           slot_conditions:
             unit:
               any_of:
-                - equals_string: Cel
-                - equals_string: K
-                - equals_string: "[degF]"
+                - equals_string: "unit:DEG_C"
+                - equals_string: "unit:K"
+                - equals_string: "unit:DEG_F"
             matrix:
               any_of:
                 - equals_string: "ENVO:00002005"    # air
@@ -106,9 +106,9 @@ classes:
           slot_conditions:
             unit:
               any_of:
-                - equals_string: Cel
-                - equals_string: K
-                - equals_string: "[degF]"
+                - equals_string: "unit:DEG_C"
+                - equals_string: "unit:K"
+                - equals_string: "unit:DEG_F"
             matrix:
               any_of:
                 - equals_string: "ENVO:00002006"    # water (generic)
@@ -137,7 +137,7 @@ classes:
           slot_conditions:
             unit:
               any_of:
-                - equals_string: "[pH]"
+                - equals_string: "unit:PH"
             matrix:
               any_of:
                 - equals_string: "ENVO:00001998"    # soil

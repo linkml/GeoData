@@ -14,7 +14,7 @@ measurement_type: "http://vocab.nerc.ac.uk/standard_name/air_temperature/"
 measurements:
   - measurement_type: "http://vocab.nerc.ac.uk/standard_name/air_temperature/"
     value: "11.8"
-    unit: Cel
+    unit: "unit:DEG_C"
     matrix: "ENVO:00002005"
     geolocation:
       latitude: 36.4072
@@ -24,7 +24,7 @@ measurements:
     quality_flag: good
   - measurement_type: "http://vocab.nerc.ac.uk/standard_name/air_temperature/"
     value: "11.5"
-    unit: Cel
+    unit: "unit:DEG_C"
     matrix: "ENVO:00002005"
     geolocation:
       latitude: 36.4072
@@ -34,7 +34,7 @@ measurements:
     quality_flag: good
   - measurement_type: "http://vocab.nerc.ac.uk/standard_name/air_temperature/"
     value: "12.1"
-    unit: Cel
+    unit: "unit:DEG_C"
     matrix: "ENVO:00002005"
     geolocation:
       latitude: 36.4072

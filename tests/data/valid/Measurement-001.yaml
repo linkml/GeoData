@@ -1,7 +1,7 @@
 # Soil pH measurement at a field site in New Mexico
 measurement_type: "ENVO:09200010"
 value: "7.2"
-unit: "[pH]"
+unit: "unit:PH"
 matrix: "ENVO:00001998"
 geolocation:
   latitude: 36.4072

@@ -1,7 +1,7 @@
 # Monthly mean air temperature for June 2023 at a weather station
 aggregation_method: mean
 value: 14.3
-unit: Cel
+unit: "unit:DEG_C"
 measurement_type: "http://vocab.nerc.ac.uk/standard_name/air_temperature/"
 sample_count: 720
 temporal_extent:

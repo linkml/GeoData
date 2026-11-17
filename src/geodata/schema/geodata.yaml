@@ -50,11 +50,6 @@ types:
     base: float
     description: A coordinate value expressed in decimal degrees.
 
-  UCUMExpression:
-    uri: xsd:string
-    base: str
-    description: A unit expression in UCUM notation (e.g. "m/s", "Cel", "g/cm3").
-
   WKTLiteral:
     uri: geo:wktLiteral
     base: str
@@ -246,11 +241,12 @@ slots:
       as a float.
 
   unit:
-    range: UCUMExpression
+    range: uriorcurie
     slot_uri: qudt:hasUnit
     description: >-
-      Unit of the measured value as a UCUM expression
-      (e.g. "Cel", "K", "m/s", "g/cm3", "pH").
+      Unit of the measured value as a QUDT unit URI or CURIE
+      (e.g. "unit:DEG_C", "unit:K", "unit:M-PER-SEC", "unit:PH").
+      Use the unit: prefix (http://qudt.org/vocab/unit/).
 
   license:
     range: uri

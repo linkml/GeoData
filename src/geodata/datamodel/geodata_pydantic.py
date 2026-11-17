@@ -132,13 +132,6 @@ linkml_meta = LinkMLMeta({'default_prefix': 'gd',
                                  'from_schema': 'https://w3id.org/linkml/geodata',
                                  'name': 'DecimalDegree',
                                  'uri': 'xsd:double'},
-               'UCUMExpression': {'base': 'str',
-                                  'description': 'A unit expression in UCUM '
-                                                 'notation (e.g. "m/s", "Cel", '
-                                                 '"g/cm3").',
-                                  'from_schema': 'https://w3id.org/linkml/geodata',
-                                  'name': 'UCUMExpression',
-                                  'uri': 'xsd:string'},
                'WKTLiteral': {'base': 'str',
                               'description': 'A geometry encoded as a Well-Known '
                                              'Text (WKT) literal.',
@@ -497,7 +490,7 @@ class Measurement(ConfiguredBaseModel):
          'slot_uri': 'sosa:observedProperty'} })
     value: str = Field(default=..., description="""The measured result. Stored as a string to accommodate both numeric and categorical values. Numeric values MUST be parseable as a float.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
          'slot_uri': 'sosa:hasSimpleResult'} })
-    unit: str = Field(default=..., description="""Unit of the measured value as a UCUM expression (e.g. \"Cel\", \"K\", \"m/s\", \"g/cm3\", \"pH\").""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
+    unit: str = Field(default=..., description="""Unit of the measured value as a QUDT unit URI or CURIE (e.g. \"unit:DEG_C\", \"unit:K\", \"unit:M-PER-SEC\", \"unit:PH\"). Use the unit: prefix (http://qudt.org/vocab/unit/).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
          'slot_uri': 'qudt:hasUnit'} })
     result_time: str = Field(default=..., description="""Date and time at which the measurement was made (ISO 8601). Use temporal_extent instead when the observation spans an interval.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement'], 'slot_uri': 'sosa:resultTime'} })
     temporal_extent: Optional[TemporalExtent] = Field(default=None, description="""Time interval associated with this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement',
@@ -546,7 +539,7 @@ class AggregateObservation(ConfiguredBaseModel):
     aggregation_method: AggregationMethodEnum = Field(default=..., description="""The statistical function applied to the input measurements.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AggregateObservation'], 'slot_uri': 'sosa:usedProcedure'} })
     value: float = Field(default=..., description="""The resulting aggregate value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
          'slot_uri': 'sosa:hasSimpleResult'} })
-    unit: str = Field(default=..., description="""Unit of the measured value as a UCUM expression (e.g. \"Cel\", \"K\", \"m/s\", \"g/cm3\", \"pH\").""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
+    unit: str = Field(default=..., description="""Unit of the measured value as a QUDT unit URI or CURIE (e.g. \"unit:DEG_C\", \"unit:K\", \"unit:M-PER-SEC\", \"unit:PH\"). Use the unit: prefix (http://qudt.org/vocab/unit/).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
          'slot_uri': 'qudt:hasUnit'} })
     measurement_type: str = Field(default=..., description="""The property being summarised.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation', 'MeasurementCollection'],
          'slot_uri': 'sosa:observedProperty'} })

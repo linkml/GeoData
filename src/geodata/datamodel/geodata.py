@@ -1,5 +1,5 @@
 # Auto generated from geodata.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-11-17T08:37:15
+# Generation date: 2026-11-17T08:49:26
 # Schema: geodata
 #
 # id: https://w3id.org/linkml/geodata
@@ -91,14 +91,6 @@ class DecimalDegree(float):
     type_class_curie = "xsd:double"
     type_name = "DecimalDegree"
     type_model_uri = GD.DecimalDegree
-
-
-class UCUMExpression(str):
-    """ A unit expression in UCUM notation (e.g. "m/s", "Cel", "g/cm3"). """
-    type_class_uri = XSD["string"]
-    type_class_curie = "xsd:string"
-    type_name = "UCUMExpression"
-    type_model_uri = GD.UCUMExpression
 
 
 class WKTLiteral(str):
@@ -301,7 +293,7 @@ class Measurement(YAMLRoot):
     geolocation: Union[dict, Geolocation] = None
     measurement_type: Union[str, URIorCURIE] = None
     value: str = None
-    unit: str = None
+    unit: Union[str, URIorCURIE] = None
     result_time: str = None
     specimen: Optional[Union[str, SpecimenSpecimenId]] = None
     quality_flag: Optional[Union[str, "QualityFlagEnum"]] = None
@@ -335,8 +327,8 @@ class Measurement(YAMLRoot):
 
         if self._is_empty(self.unit):
             self.MissingRequiredField("unit")
-        if not isinstance(self.unit, str):
-            self.unit = str(self.unit)
+        if not isinstance(self.unit, URIorCURIE):
+            self.unit = URIorCURIE(self.unit)
 
         if self._is_empty(self.result_time):
             self.MissingRequiredField("result_time")
@@ -401,7 +393,7 @@ class AggregateObservation(YAMLRoot):
 
     aggregation_method: Union[str, "AggregationMethodEnum"] = None
     value: float = None
-    unit: str = None
+    unit: Union[str, URIorCURIE] = None
     measurement_type: Union[str, URIorCURIE] = None
     matrix: Optional[Union[str, "MatrixEnum"]] = None
     geolocation: Optional[Union[dict, Geolocation]] = None
@@ -427,8 +419,8 @@ class AggregateObservation(YAMLRoot):
 
         if self._is_empty(self.unit):
             self.MissingRequiredField("unit")
-        if not isinstance(self.unit, str):
-            self.unit = str(self.unit)
+        if not isinstance(self.unit, URIorCURIE):
+            self.unit = URIorCURIE(self.unit)
 
         if self._is_empty(self.measurement_type):
             self.MissingRequiredField("measurement_type")
@@ -1092,7 +1084,7 @@ slots.value = Slot(uri=SOSA.hasSimpleResult, name="value", curie=SOSA.curie('has
                    model_uri=GD.value, domain=None, range=Optional[str])
 
 slots.unit = Slot(uri=QUDT.hasUnit, name="unit", curie=QUDT.curie('hasUnit'),
-                   model_uri=GD.unit, domain=None, range=Optional[str])
+                   model_uri=GD.unit, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.license = Slot(uri=SCHEMA.license, name="license", curie=SCHEMA.curie('license'),
                    model_uri=GD.license, domain=None, range=Optional[Union[str, URI]])
@@ -1317,7 +1309,7 @@ slots.Measurement_value = Slot(uri=SOSA.hasSimpleResult, name="Measurement_value
                    model_uri=GD.Measurement_value, domain=Measurement, range=str)
 
 slots.Measurement_unit = Slot(uri=QUDT.hasUnit, name="Measurement_unit", curie=QUDT.curie('hasUnit'),
-                   model_uri=GD.Measurement_unit, domain=Measurement, range=str)
+                   model_uri=GD.Measurement_unit, domain=Measurement, range=Union[str, URIorCURIE])
 
 slots.Measurement_result_time = Slot(uri=SOSA.resultTime, name="Measurement_result_time", curie=SOSA.curie('resultTime'),
                    model_uri=GD.Measurement_result_time, domain=Measurement, range=str)
@@ -1326,7 +1318,7 @@ slots.AggregateObservation_value = Slot(uri=SOSA.hasSimpleResult, name="Aggregat
                    model_uri=GD.AggregateObservation_value, domain=AggregateObservation, range=float)
 
 slots.AggregateObservation_unit = Slot(uri=QUDT.hasUnit, name="AggregateObservation_unit", curie=QUDT.curie('hasUnit'),
-                   model_uri=GD.AggregateObservation_unit, domain=AggregateObservation, range=str)
+                   model_uri=GD.AggregateObservation_unit, domain=AggregateObservation, range=Union[str, URIorCURIE])
 
 slots.AggregateObservation_measurement_type = Slot(uri=SOSA.observedProperty, name="AggregateObservation_measurement_type", curie=SOSA.curie('observedProperty'),
                    model_uri=GD.AggregateObservation_measurement_type, domain=AggregateObservation, range=Union[str, URIorCURIE])
