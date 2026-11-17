@@ -230,10 +230,10 @@ The schema will use W3C SOSA/SSN as the foundational observation model, since it
 - [x] Generate JSON Schema, JSON-LD context, OWL, Python dataclasses, Pydantic, TypeScript, and Java from LinkML.
 - [x] Import `linkml-microschema-profile`; annotate `Measurement` as `MicroschemaDefinition`.
 
-### Phase 2 — Vocabulary Integration (in progress)
+### Phase 2 — Vocabulary Integration ✅
 - [x] Create measurement microschemas (`src/geodata/schema/measurements.yaml`) as named `Measurement` subclasses with rules mapping `measurement_type` to equivalent CURIEs from CF Conventions, SWEET, ENVO, BERVO, and PATO, with postconditions constraining QUDT units and ENVO matrix terms. Initial microschemas: `AirTemperatureMeasurement`, `WaterTemperatureMeasurement`, `SoilpHMeasurement`.
 - [x] Unit vocabulary: `unit` slot uses QUDT unit URIs/CURIEs directly (`unit:DEG_C`, `unit:K`, etc.). QUDT itself serves as the unit registry; a separate unit registry file is not needed.
-- [ ] Add SKOS mappings for matrix terms to iSamples Material vocabulary.
+- [x] SKOS matrix→iSamples Material mappings folded into Phase 3 iSamples SSSOM file (see below).
 
 ### Phase 3 — Cross-Schema Mappings
 - [ ] Write OWL / SSSOM mapping files for NMDC, iSamples, SOSO, GeoLink, SoTerML.
@@ -243,6 +243,7 @@ The schema will use W3C SOSA/SSN as the foundational observation model, since it
   - `Specimen.material` terms → iSamples Material vocabulary
   - `Specimen.collection_location` → `isam:SamplingLocation`
   - `Specimen.repository` / `curation_location` → `isam:curationLocation`
+  - SKOS mappings from ENVO matrix terms to iSamples Material vocabulary (e.g. `ENVO:00001998` → `isam:mat:Soil`)
 - [ ] Validate mappings with at least one representative dataset from each target schema.
 
 ### Phase 4 — Validation and Examples
