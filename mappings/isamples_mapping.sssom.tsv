@@ -1,0 +1,55 @@
+# ---
+# mapping_set_id: https://w3id.org/linkml/geodata/mappings/isamples
+# mapping_set_title: "GeoData to iSamples Mapping"
+# mapping_set_version: "0.1.0"
+# license: https://creativecommons.org/publicdomain/zero/1.0/
+# mapping_date: "2026-11-17"
+# comment: >-
+#   Maps GeoData schema classes and ENVO matrix terms to iSamples equivalents.
+#   SpecimenTypeEnum -> msot: mappings are pending addition of meaning: URIs
+#   to the SpecimenTypeEnum in geodata.yaml.
+# curie_map:
+#   gd: "https://w3id.org/linkml/geodata/"
+#   ENVO: "http://purl.obolibrary.org/obo/ENVO_"
+#   isam: "https://w3id.org/isample/schema/2.0/"
+#   mat: "https://w3id.org/isample/vocabulary/material/"
+#   msot: "https://w3id.org/isample/vocabulary/materialsampleobjecttype/"
+#   skos: "http://www.w3.org/2004/02/skos/core#"
+#   owl: "http://www.w3.org/2002/07/owl#"
+#   semapv: "https://w3id.org/semapv/vocab/"
+# ---
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	comment
+gd:Specimen	Specimen	skos:exactMatch	isam:MaterialSample	Material Sample	semapv:ManualMappingCuration	GeoData Specimen maps to the iSamples top-level sample class
+gd:specimen_id	specimen_id	skos:relatedMatch	isam:sampleidentifier	sample identifier	semapv:ManualMappingCuration	Both are primary identifiers; gd:specimen_id allows local strings while iSamples uses URIs
+gd:igsn	igsn	skos:exactMatch	isam:registeredIdentifier	registered identifier	semapv:ManualMappingCuration	Both slots hold a persistent registered identifier (IGSN URI)
+gd:collection_location	collection_location	skos:closeMatch	isam:samplingLocation	sampling location	semapv:ManualMappingCuration	Both describe where the specimen was collected
+gd:collection_time	collection_time	skos:exactMatch	isam:samplingTime	sampling time	semapv:ManualMappingCuration	Date/time of collection
+gd:collected_by	collected_by	skos:closeMatch	isam:responsibility	responsibility	semapv:ManualMappingCuration	Person or org responsible for collection
+gd:material	material	skos:exactMatch	isam:hasMaterialCategory	has material category	semapv:ManualMappingCuration	Both use iSamples Material vocabulary terms as values
+gd:parent_specimen	parent_specimen	skos:exactMatch	isam:relatedSample	related sample	semapv:ManualMappingCuration	Hierarchical sample relationship (subsample, aliquot)
+gd:repository	repository	skos:closeMatch	isam:curationLocation	curation location	semapv:ManualMappingCuration	Holding institution
+gd:curation_location	curation_location	skos:narrowMatch	isam:curationLocation	curation location	semapv:ManualMappingCuration	Physical storage location within repository
+ENVO:00001998	soil	skos:exactMatch	mat:soil	Soil	semapv:ManualMappingCuration
+ENVO:00002007	sediment	skos:exactMatch	mat:sediment	Sediment	semapv:ManualMappingCuration
+ENVO:00001995	rock	skos:exactMatch	mat:rock	Rock	semapv:ManualMappingCuration
+ENVO:00002006	water	skos:closeMatch	mat:liquidwater	Liquid water	semapv:ManualMappingCuration	ENVO water is broader; mat:liquidwater is specific to liquid phase
+ENVO:00002004	freshwater	skos:narrowMatch	mat:liquidwater	Liquid water	semapv:ManualMappingCuration	Freshwater is a subtype of liquid water
+ENVO:00002149	seawater	skos:narrowMatch	mat:liquidwater	Liquid water	semapv:ManualMappingCuration	Seawater is a subtype of liquid water
+ENVO:01001004	groundwater	skos:narrowMatch	mat:liquidwater	Liquid water	semapv:ManualMappingCuration	Groundwater is a subtype of liquid water
+ENVO:01001057	pore water	skos:narrowMatch	mat:liquidwater	Liquid water	semapv:ManualMappingCuration	Pore water is a subtype of liquid water
+ENVO:00002005	air	skos:closeMatch	mat:gas	Gaseous material	semapv:ManualMappingCuration	Air is the primary instance of gaseous material in earth science
+ENVO:01000810	atmosphere	skos:closeMatch	mat:gas	Gaseous material	semapv:ManualMappingCuration	Atmosphere broadly corresponds to gaseous material
+ENVO:00002209	ice	skos:closeMatch	mat:anyice	Any ice	semapv:ManualMappingCuration	Glacial/sea ice maps to iSamples anyice
+ENVO:01000406	snow	skos:closeMatch	mat:waterice	Frozen water	semapv:ManualMappingCuration	Snow is a form of frozen water
+ENVO:00000134	permafrost	skos:closeMatch	mat:mixedsoilsedimentrock	Mixed soil sediment or rock	semapv:ManualMappingCuration	Permafrost is frozen soil/sediment; no exact iSamples equivalent
+ENVO:00000016	biota	skos:closeMatch	mat:organicmaterial	Organic material	semapv:ManualMappingCuration	Biota broadly corresponds to organic material
+msot:nonbiologicsolidobject	Non biologic solid object	skos:closeMatch	gd:SpecimenTypeEnum#rock	rock	semapv:ManualMappingCuration	rock, sediment, sediment_core, ice_core, soil, mineral, speleothem all map here
+msot:fluidincontainer	Fluid in container	skos:exactMatch	gd:SpecimenTypeEnum#water	water	semapv:ManualMappingCuration
+msot:fluidincontainer	Fluid in container	skos:closeMatch	gd:SpecimenTypeEnum#fluid	fluid	semapv:ManualMappingCuration
+msot:fluidincontainer	Fluid in container	skos:closeMatch	gd:SpecimenTypeEnum#gas	gas	semapv:ManualMappingCuration
+msot:organismpart	Organism part	skos:exactMatch	gd:SpecimenTypeEnum#biological_tissue	biological tissue	semapv:ManualMappingCuration
+msot:solidmaterialsample	Solid material sample	skos:closeMatch	gd:SpecimenTypeEnum#peat	peat	semapv:ManualMappingCuration
+msot:biologicalmaterialsample	Biological material sample	skos:closeMatch	gd:SpecimenTypeEnum#coral	coral	semapv:ManualMappingCuration
+msot:biologicalmaterialsample	Biological material sample	skos:closeMatch	gd:SpecimenTypeEnum#tree_ring	tree ring	semapv:ManualMappingCuration
+msot:anyaggregation	Any aggregation material sample	skos:closeMatch	gd:SpecimenTypeEnum#dust	dust	semapv:ManualMappingCuration
+msot:materialsample	Material sample	skos:broadMatch	gd:SpecimenTypeEnum#other	other	semapv:ManualMappingCuration

@@ -1,5 +1,5 @@
 # Auto generated from geodata.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-11-17T08:49:26
+# Generation date: 2026-11-17T10:46:52
 # Schema: geodata
 #
 # id: https://w3id.org/linkml/geodata
@@ -72,6 +72,8 @@ GEO = CurieNamespace('geo', 'http://www.opengis.net/ont/geosparql#')
 GEOLINK = CurieNamespace('geolink', 'http://schema.geolink.org/1.0/base/main#')
 ISAM = CurieNamespace('isam', 'https://w3id.org/isample/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
+MAT = CurieNamespace('mat', 'https://w3id.org/isample/vocabulary/material/')
+MSOT = CurieNamespace('msot', 'https://w3id.org/isample/vocabulary/materialsampleobjecttype/')
 NMDC = CurieNamespace('nmdc', 'https://w3id.org/nmdc/')
 PROV = CurieNamespace('prov', 'http://www.w3.org/ns/prov#')
 QUDT = CurieNamespace('qudt', 'http://qudt.org/schema/qudt/')
@@ -947,52 +949,68 @@ class SpecimenTypeEnum(EnumDefinitionImpl):
     """
     rock = PermissibleValue(
         text="rock",
-        description="Consolidated rock sample")
+        description="Consolidated rock sample",
+        meaning=MSOT["nonbiologicsolidobject"])
     sediment = PermissibleValue(
         text="sediment",
-        description="Loose unconsolidated sediment")
+        description="Loose unconsolidated sediment",
+        meaning=MSOT["nonbiologicsolidobject"])
     sediment_core = PermissibleValue(
         text="sediment_core",
-        description="A drilled or pushed sediment core")
+        description="A drilled or pushed sediment core",
+        meaning=MSOT["nonbiologicsolidobject"])
     ice_core = PermissibleValue(
         text="ice_core",
-        description="A drilled ice core")
+        description="A drilled ice core",
+        meaning=MSOT["nonbiologicsolidobject"])
     soil = PermissibleValue(
         text="soil",
-        description="Soil sample")
+        description="Soil sample",
+        meaning=MSOT["nonbiologicsolidobject"])
     water = PermissibleValue(
         text="water",
-        description="Collected water sample (bottle, bag, etc.)")
+        description="Collected water sample (bottle, bag, etc.)",
+        meaning=MSOT["fluidincontainer"])
     biological_tissue = PermissibleValue(
         text="biological_tissue",
-        description="Biological tissue or whole organism")
+        description="Biological tissue or whole organism",
+        meaning=MSOT["organismpart"])
     mineral = PermissibleValue(
         text="mineral",
-        description="Individual mineral specimen")
+        description="Individual mineral specimen",
+        meaning=MSOT["nonbiologicsolidobject"])
     fluid = PermissibleValue(
         text="fluid",
-        description="Non-water fluid sample (e.g. hydrothermal fluid, oil)")
+        description="Non-water fluid sample (e.g. hydrothermal fluid, oil)",
+        meaning=MSOT["fluidincontainer"])
     gas = PermissibleValue(
         text="gas",
-        description="Gas sample")
+        description="Gas sample",
+        meaning=MSOT["fluidincontainer"])
     peat = PermissibleValue(
         text="peat",
-        description="Peat or organic-rich deposit")
+        description="Peat or organic-rich deposit",
+        meaning=MSOT["solidmaterialsample"])
     coral = PermissibleValue(
         text="coral",
-        description="Coral skeleton")
+        description="Coral skeleton",
+        meaning=MSOT["biologicalmaterialsample"])
     tree_ring = PermissibleValue(
         text="tree_ring",
-        description="Tree ring / dendrochronology sample")
+        description="Tree ring / dendrochronology sample",
+        meaning=MSOT["biologicalmaterialsample"])
     speleothem = PermissibleValue(
         text="speleothem",
-        description="Cave deposit (stalactite, stalagmite, flowstone, etc.)")
+        description="Cave deposit (stalactite, stalagmite, flowstone, etc.)",
+        meaning=MSOT["nonbiologicsolidobject"])
     dust = PermissibleValue(
         text="dust",
-        description="Atmospheric dust or aerosol trap sample")
+        description="Atmospheric dust or aerosol trap sample",
+        meaning=MSOT["anyaggregation"])
     other = PermissibleValue(
         text="other",
-        description="Specimen type not covered by the other terms")
+        description="Specimen type not covered by the other terms",
+        meaning=MSOT["materialsample"])
 
     _defn = EnumDefinition(
         name="SpecimenTypeEnum",

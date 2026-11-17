@@ -31,6 +31,8 @@ prefixes:
   xsd:      http://www.w3.org/2001/XMLSchema#
   BERVO:    http://purl.obolibrary.org/obo/BERVO_
   PATO:     http://purl.obolibrary.org/obo/PATO_
+  mat:      https://w3id.org/isample/vocabulary/material/
+  msot:     https://w3id.org/isample/vocabulary/materialsampleobjecttype/
 
 default_prefix: gd
 default_range: string
@@ -113,36 +115,52 @@ enums:
     permissible_values:
       rock:
         description: Consolidated rock sample
+        meaning: msot:nonbiologicsolidobject
       sediment:
         description: Loose unconsolidated sediment
+        meaning: msot:nonbiologicsolidobject
       sediment_core:
         description: A drilled or pushed sediment core
+        meaning: msot:nonbiologicsolidobject
       ice_core:
         description: A drilled ice core
+        meaning: msot:nonbiologicsolidobject
       soil:
         description: Soil sample
+        meaning: msot:nonbiologicsolidobject
       water:
         description: Collected water sample (bottle, bag, etc.)
+        meaning: msot:fluidincontainer
       biological_tissue:
         description: Biological tissue or whole organism
+        meaning: msot:organismpart
       mineral:
         description: Individual mineral specimen
+        meaning: msot:nonbiologicsolidobject
       fluid:
         description: Non-water fluid sample (e.g. hydrothermal fluid, oil)
+        meaning: msot:fluidincontainer
       gas:
         description: Gas sample
+        meaning: msot:fluidincontainer
       peat:
         description: Peat or organic-rich deposit
+        meaning: msot:solidmaterialsample
       coral:
         description: Coral skeleton
+        meaning: msot:biologicalmaterialsample
       tree_ring:
         description: Tree ring / dendrochronology sample
+        meaning: msot:biologicalmaterialsample
       speleothem:
         description: Cave deposit (stalactite, stalagmite, flowstone, etc.)
+        meaning: msot:nonbiologicsolidobject
       dust:
         description: Atmospheric dust or aerosol trap sample
+        meaning: msot:anyaggregation
       other:
         description: Specimen type not covered by the other terms
+        meaning: msot:materialsample
 
   QualityFlagEnum:
     description: QA/QC status of a measurement or aggregate observation.
