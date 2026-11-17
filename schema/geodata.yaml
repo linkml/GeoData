@@ -91,6 +91,14 @@ types:
     from_schema: https://w3id.org/linkml/geodata
     base: str
     uri: geo:wktLiteral
+  Datetime:
+    name: Datetime
+    definition_uri: https://w3id.org/linkml/geodata/Datetime
+    description: An ISO 8601 datetime string. Defined as an explicit alias to avoid
+      ambiguity with the datetime slot imported from linkml-microschema-profile.
+    from_schema: https://w3id.org/linkml/geodata
+    base: str
+    uri: xsd:dateTime
   string:
     name: string
     definition_uri: https://w3id.org/linkml/String
@@ -816,7 +824,7 @@ slots:
     owner: TemporalExtent
     domain_of:
     - TemporalExtent
-    range: datetime
+    range: Datetime
     required: true
   end_time:
     name: end_time
@@ -829,7 +837,7 @@ slots:
     owner: TemporalExtent
     domain_of:
     - TemporalExtent
-    range: datetime
+    range: Datetime
     required: true
   specimen_id:
     name: specimen_id
@@ -912,7 +920,7 @@ slots:
     owner: Specimen
     domain_of:
     - Specimen
-    range: datetime
+    range: Datetime
   collected_by:
     name: collected_by
     definition_uri: https://w3id.org/linkml/geodata/collected_by
@@ -999,7 +1007,7 @@ slots:
     owner: Measurement
     domain_of:
     - Measurement
-    range: datetime
+    range: Datetime
   instrument:
     name: instrument
     definition_uri: https://w3id.org/linkml/geodata/instrument
@@ -1680,7 +1688,7 @@ slots:
     - Measurement
     is_usage_slot: true
     usage_slot_name: result_time
-    range: datetime
+    range: Datetime
     required: true
   AggregateObservation_value:
     name: AggregateObservation_value
@@ -2296,7 +2304,7 @@ classes:
     class_uri: https://w3id.org/linkml/linkml-microschema-profile/CodedValue
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-16T22:38:32'
-source_file_size: 23180
-generation_date: '2026-11-16T22:38:41'
+source_file_date: '2026-11-17T13:39:26'
+source_file_size: 23403
+generation_date: '2026-11-17T13:39:33'
 
