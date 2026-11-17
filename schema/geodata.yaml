@@ -77,13 +77,6 @@ types:
     from_schema: https://w3id.org/linkml/geodata
     base: float
     uri: xsd:double
-  UCUMExpression:
-    name: UCUMExpression
-    definition_uri: https://w3id.org/linkml/geodata/UCUMExpression
-    description: A unit expression in UCUM notation (e.g. "m/s", "Cel", "g/cm3").
-    from_schema: https://w3id.org/linkml/geodata
-    base: str
-    uri: xsd:string
   WKTLiteral:
     name: WKTLiteral
     definition_uri: https://w3id.org/linkml/geodata/WKTLiteral
@@ -680,8 +673,8 @@ slots:
   unit:
     name: unit
     definition_uri: https://w3id.org/linkml/geodata/unit
-    description: Unit of the measured value as a UCUM expression (e.g. "Cel", "K",
-      "m/s", "g/cm3", "pH").
+    description: 'Unit of the measured value as a QUDT unit URI or CURIE (e.g. "unit:DEG_C",
+      "unit:K", "unit:M-PER-SEC", "unit:PH"). Use the unit: prefix (http://qudt.org/vocab/unit/).'
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - qudt:hasUnit
@@ -690,7 +683,7 @@ slots:
     domain_of:
     - Measurement
     - AggregateObservation
-    range: UCUMExpression
+    range: uriorcurie
   license:
     name: license
     definition_uri: https://w3id.org/linkml/geodata/license
@@ -1655,8 +1648,8 @@ slots:
   Measurement_unit:
     name: Measurement_unit
     definition_uri: https://w3id.org/linkml/geodata/unit
-    description: Unit of the measured value as a UCUM expression (e.g. "Cel", "K",
-      "m/s", "g/cm3", "pH").
+    description: 'Unit of the measured value as a QUDT unit URI or CURIE (e.g. "unit:DEG_C",
+      "unit:K", "unit:M-PER-SEC", "unit:PH"). Use the unit: prefix (http://qudt.org/vocab/unit/).'
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - qudt:hasUnit
@@ -1669,7 +1662,7 @@ slots:
     - Measurement
     is_usage_slot: true
     usage_slot_name: unit
-    range: UCUMExpression
+    range: uriorcurie
     required: true
   Measurement_result_time:
     name: Measurement_result_time
@@ -1711,8 +1704,8 @@ slots:
   AggregateObservation_unit:
     name: AggregateObservation_unit
     definition_uri: https://w3id.org/linkml/geodata/unit
-    description: Unit of the measured value as a UCUM expression (e.g. "Cel", "K",
-      "m/s", "g/cm3", "pH").
+    description: 'Unit of the measured value as a QUDT unit URI or CURIE (e.g. "unit:DEG_C",
+      "unit:K", "unit:M-PER-SEC", "unit:PH"). Use the unit: prefix (http://qudt.org/vocab/unit/).'
     from_schema: https://w3id.org/linkml/geodata
     mappings:
     - qudt:hasUnit
@@ -1725,7 +1718,7 @@ slots:
     - AggregateObservation
     is_usage_slot: true
     usage_slot_name: unit
-    range: UCUMExpression
+    range: uriorcurie
     required: true
   AggregateObservation_measurement_type:
     name: AggregateObservation_measurement_type
@@ -2304,7 +2297,7 @@ classes:
     class_uri: https://w3id.org/linkml/linkml-microschema-profile/CodedValue
 metamodel_version: 1.11.0
 source_file: geodata.yaml
-source_file_date: '2026-11-17T13:39:26'
-source_file_size: 23403
-generation_date: '2026-11-17T13:39:33'
+source_file_date: '2026-11-17T14:05:23'
+source_file_size: 23348
+generation_date: '2026-11-17T14:05:32'
 
