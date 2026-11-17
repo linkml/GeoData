@@ -1,5 +1,5 @@
 # Auto generated from geodata.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-11-16T17:33:12
+# Generation date: 2026-11-17T08:37:15
 # Schema: geodata
 #
 # id: https://w3id.org/linkml/geodata
@@ -109,6 +109,14 @@ class WKTLiteral(str):
     type_model_uri = GD.WKTLiteral
 
 
+class Datetime(str):
+    """ An ISO 8601 datetime string. Defined as an explicit alias to avoid ambiguity with the datetime slot imported from linkml-microschema-profile. """
+    type_class_uri = XSD["dateTime"]
+    type_class_curie = "xsd:dateTime"
+    type_name = "Datetime"
+    type_model_uri = GD.Datetime
+
+
 # Class references
 class SpecimenSpecimenId(extended_str):
     pass
@@ -172,19 +180,19 @@ class TemporalExtent(YAMLRoot):
     class_name: ClassVar[str] = "TemporalExtent"
     class_model_uri: ClassVar[URIRef] = GD.TemporalExtent
 
-    start_time: Union[str, XSDDateTime] = None
-    end_time: Union[str, XSDDateTime] = None
+    start_time: str = None
+    end_time: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.start_time):
             self.MissingRequiredField("start_time")
-        if not isinstance(self.start_time, XSDDateTime):
-            self.start_time = XSDDateTime(self.start_time)
+        if not isinstance(self.start_time, str):
+            self.start_time = str(self.start_time)
 
         if self._is_empty(self.end_time):
             self.MissingRequiredField("end_time")
-        if not isinstance(self.end_time, XSDDateTime):
-            self.end_time = XSDDateTime(self.end_time)
+        if not isinstance(self.end_time, str):
+            self.end_time = str(self.end_time)
 
         super().__post_init__(**kwargs)
 
@@ -209,7 +217,7 @@ class Specimen(YAMLRoot):
     label: Optional[str] = None
     material: Optional[str] = None
     collection_location: Optional[Union[dict, Geolocation]] = None
-    collection_time: Optional[Union[str, XSDDateTime]] = None
+    collection_time: Optional[str] = None
     collected_by: Optional[str] = None
     parent_specimen: Optional[Union[str, SpecimenSpecimenId]] = None
     repository: Optional[str] = None
@@ -243,8 +251,8 @@ class Specimen(YAMLRoot):
         if self.collection_location is not None and not isinstance(self.collection_location, Geolocation):
             self.collection_location = Geolocation(**as_dict(self.collection_location))
 
-        if self.collection_time is not None and not isinstance(self.collection_time, XSDDateTime):
-            self.collection_time = XSDDateTime(self.collection_time)
+        if self.collection_time is not None and not isinstance(self.collection_time, str):
+            self.collection_time = str(self.collection_time)
 
         if self.collected_by is not None and not isinstance(self.collected_by, str):
             self.collected_by = str(self.collected_by)
@@ -294,7 +302,7 @@ class Measurement(YAMLRoot):
     measurement_type: Union[str, URIorCURIE] = None
     value: str = None
     unit: str = None
-    result_time: Union[str, XSDDateTime] = None
+    result_time: str = None
     specimen: Optional[Union[str, SpecimenSpecimenId]] = None
     quality_flag: Optional[Union[str, "QualityFlagEnum"]] = None
     temporal_extent: Optional[Union[dict, TemporalExtent]] = None
@@ -332,8 +340,8 @@ class Measurement(YAMLRoot):
 
         if self._is_empty(self.result_time):
             self.MissingRequiredField("result_time")
-        if not isinstance(self.result_time, XSDDateTime):
-            self.result_time = XSDDateTime(self.result_time)
+        if not isinstance(self.result_time, str):
+            self.result_time = str(self.result_time)
 
         if self.specimen is not None and not isinstance(self.specimen, SpecimenSpecimenId):
             self.specimen = SpecimenSpecimenId(self.specimen)
@@ -1114,10 +1122,10 @@ slots.coordinate_system = Slot(uri=GD.coordinate_system, name="coordinate_system
                    model_uri=GD.coordinate_system, domain=None, range=Optional[str])
 
 slots.start_time = Slot(uri=TIME.hasBeginning, name="start_time", curie=TIME.curie('hasBeginning'),
-                   model_uri=GD.start_time, domain=None, range=Union[str, XSDDateTime])
+                   model_uri=GD.start_time, domain=None, range=str)
 
 slots.end_time = Slot(uri=TIME.hasEnd, name="end_time", curie=TIME.curie('hasEnd'),
-                   model_uri=GD.end_time, domain=None, range=Union[str, XSDDateTime])
+                   model_uri=GD.end_time, domain=None, range=str)
 
 slots.specimen_id = Slot(uri=SCHEMA.identifier, name="specimen_id", curie=SCHEMA.curie('identifier'),
                    model_uri=GD.specimen_id, domain=None, range=URIRef)
@@ -1135,7 +1143,7 @@ slots.collection_location = Slot(uri=GD.collection_location, name="collection_lo
                    model_uri=GD.collection_location, domain=None, range=Optional[Union[dict, Geolocation]])
 
 slots.collection_time = Slot(uri=SOSA.resultTime, name="collection_time", curie=SOSA.curie('resultTime'),
-                   model_uri=GD.collection_time, domain=None, range=Optional[Union[str, XSDDateTime]])
+                   model_uri=GD.collection_time, domain=None, range=Optional[str])
 
 slots.collected_by = Slot(uri=SCHEMA.contributor, name="collected_by", curie=SCHEMA.curie('contributor'),
                    model_uri=GD.collected_by, domain=None, range=Optional[str])
@@ -1156,7 +1164,7 @@ slots.mass = Slot(uri=GD.mass, name="mass", curie=GD.curie('mass'),
                    model_uri=GD.mass, domain=None, range=Optional[float])
 
 slots.result_time = Slot(uri=SOSA.resultTime, name="result_time", curie=SOSA.curie('resultTime'),
-                   model_uri=GD.result_time, domain=None, range=Optional[Union[str, XSDDateTime]])
+                   model_uri=GD.result_time, domain=None, range=Optional[str])
 
 slots.instrument = Slot(uri=SOSA.madeBySensor, name="instrument", curie=SOSA.curie('madeBySensor'),
                    model_uri=GD.instrument, domain=None, range=Optional[str])
@@ -1312,7 +1320,7 @@ slots.Measurement_unit = Slot(uri=QUDT.hasUnit, name="Measurement_unit", curie=Q
                    model_uri=GD.Measurement_unit, domain=Measurement, range=str)
 
 slots.Measurement_result_time = Slot(uri=SOSA.resultTime, name="Measurement_result_time", curie=SOSA.curie('resultTime'),
-                   model_uri=GD.Measurement_result_time, domain=Measurement, range=Union[str, XSDDateTime])
+                   model_uri=GD.Measurement_result_time, domain=Measurement, range=str)
 
 slots.AggregateObservation_value = Slot(uri=SOSA.hasSimpleResult, name="AggregateObservation_value", curie=SOSA.curie('hasSimpleResult'),
                    model_uri=GD.AggregateObservation_value, domain=AggregateObservation, range=float)

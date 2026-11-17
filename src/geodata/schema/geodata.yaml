@@ -60,6 +60,13 @@ types:
     base: str
     description: A geometry encoded as a Well-Known Text (WKT) literal.
 
+  Datetime:
+    uri: xsd:dateTime
+    base: str
+    description: >-
+      An ISO 8601 datetime string. Defined as an explicit alias to avoid
+      ambiguity with the datetime slot imported from linkml-microschema-profile.
+
 # ---------------------------------------------------------------------------
 # Enumerations
 # ---------------------------------------------------------------------------
@@ -310,13 +317,13 @@ slots:
   # --- TemporalExtent slots -------------------------------------------------
 
   start_time:
-    range: datetime
+    range: Datetime
     required: true
     slot_uri: TIME:hasBeginning
     description: Start of the interval (ISO 8601 datetime).
 
   end_time:
-    range: datetime
+    range: Datetime
     required: true
     slot_uri: TIME:hasEnd
     description: End of the interval (ISO 8601 datetime).
@@ -364,7 +371,7 @@ slots:
     description: Location where the specimen was collected.
 
   collection_time:
-    range: datetime
+    range: Datetime
     slot_uri: sosa:resultTime
     description: Date and time of collection (ISO 8601).
 
@@ -405,7 +412,7 @@ slots:
   # --- Measurement slots ----------------------------------------------------
 
   result_time:
-    range: datetime
+    range: Datetime
     slot_uri: sosa:resultTime
     description: >-
       Date and time at which the measurement was made (ISO 8601).

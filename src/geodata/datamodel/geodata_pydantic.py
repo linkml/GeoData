@@ -117,7 +117,16 @@ linkml_meta = LinkMLMeta({'default_prefix': 'gd',
      'see_also': ['https://linkml.github.io/geodata'],
      'source_file': 'src/geodata/schema/geodata.yaml',
      'title': 'Earth Science Data Schema',
-     'types': {'DecimalDegree': {'base': 'float',
+     'types': {'Datetime': {'base': 'str',
+                            'description': 'An ISO 8601 datetime string. Defined '
+                                           'as an explicit alias to avoid '
+                                           'ambiguity with the datetime slot '
+                                           'imported from '
+                                           'linkml-microschema-profile.',
+                            'from_schema': 'https://w3id.org/linkml/geodata',
+                            'name': 'Datetime',
+                            'uri': 'xsd:dateTime'},
+               'DecimalDegree': {'base': 'float',
                                  'description': 'A coordinate value expressed in '
                                                 'decimal degrees.',
                                  'from_schema': 'https://w3id.org/linkml/geodata',
@@ -426,8 +435,8 @@ class TemporalExtent(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'TIME:ProperInterval',
          'from_schema': 'https://w3id.org/linkml/geodata'})
 
-    start_time: datetime  = Field(default=..., description="""Start of the interval (ISO 8601 datetime).""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemporalExtent'], 'slot_uri': 'TIME:hasBeginning'} })
-    end_time: datetime  = Field(default=..., description="""End of the interval (ISO 8601 datetime).""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemporalExtent'], 'slot_uri': 'TIME:hasEnd'} })
+    start_time: str = Field(default=..., description="""Start of the interval (ISO 8601 datetime).""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemporalExtent'], 'slot_uri': 'TIME:hasBeginning'} })
+    end_time: str = Field(default=..., description="""End of the interval (ISO 8601 datetime).""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemporalExtent'], 'slot_uri': 'TIME:hasEnd'} })
 
 
 class Specimen(ConfiguredBaseModel):
@@ -446,7 +455,7 @@ class Specimen(ConfiguredBaseModel):
     label: Optional[str] = Field(default=None, description="""Human-readable name or field number (e.g. \"Core 3A, Section 2\").""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen', 'MeasurementCollection'], 'slot_uri': 'schema:name'} })
     material: Optional[str] = Field(default=None, description="""Bulk material of the specimen using iSamples Material vocabulary terms (e.g. \"RockOrSediment\", \"NaturalSolidMaterial\", \"Fluid\", \"BiogenicNonOrganicMaterial\").""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'isam:material'} })
     collection_location: Optional[Geolocation] = Field(default=None, description="""Location where the specimen was collected.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'gd:collection_location'} })
-    collection_time: Optional[datetime ] = Field(default=None, description="""Date and time of collection (ISO 8601).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'sosa:resultTime'} })
+    collection_time: Optional[str] = Field(default=None, description="""Date and time of collection (ISO 8601).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'sosa:resultTime'} })
     collected_by: Optional[str] = Field(default=None, description="""Person or organisation responsible for collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'schema:contributor'} })
     parent_specimen: Optional[str] = Field(default=None, description="""Parent specimen from which this one was derived (e.g. a subsample, aliquot, or thin section).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'sosa:isSampleOf'} })
     repository: Optional[str] = Field(default=None, description="""Institution or archive currently holding the specimen.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Specimen'], 'slot_uri': 'gd:repository'} })
@@ -490,7 +499,7 @@ class Measurement(ConfiguredBaseModel):
          'slot_uri': 'sosa:hasSimpleResult'} })
     unit: str = Field(default=..., description="""Unit of the measured value as a UCUM expression (e.g. \"Cel\", \"K\", \"m/s\", \"g/cm3\", \"pH\").""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement', 'AggregateObservation'],
          'slot_uri': 'qudt:hasUnit'} })
-    result_time: datetime  = Field(default=..., description="""Date and time at which the measurement was made (ISO 8601). Use temporal_extent instead when the observation spans an interval.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement'], 'slot_uri': 'sosa:resultTime'} })
+    result_time: str = Field(default=..., description="""Date and time at which the measurement was made (ISO 8601). Use temporal_extent instead when the observation spans an interval.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement'], 'slot_uri': 'sosa:resultTime'} })
     temporal_extent: Optional[TemporalExtent] = Field(default=None, description="""Time interval associated with this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Measurement',
                        'AggregateObservation',
                        'MeasurementCollection',
